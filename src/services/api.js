@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_BASE_URL = 'https://fashion-studio-ai.onrender.com/api/designs'; // Update with your Render backend URL
 
 export const generateDesign = async (prompt, style) => {
