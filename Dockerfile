@@ -10,6 +10,9 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install
 
+# Explicitly add react-scripts
+RUN yarn add react-scripts
+
 # Copy the rest of the application code to the working directory
 COPY . .
 
