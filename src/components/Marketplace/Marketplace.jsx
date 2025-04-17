@@ -12,7 +12,7 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
+        const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL || 'https://api.cloudinary.com/v1_1/dnl1vldmo';
         const response = await axios.get(`${cloudinaryUrl}/resources/image/fashion_designs`);
         const cloudinaryDesigns = response.data.resources.map((resource) => ({
           id: resource.public_id,
