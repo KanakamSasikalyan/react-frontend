@@ -5,6 +5,7 @@ import GenerateDesign from './components/GenerateDesign/GenerateDesign';
 import Marketplace from './components/Marketplace/Marketplace';
 import VirtualTryOn from './components/VirtualTryOn/VirtualTryOn';
 import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/"
           element={

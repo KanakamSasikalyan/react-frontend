@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import './Signup.css';
 
-const Login = () => {
+const Signup = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'password') {
-      localStorage.setItem('isLoggedIn', 'true');
-      navigate('/');
-    } else {
-      alert('Invalid credentials. Please try again or sign up.');
-    }
+    // Simulate signup logic
+    alert('Signup successful! Please login.');
+    navigate('/login');
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2>Login</h2>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit} className="signup-form">
+        <h2>Sign Up</h2>
         <div className="form-group">
           <label>Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -39,14 +46,10 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
-        <div className="login-links">
-          <a href="#" onClick={() => navigate('/signup')}>Sign Up</a>
-          <a href="#" onClick={() => navigate('/forgot-password')}>Forgot Password?</a>
-        </div>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
