@@ -1,0 +1,107 @@
+.marketplace-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: rgb(0, 0, 0);
+  }
+  
+  .filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .filters input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+  }
+  
+  .filters select {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+  }
+  
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .design-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .design-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .design-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .design-info {
+    padding: 1.5rem;
+  }
+  
+  .design-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .style-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .style-tag.casual {
+    background: #4CAF50;
+  }
+  
+  .style-tag.cyberpunk {
+    background: #9C27B0;
+  }
+  
+  .style-tag.formal {
+    background: #2196F3;
+  }
+  
+  .style-tag.sporty {
+    background: #FF9800;
+  }
+  
+  .try-on-button {
+    display: inline-block;
+    background: white;
+    color: #667eea;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  
+  .loading, .no-results {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }

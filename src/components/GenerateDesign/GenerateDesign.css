@@ -1,0 +1,62 @@
+.design-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    color: rgb(73, 70, 70);
+  }
+  
+  .design-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+  }
+  
+  .form-group input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .generate-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+  
+  .generate-button:hover {
+    background: #5a6fd1;
+    transform: translateY(-2px);
+  }
+  
+  .generate-button:disabled {
+    background: #4a5568;
+    cursor: not-allowed;
+    transform: none;
+  }

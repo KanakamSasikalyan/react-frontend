@@ -1,6 +1,6 @@
-import axios from 'axios';
-const API_BASE_URL = 'https://fashion-studio-ai.onrender.com';
-//const API_BASE_URL='';
+/*import axios from 'axios';
+//const API_BASE_URL = 'https://fashion-studio-ai.onrender.com';
+const API_BASE_URL='';
 
 export const generateDesign = async (prompt, style) => {
     try {
@@ -15,4 +15,4 @@ export const generateDesign = async (prompt, style) => {
         console.error('Error generating design:', error);
         throw error;
     }
-};
+};*/
