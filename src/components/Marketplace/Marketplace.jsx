@@ -12,10 +12,20 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const response = await axios.get('/api/designs');
-        setDesigns(response.data);
+        const response = await axios.get('https://api.cloudinary.com/v1_1/dnl1vldmo/resources/image/fashion_designs', {
+          headers: {
+            Authorization: `Basic ${btoa('852485781197181:W-WgxhZjQIj1n0OwJKVhRCQ8Yz8')}`
+          }
+        });
+        const cloudinaryDesigns = response.data.resources.map(resource => ({
+          id: resource.public_id,
+          imageUrl: resource.secure_url,
+          prompt: resource.public_id.split('_').slice(1).join(' '),
+          style: 'unknown' // Default style, can be updated if metadata is available
+        }));
+        setDesigns(cloudinaryDesigns);
       } catch (error) {
-        console.error('Error fetching designs:', error);
+        console.error('Error fetching designs from Cloudinary:', error);
       } finally {
         setLoading(false);
       }
