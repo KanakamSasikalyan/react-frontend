@@ -12,16 +12,13 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const response = await axios.get('https://api.cloudinary.com/v1_1/dnl1vldmo/resources/image/fashion_designs', {
-          headers: {
-            Authorization: `Basic ${btoa('852485781197181:W-WgxhZjQIj1n0OwJKVhRCQ8Yz8')}`
-          }
-        });
-        const cloudinaryDesigns = response.data.resources.map(resource => ({
+        const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
+        const response = await axios.get(`${cloudinaryUrl}/resources/image/fashion_designs`);
+        const cloudinaryDesigns = response.data.resources.map((resource) => ({
           id: resource.public_id,
           imageUrl: resource.secure_url,
           prompt: resource.public_id.split('_').slice(1).join(' '),
-          style: 'unknown' // Default style, can be updated if metadata is available
+          style: 'unknown', // Default style, can be updated if metadata is available
         }));
         setDesigns(cloudinaryDesigns);
       } catch (error) {
@@ -33,7 +30,7 @@ const Marketplace = () => {
     fetchDesigns();
   }, []);
 
-  const filteredDesigns = designs.filter(design => {
+  const filteredDesigns = designs.filter((design) => {
     const matchesFilter = filter === 'all' || design.style === filter;
     const matchesSearch = design.prompt.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
@@ -42,7 +39,7 @@ const Marketplace = () => {
   return (
     <div className="marketplace-container">
       <h2>Design Marketplace</h2>
-      
+
       <div className="filters">
         <input
           type="text"
@@ -50,7 +47,7 @@ const Marketplace = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        
+
         <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="all">All Styles</option>
           <option value="casual">Casual</option>
@@ -59,13 +56,13 @@ const Marketplace = () => {
           <option value="sporty">Sporty</option>
         </select>
       </div>
-      
+
       {loading ? (
         <div className="loading">Loading designs...</div>
       ) : (
         <div className="design-grid">
           {filteredDesigns.length > 0 ? (
-            filteredDesigns.map(design => (
+            filteredDesigns.map((design) => (
               <div key={design.id} className="design-card">
                 <img src={design.imageUrl} alt={design.prompt} />
                 <div className="design-info">
