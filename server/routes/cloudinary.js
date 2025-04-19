@@ -4,8 +4,11 @@ const router = express.Router();
 
 router.get('/cloudinary/images', async (req, res) => {
   try {
-    const response = await axios.get(
-      'https://api.cloudinary.com/v1_1/dnl1vldmo/resources/image/fashion_designs',
+    const response = await axios.post(
+      'https://api.cloudinary.com/v1_1/dnl1vldmo/resources/search',
+      {
+        expression: 'folder:fashion_designs',
+      },
       {
         headers: {
           Authorization: `Basic ${Buffer.from('852485781197181:W-WgxhZjQIj1n0OwJKVhRCQ8Yz8').toString('base64')}`
