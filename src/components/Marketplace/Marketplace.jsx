@@ -13,7 +13,12 @@ const Marketplace = () => {
     const fetchDesigns = async () => {
       try {
         const response = await axios.get(
-          'https://res.cloudinary.com/dnl1vldmo/image/list/fashion_designs.json'
+          'https://api.cloudinary.com/v1_1/dnl1vldmo/resources/image/fashion_designs',
+          {
+            headers: {
+              Authorization: `Basic ${btoa('852485781197181:W-WgxhZjQIj1n0OwJKVhRCQ8Yz8')}`
+            }
+          }
         );
         const cloudinaryDesigns = response.data.resources.map((resource) => ({
           id: resource.public_id,
