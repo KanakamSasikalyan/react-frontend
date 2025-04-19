@@ -14,8 +14,11 @@ router.get('/cloudinary/images', async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
-    console.error('Error fetching images from Cloudinary:', error);
-    res.status(500).json({ error: 'Failed to fetch images from Cloudinary' });
+    console.error('Error fetching images from Cloudinary:', error.response?.data || error.message);
+    res.status(500).json({
+      error: 'Failed to fetch images from Cloudinary',
+      details: error.response?.data || error.message
+    });
   }
 });
 
