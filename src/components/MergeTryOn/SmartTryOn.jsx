@@ -3,7 +3,6 @@ import * as faceapi from 'face-api.js';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css'; // Required for resize handles
-import './SmartTryOn.css';
 
 const SmartTryOn = () => {
   const personImg = '/images/man2.jpg';
@@ -46,9 +45,9 @@ const SmartTryOn = () => {
   }, []);
 
   return (
-    <div className="smart-tryon-container">
+    <div>
       <h2>Smart Virtual Try-On</h2>
-      <div className="image-container">
+      <div style={{ position: 'relative', display: 'inline-block' }}>
         <img ref={imageRef} src={personImg} alt="User" crossOrigin="anonymous" width={400} />
         {faceBox && (
           <Draggable
@@ -68,7 +67,6 @@ const SmartTryOn = () => {
               <img
                 src={clothImg}
                 alt="Clothing"
-                className="clothing-overlay"
                 style={{
                   width: '100%',
                   height: '100%',

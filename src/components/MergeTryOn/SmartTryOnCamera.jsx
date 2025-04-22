@@ -3,7 +3,39 @@ import Webcam from 'react-webcam';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
-import './SmartTryOnCamera.css';
+
+const containerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  backgroundColor: '#f5f5f5',
+  flexDirection: 'column',
+};
+
+const cameraContainerStyle = {
+  position: 'relative',
+  width: '800px',
+  height: '800px',
+  border: '2px solid #ccc',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  backgroundColor: '#000',
+};
+
+const clothingOverlayStyle = {
+  position: 'absolute',
+  zIndex: 3,
+  cursor: 'move',
+  border: '2px dashed #007bff',
+  borderRadius: '4px',
+};
+
+const titleStyle = {
+  marginBottom: '20px',
+  fontSize: '1.5rem',
+  color: '#333',
+};
 
 const SmartTryOnCamera = () => {
   const webcamRef = useRef();
@@ -19,15 +51,15 @@ const SmartTryOnCamera = () => {
   };
 
   return (
-    <div className="smart-tryon-camera-container">
-      <h2 className="smart-tryon-camera-title">Smart Virtual Try-On (Camera)</h2>
-      <div className="camera-container">
+    <div style={containerStyle}>
+      <h2 style={titleStyle}>Smart Virtual Try-On (Camera)</h2>
+      <div style={cameraContainerStyle}>
         <Webcam
           ref={webcamRef}
           audio={false}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
-          className="camera-video"
+          style={{ position: 'absolute', top: 0, left: 0, zIndex: 1, objectFit: 'cover', borderRadius: '12px' }}
         />
         <div>
           <Draggable defaultPosition={dragPos} onStop={(e, data) => setDragPos({ x: data.x, y: data.y })}>
@@ -44,13 +76,7 @@ const SmartTryOnCamera = () => {
               <img
                 src={clothImg}
                 alt="Clothing"
-                className="clothing-overlay"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  pointerEvents: "none",
-                  userSelect: "none",
-                }}
+                style={{ ...clothingOverlayStyle, width: '100%', height: '100%', pointerEvents: 'none', userSelect: 'none' }}
               />
             </ResizableBox>
           </Draggable>
