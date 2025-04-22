@@ -46,9 +46,9 @@ const SmartTryOn = () => {
   }, []);
 
   return (
-    <div>
+    <div className="smart-tryon-container">
       <h2>Smart Virtual Try-On</h2>
-      <div style={{ position: 'relative', display: 'inline-block' }}>
+      <div className="image-container">
         <img ref={imageRef} src={personImg} alt="User" crossOrigin="anonymous" width={400} />
         {faceBox && (
           <Draggable
@@ -68,6 +68,7 @@ const SmartTryOn = () => {
               <img
                 src={clothImg}
                 alt="Clothing"
+                className="clothing-overlay"
                 style={{
                   width: '100%',
                   height: '100%',

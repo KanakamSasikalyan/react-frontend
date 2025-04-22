@@ -19,53 +19,18 @@ const SmartTryOnCamera = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        background: '#f5f5f5',
-        flexDirection: 'column',
-      }}
-    >
-      <h2 style={{ marginBottom: '20px' }}>Smart Virtual Try-On (Camera)</h2>
-
-      <div
-        style={{
-          position: 'relative',
-          width: dimensions.width,
-          height: dimensions.height,
-          border: '2px solid #ccc',
-          borderRadius: '12px',
-          overflow: 'hidden',
-          backgroundColor: '#000',
-        }}
-      >
-        {/* Camera Video */}
+    <div className="smart-tryon-camera-container">
+      <h2 className="smart-tryon-camera-title">Smart Virtual Try-On (Camera)</h2>
+      <div className="camera-container">
         <Webcam
           ref={webcamRef}
           audio={false}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
-          width={dimensions.width}
-          height={dimensions.height}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 1,
-            objectFit: 'cover',
-            borderRadius: '12px',
-          }}
+          className="camera-video"
         />
-
-        {/* Clothing Overlay */}
-        <div style={{ position: 'absolute', top: 0, left: 0, zIndex: 3 }}>
-          <Draggable
-            defaultPosition={dragPos}
-            onStop={(e, data) => setDragPos({ x: data.x, y: data.y })}
-          >
+        <div>
+          <Draggable defaultPosition={dragPos} onStop={(e, data) => setDragPos({ x: data.x, y: data.y })}>
             <ResizableBox
               width={clothSize.width}
               height={clothSize.height}
@@ -74,16 +39,17 @@ const SmartTryOnCamera = () => {
               onResizeStop={(e, data) => {
                 setClothSize({ width: data.size.width, height: data.size.height });
               }}
-              resizeHandles={['se', 'ne', 'sw', 'nw']}
+              resizeHandles={["se", "ne", "sw", "nw"]}
             >
               <img
                 src={clothImg}
                 alt="Clothing"
+                className="clothing-overlay"
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  pointerEvents: 'none',
-                  userSelect: 'none',
+                  width: "100%",
+                  height: "100%",
+                  pointerEvents: "none",
+                  userSelect: "none",
                 }}
               />
             </ResizableBox>
