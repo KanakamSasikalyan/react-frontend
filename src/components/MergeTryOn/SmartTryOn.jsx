@@ -4,6 +4,28 @@ import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css'; // Required for resize handles
 
+const containerStyle = {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '2rem',
+  backgroundColor: '#ffffff',
+};
+
+const imageContainerStyle = {
+  position: 'relative',
+  display: 'inline-block',
+  border: '1px solid #ddd',
+  borderRadius: '8px',
+  overflow: 'hidden',
+};
+
+const clothingOverlayStyle = {
+  position: 'absolute',
+  cursor: 'move',
+  border: '2px dashed #007bff',
+  borderRadius: '4px',
+};
+
 const SmartTryOn = () => {
   const personImg = '/images/man2.jpg';
   const clothImg = '/images/shopping-trans.png';
@@ -45,9 +67,9 @@ const SmartTryOn = () => {
   }, []);
 
   return (
-    <div>
+    <div style={containerStyle}>
       <h2>Smart Virtual Try-On</h2>
-      <div style={{ position: 'relative', display: 'inline-block' }}>
+      <div style={imageContainerStyle}>
         <img ref={imageRef} src={personImg} alt="User" crossOrigin="anonymous" width={400} />
         {faceBox && (
           <Draggable
@@ -67,12 +89,7 @@ const SmartTryOn = () => {
               <img
                 src={clothImg}
                 alt="Clothing"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                }}
+                style={{ ...clothingOverlayStyle, width: '100%', height: '100%', pointerEvents: 'none', userSelect: 'none' }}
               />
             </ResizableBox>
           </Draggable>
