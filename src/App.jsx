@@ -6,6 +6,9 @@ import Marketplace from './components/Marketplace/Marketplace';
 import VirtualTryOn from './components/VirtualTryOn/VirtualTryOn';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+// import MergeTryOnPage from './components/MergeTryOn/MergeTryOnPage';
+import SmartTryOn from './components/MergeTryOn/SmartTryOn';
+import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -50,6 +53,32 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/merge-images"
+          element={
+            <PrivateRoute>
+              <SmartTryOn />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/try-on-camera"
+          element={
+            <PrivateRoute>
+              <SmartTryOnCamera />
+            </PrivateRoute>
+          }
+        />
+
+        {/* <Route
+          path="/merge-images"
+          element={
+            <PrivateRoute>
+              <MergeTryOnPage />
+            </PrivateRoute>
+          }
+        /> */}
       </Routes>
     </Router>
   );
