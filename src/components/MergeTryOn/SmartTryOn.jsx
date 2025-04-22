@@ -3,6 +3,7 @@ import * as faceapi from 'face-api.js';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css'; // Required for resize handles
+import './MergeTryOn.css';
 
 const SmartTryOn = () => {
   const personImg = '/images/man2.jpg';
