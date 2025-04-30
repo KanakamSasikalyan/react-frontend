@@ -12,7 +12,7 @@ const Dashboard = () => {
           <Link to="/marketplace" className="nav-link">Marketplace</Link>
           <Link to="/try-on" className="nav-link">Virtual Try-On</Link>
           <Link to="/merge-images" className="nav-link">Merge</Link>
-          <Link to="/try-on-camera" className="nav-link">try-on-camera</Link>
+          <Link to="/try-on-camera" className="nav-link">Camera Try-On</Link>
           <Link to="/github" className="nav-link">Docs</Link>
           <Link to="/about" className="nav-link">About</Link>
         </div>
