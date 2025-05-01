@@ -1,8 +1,11 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: Arial, sans-serif; /* Using Arial as a substitute for Sharp Grotesk */
+  background-color: #f9f9f9; /* Very light grey background */
   color: #333;
+  line-height: 1.6; /* Improve readability */
+  -webkit-font-smoothing: antialiased; /* Better font rendering */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -10,4 +13,8 @@ code {
   background-color: #f4f4f4;
   padding: 2px 4px;
   border-radius: 4px;
+}
+
+*, *::before, *::after { /* Box-sizing reset */
+  box-sizing: border-box;
 }

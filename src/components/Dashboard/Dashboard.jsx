@@ -6,15 +6,15 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <nav className="glass-navbar">
-        <h1 className="logo">Metaverse Fashion Studio</h1>
+        <h1 className="logo">METAVERSE FASHION STUDIO</h1>
         <div className="nav-links">
-          <Link to="/generate" className="nav-link">Generate Designs</Link>
-          <Link to="/marketplace" className="nav-link">Marketplace</Link>
-          <Link to="/try-on" className="nav-link">Virtual Try-On</Link>
-          <Link to="/merge-images" className="nav-link">Merge</Link>
-          <Link to="/try-on-camera" className="nav-link">Camera Try-On</Link>
-          <Link to="/github" className="nav-link">Docs</Link>
-          <Link to="/about" className="nav-link">About</Link>
+          <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
+          <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
+          <Link to="/try-on" className="nav-link">VTON</Link>
+          <Link to="/merge-images" className="nav-link">MERGE</Link>
+          <Link to="/try-on-camera" className="nav-link">CAM VTON</Link>
+          <Link to="/github" className="nav-link">DOCS</Link>
+          <Link to="/about" className="nav-link">ABOUT</Link>
         </div>
       </nav>
 
@@ -28,6 +28,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <footer className="dashboard-footer">
+      &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+      </footer>
     </div>
   );
 };

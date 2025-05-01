@@ -1,93 +1,140 @@
 .dashboard-container {
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  font-family: 'Inter', sans-serif; /* Modern font */
+  background-color: #f0f2f5; /* Light background */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease; /* Smooth transitions */
 }
 
-.gradient-bg {
-  background: #833AB4;
-  background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
-  min-height: calc(100vh - 80px);
-  padding: 2rem;
-}
-
+/* Improved Glassmorphism Navbar */
 .glass-navbar {
-  background-color: #f8f9fa;
-  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.7); /* Slightly less transparent */
+  backdrop-filter: blur(12px); /* Slightly stronger blur */
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.8rem 2rem; /* Slightly reduced vertical padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(224, 224, 224, 0.4); /* Slightly darker border */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06); /* Subtler shadow */
+  border-radius: 0.5rem; /* More subtle rounding */
+  color: #444; /* Slightly lighter text */
 }
 
 .logo {
-  color: #333;
-  font-weight: bold;
-  font-size: 1.5rem;
+  color: #34495e; /* Darker logo color */
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; /* Bold font weight */
+  font-size: 1.3rem; /* Slightly smaller logo */
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .nav-links {
   display: flex;
-  gap: 1rem;
+  gap: 1rem; /* Reduced gap */
 }
 
 .nav-link {
-  color: #007bff;
+  color: #4a5568; /* Slightly lighter link color */
   text-decoration: none;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  font-size: 0.8rem; /* Smaller font size for nav links */
+  padding: 0.5rem 1rem; /* Reduced padding */
+  border-radius: 0.25rem; /* More subtle rounding */
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  background-color: #e9ecef;
+  background-color: rgba(0, 0, 0, 0.03); /* Even subtler hover */
+  color: #34495e; /* Darker on hover */
+}
+
+/* Adjusted Gradient Background */
+.gradient-bg {
+  /* background-image: linear-gradient(-225deg, #7085B6 0%, #87A7D9 50%, #DEF3F8 100%); */
+  background-image: linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%); 
+
+  min-height: calc(100vh - 50px); /* Adjusted to match reduced navbar padding */
+  padding: 2.5rem; /* Slightly increased padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  border-radius: 0.75rem; /* Adjusted rounding */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
 }
 
 .welcome-screen {
   text-align: center;
-  padding: 5rem 2rem;
+  color: white; /* White text on gradient */
 }
 
 .welcome-screen h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 2rem; /* Slightly smaller heading */
+  margin-bottom: 0.8rem; /* Reduced margin */
+  font-weight: 600;
+  letter-spacing: -0.02em; /* Slightly less tight letter spacing */
 }
 
 .welcome-screen p {
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  color: #555;
+  font-size: 1rem; /* Slightly smaller paragraph */
+  color: rgba(255, 255, 255, 0.85); /* Slightly darker text */
+  margin-bottom: 1.5rem; /* Reduced margin */
+  line-height: 1.5; /* Adjusted line height */
 }
 
 .welcome-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1rem; /* Reduced gap */
 }
 
 .cta-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
+  background-color: #f97316; /* Different accent color */
+  color: white;
+  padding: 0.6rem 1.2rem; /* Reduced padding */
+  border-radius: 0.3rem; /* More subtle rounding */
   text-decoration: none;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-  transition: background-color 0.3s;
+  font-size: 0.9rem; /* Smaller button text */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* Subtler button shadow */
 }
 
 .cta-button:hover {
-  background-color: #0056b3;
+  background-color: #ea580c; /* Darker on hover */
+  transform: translateY(-1px); /* Less lift on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
 
 .cta-button.secondary {
-  background-color: #6c757d;
-  color: #fff;
+  background-color: #718096; /* Different secondary color */
 }
 
 .cta-button.secondary:hover {
-  background-color: #5a6268;
+  background-color: #4a5568;
+}
+
+.dashboard-footer {
+  background: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
+  backdrop-filter: blur(12px); /* Slightly stronger blur */
+  -webkit-backdrop-filter: blur(12px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem; /* Reduced padding */
+  /* background-color: rgba(0, 0, 0, 0.6); Slightly lighter footer background */
+  color : #434343;
+  /* color: rgba(255, 255, 255, 0.7); Slightly lighter footer text */
+  font-size: 0.6rem; /* Smaller footer text */
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Subtler border */
 }

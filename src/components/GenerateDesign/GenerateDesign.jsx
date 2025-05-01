@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './GenerateDesign.css';
 
-const API_BASE_URL='';
+const API_BASE_URL = '';
 
 const GenerateDesign = () => {
   const [prompt, setPrompt] = useState('');
@@ -15,14 +15,22 @@ const GenerateDesign = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/designs/${encodeURIComponent(prompt)}?style=${style}`);
-      const imageUrl = URL.createObjectURL(new Blob([response.data], { type: 'image/png' }));
+      const response = await axios.post(
+        `${API_BASE_URL}/api/designs/${encodeURIComponent(prompt)}?style=${style}`
+      );
+      const imageUrl = URL.createObjectURL(
+        new Blob([response.data], { type: 'image/png' })
+      );
       navigate('/', { state: { generatedImage: imageUrl } });
     } catch (error) {
       console.error('Error generating design:', error);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const goToDashboard = () => {
+    navigate('/');
   };
 
   return (
@@ -48,9 +56,21 @@ const GenerateDesign = () => {
             <option value="sporty">Sporty</option>
           </select>
         </div>
-        <button type="submit" disabled={isLoading} className="generate-button">
-          {isLoading ? 'Generating...' : 'Create Design'}
-        </button>
+        <div className="button-container">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="generate-button create-button"
+          >
+            {isLoading ? 'Generating...' : 'Create Design'}
+          </button>
+          <button
+            onClick={goToDashboard}
+            className="generate-button dashboard-button"
+          >
+            {'<--'}
+          </button>
+        </div>
       </form>
     </div>
   );
