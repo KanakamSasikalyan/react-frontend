@@ -40,22 +40,33 @@ const VirtualTryOn = () => {
   };
 
   return (
-    <div className="try-on-container">
-      <h2>Virtual Try-On</h2>
+    <div className="try-on-page">
+      <h1 className="page-header">Virtual Try-On</h1>
+      <div className="try-on-container"></div>
+        <div className="input-section">
+          <div className="file-input">
+            <label htmlFor="userImage">Upload User Image:</label>
+            <input type="file" id="userImage" accept="image/*" onChange={handleUserImageChange} />
+            {userImage && (
+              <div className="preview-box">
+                <img src={URL.createObjectURL(userImage)} alt="User Preview" />
+              </div>
+            )}
+          </div>
 
-      <div className="file-inputs">
-        <div>
-          <label htmlFor="userImage">Upload User Image:</label>
-          <input type="file" id="userImage" accept="image/*" onChange={handleUserImageChange} />
+          <div className="file-input">
+            <label htmlFor="clothImage">Upload Cloth Image:</label>
+            <input type="file" id="clothImage" accept="image/*" onChange={handleClothImageChange} />
+            {clothImage && (
+              <div className="preview-box">
+                <img src={URL.createObjectURL(clothImage)} alt="Cloth Preview" />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="clothImage">Upload Cloth Image:</label>
-          <input type="file" id="clothImage" accept="image/*" onChange={handleClothImageChange} />
-        </div>
+        <button className="submit-button" onClick={handleSubmit}>Submit</button>
       </div>
-
-      <button className="submit-button" onClick={handleSubmit}>Submit</button>
 
       {resultImage && (
         <div className="result-section">
