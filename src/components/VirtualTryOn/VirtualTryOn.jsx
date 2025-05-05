@@ -42,7 +42,7 @@ const VirtualTryOn = () => {
   return (
     <div className="try-on-page">
       <h1 className="page-header">Virtual Try-On</h1>
-      <div className="try-on-container"></div>
+      <div className="try-on-container">
         <div className="input-section">
           <div className="file-input">
             <label htmlFor="userImage">Upload User Image:</label>
