@@ -1,59 +1,22 @@
-.try-on-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #ffffff;
-}
-
-.try-on-modes {
+.file-inputs {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.try-on-modes button {
-  padding: 0.8rem 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.file-inputs label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.try-on-modes button.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.try-on-content {
-  display: flex;
-  gap: 2rem;
-}
-
-.source-container {
-  flex: 1;
-  text-align: center;
-}
-
-.source-container video,
-.source-container img {
-  max-width: 100%;
+.file-inputs input {
+  padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.design-preview {
-  flex: 1;
-  text-align: center;
-}
-
-.design-preview img {
-  max-width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.apply-button {
+.submit-button {
   background-color: #007bff;
   color: #fff;
   padding: 0.8rem 1.5rem;
@@ -63,7 +26,7 @@
   transition: background-color 0.3s;
 }
 
-.apply-button:hover {
+.submit-button:hover {
   background-color: #0056b3;
 }
 
@@ -79,11 +42,14 @@
 }
 
 .download-button {
+  display: inline-block;
+  margin-top: 1rem;
   background-color: #28a745;
   color: #fff;
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 4px;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s;
 }
