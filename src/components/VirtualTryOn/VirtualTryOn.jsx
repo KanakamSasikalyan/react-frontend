@@ -75,6 +75,8 @@ const VirtualTryOn = () => {
           <a href={resultImage} download className="download-button">Download Image</a>
         </div>
       )}
+
+      <footer className="footer">&copy; 2025 Virtual Try-On. All rights reserved.</footer>
     </div>
   );
 };
