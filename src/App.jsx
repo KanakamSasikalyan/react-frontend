@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 // import MergeTryOnPage from './components/MergeTryOn/MergeTryOnPage';
 import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
+import About from './components/About/About'
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -57,6 +58,15 @@ function App() {
           element={
             <PrivateRoute>
               <SmartTryOnCamera />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <PrivateRoute>
+              <About />
             </PrivateRoute>
           }
         />
