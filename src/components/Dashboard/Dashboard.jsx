@@ -11,7 +11,6 @@ const Dashboard = () => {
           <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
           <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
           <Link to="/try-on" className="nav-link">VTON</Link>
-          <Link to="/merge-images" className="nav-link">MERGE</Link>
           <Link to="/try-on-camera" className="nav-link">CAM VTON</Link>
           <Link to="/github" className="nav-link">DOCS</Link>
           <Link to="/about" className="nav-link">ABOUT</Link>
