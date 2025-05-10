@@ -9,6 +9,8 @@ import Signup from './components/Signup/Signup';
 // import MergeTryOnPage from './components/MergeTryOn/MergeTryOnPage';
 import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
 import About from './components/About/About'
+import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
+import ShirtComparision from './components/ShirtComparison/ShirtComparison'
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -58,6 +60,25 @@ function App() {
           element={
             <PrivateRoute>
               <SmartTryOnCamera />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/outfit-suggestion"
+          element={
+            <PrivateRoute>
+              <OutfitSuggestion />
+            </PrivateRoute>
+          }
+        />
+
+
+      <Route
+          path="/comparision"
+          element={
+            <PrivateRoute>
+              <ShirtComparision />
             </PrivateRoute>
           }
         />
