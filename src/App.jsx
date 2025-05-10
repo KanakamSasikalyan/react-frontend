@@ -69,7 +69,7 @@ function App() {
               <About />
             </PrivateRoute>
           }
-        />
+        />    
 
         {/* <Route
           path="/merge-images"
