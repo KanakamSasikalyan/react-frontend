@@ -57,56 +57,40 @@ const ShirtComparison = () => {
     <div className="shirt-comparison-container">
       <h2>Shirt Comparison</h2>
       <form onSubmit={handleSubmit} className="shirt-comparison-form">
-        <div className="form-group">
-          <label>Upload Image 1</label>
-          <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage1, setPreview1)} />
-          {preview1 && <img src={preview1} alt="Preview 1" className="image-preview" />}
-        </div>
+        <div className="side-by-side">
+          <div className="form-group">
+            <label>Upload Image 1</label>
+            <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage1, setPreview1)} />
+            {preview1 && <img src={preview1} alt="Preview 1" className="image-preview" />}
+            <label>Platform 1</label>
+            <select value={platform1} onChange={(e) => setPlatform1(e.target.value)}>
+              <option value="">-- Select Platform --</option>
+              {platforms.map((platform) => (
+                <option key={platform} value={platform}>{platform}</option>
+              ))}
+            </select>
+            <label>Price 1</label>
+            <input type="number" step="0.01" value={price1} onChange={(e) => setPrice1(e.target.value)} />
+            <label>Description 1</label>
+            <textarea value={description1} onChange={(e) => setDescription1(e.target.value)} />
+          </div>
 
-        <div className="form-group">
-          <label>Platform 1</label>
-          <select value={platform1} onChange={(e) => setPlatform1(e.target.value)}>
-            <option value="">-- Select Platform --</option>
-            {platforms.map((platform) => (
-              <option key={platform} value={platform}>{platform}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Price 1</label>
-          <input type="number" step="0.01" value={price1} onChange={(e) => setPrice1(e.target.value)} />
-        </div>
-
-        <div className="form-group">
-          <label>Description 1</label>
-          <textarea value={description1} onChange={(e) => setDescription1(e.target.value)} />
-        </div>
-
-        <div className="form-group">
-          <label>Upload Image 2</label>
-          <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage2, setPreview2)} />
-          {preview2 && <img src={preview2} alt="Preview 2" className="image-preview" />}
-        </div>
-
-        <div className="form-group">
-          <label>Platform 2</label>
-          <select value={platform2} onChange={(e) => setPlatform2(e.target.value)}>
-            <option value="">-- Select Platform --</option>
-            {platforms.map((platform) => (
-              <option key={platform} value={platform}>{platform}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Price 2</label>
-          <input type="number" step="0.01" value={price2} onChange={(e) => setPrice2(e.target.value)} />
-        </div>
-
-        <div className="form-group">
-          <label>Description 2</label>
-          <textarea value={description2} onChange={(e) => setDescription2(e.target.value)} />
+          <div className="form-group">
+            <label>Upload Image 2</label>
+            <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage2, setPreview2)} />
+            {preview2 && <img src={preview2} alt="Preview 2" className="image-preview" />}
+            <label>Platform 2</label>
+            <select value={platform2} onChange={(e) => setPlatform2(e.target.value)}>
+              <option value="">-- Select Platform --</option>
+              {platforms.map((platform) => (
+                <option key={platform} value={platform}>{platform}</option>
+              ))}
+            </select>
+            <label>Price 2</label>
+            <input type="number" step="0.01" value={price2} onChange={(e) => setPrice2(e.target.value)} />
+            <label>Description 2</label>
+            <textarea value={description2} onChange={(e) => setDescription2(e.target.value)} />
+          </div>
         </div>
 
         <button type="submit" disabled={isLoading}>{isLoading ? 'Comparing...' : 'Compare Shirts'}</button>
@@ -115,7 +99,17 @@ const ShirtComparison = () => {
       {result && (
         <div className="comparison-result">
           <h3>Comparison Result</h3>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+          {result.recommendations && result.recommendations.map((shirt, index) => (
+            <div key={index} className="result-item">
+              <img src={index === 0 ? preview1 : preview2} alt={`Result ${index + 1}`} className="result-image" />
+              <div className="result-summary">
+                <p><strong>Platform:</strong> {shirt.platform}</p>
+                <p><strong>Price:</strong> {shirt.price}</p>
+                <p><strong>Description:</strong> {shirt.description}</p>
+                <p><strong>Reason:</strong> {shirt.reason}</p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
