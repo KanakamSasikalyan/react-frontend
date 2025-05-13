@@ -78,6 +78,7 @@ const VirtualTryOn = () => {
             </div>
 
             <div className="file-upload">
+                <label className="upload-label">Upload Cloth Image:</label>
                 <input 
                     type="file" 
                     onChange={handleFileChange} 

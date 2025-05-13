@@ -72,6 +72,23 @@ body {
     cursor: not-allowed;
 }
 
+/* Added styles for the upload label to align with the video container */
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    margin-right: 10px;
+    font-size: 1em;
+    color: #333;
+    text-align: left;
+    flex-shrink: 0;
+    width: 150px; /* Matches the start alignment of the video container */
+}
+
 .video-feed {
     background-color: #000;
     border-radius: 8px;
