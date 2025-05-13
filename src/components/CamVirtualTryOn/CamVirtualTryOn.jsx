@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
+import './CamVirtualTryOn.css';
 
 const VirtualTryOn = () => {
     const [imageSrc, setImageSrc] = useState('');
@@ -71,16 +72,15 @@ const VirtualTryOn = () => {
     };
 
     return (
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+        <div className="container">
             <h1>Virtual Try-On</h1>
-            <p>Status: {status}</p>
+            <p className="status">Status: {status}</p>
             
-            <div style={{ margin: '20px 0' }}>
+            <div className="controls">
                 <input type="file" onChange={handleFileChange} accept="image/*" />
                 <button 
                     onClick={handleUpload} 
                     disabled={!selectedFile || !isConnected}
-                    style={{ margin: '0 10px' }}
                 >
                     Start Virtual Try-On
                 </button>
@@ -92,28 +92,14 @@ const VirtualTryOn = () => {
                 </button>
             </div>
             
-            <div style={{ 
-                backgroundColor: '#000', 
-                borderRadius: '8px', 
-                padding: '10px',
-                marginTop: '20px'
-            }}>
+            <div className="video-feed">
                 {imageSrc ? (
                     <img 
                         src={imageSrc} 
                         alt="Virtual Try-On Output" 
-                        style={{ 
-                            maxWidth: '100%', 
-                            display: 'block',
-                            margin: '0 auto'
-                        }} 
                     />
                 ) : (
-                    <div style={{
-                        color: '#fff',
-                        textAlign: 'center',
-                        padding: '100px 0'
-                    }}>
+                    <div className="placeholder">
                         Waiting for video feed...
                     </div>
                 )}
