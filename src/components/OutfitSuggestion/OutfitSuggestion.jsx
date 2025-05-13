@@ -4,6 +4,7 @@ import './OutfitSuggestion.css';
 
 const OutfitSuggestion = () => {
   const [occasion, setOccasion] = useState('');
+  const [gender, setGender] = useState('unisex');
   const [customPrompt, setCustomPrompt] = useState('');
   const [suggestion, setSuggestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,13 +19,21 @@ const OutfitSuggestion = () => {
     'Interview',
   ];
 
+  const genders = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+    { value: 'unisex', label: 'Unisex' }
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const query = customPrompt || occasion;
 
     try {
-      const response = await axios.get(`/api/outfit/suggest?occasion=${encodeURIComponent(query)}`);
+      const response = await axios.get(
+        `/api/outfit/suggest?occasion=${encodeURIComponent(query)}&gender=${encodeURIComponent(gender)}`
+      );
       setSuggestion(response.data);
     } catch (error) {
       console.error('Error fetching outfit suggestion:', error);
@@ -61,6 +70,24 @@ const OutfitSuggestion = () => {
             placeholder="e.g., Casual dinner with friends"
             disabled={!!occasion}
           />
+        </div>
+
+        <div className="form-group">
+          <label>Select Gender</label>
+          <div className="gender-options">
+            {genders.map((option) => (
+              <label key={option.value} className="gender-option">
+                <input
+                  type="radio"
+                  name="gender"
+                  value={option.value}
+                  checked={gender === option.value}
+                  onChange={() => setGender(option.value)}
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
         </div>
 
         <button type="submit" disabled={isLoading || (!occasion && !customPrompt)}>

@@ -11,7 +11,8 @@ const Dashboard = () => {
           <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
           <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
           <Link to="/try-on" className="nav-link">VTON</Link>
-          <Link to="/try-on-camera" className="nav-link">CAM VTON</Link>
+          {/* <Link to="/try-on-camera" className="nav-link">CAM VTON</Link> */}
+          <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
           <Link to="/outfit-suggestion" className="nav-link">OUTFIT RECOMMENDER</Link>
           <Link to="/comparision" className="nav-link">OPTIMAL PICKER</Link>
           <Link to="/about" className="nav-link">ABOUT</Link>

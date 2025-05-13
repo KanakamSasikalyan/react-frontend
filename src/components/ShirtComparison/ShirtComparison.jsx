@@ -31,14 +31,14 @@ const ShirtComparison = () => {
     setIsLoading(true);
 
     const formData = new FormData();
-    formData.append('image1', image1);
-    formData.append('platform1', platform1);
-    formData.append('price1', price1);
-    formData.append('description1', description1);
-    formData.append('image2', image2);
-    formData.append('platform2', platform2);
-    formData.append('price2', price2);
-    formData.append('description2', description2);
+    if (image1) formData.append('image1', image1);
+    if (platform1) formData.append('platform1', platform1);
+    if (price1) formData.append('price1', price1);
+    if (description1) formData.append('description1', description1);
+    if (image2) formData.append('image2', image2);
+    if (platform2) formData.append('platform2', platform2);
+    if (price2) formData.append('price2', price2);
+    if (description2) formData.append('description2', description2);
 
     try {
       const response = await axios.post('/api/shirts/compare', formData, {
@@ -47,7 +47,7 @@ const ShirtComparison = () => {
       setResult(response.data);
     } catch (error) {
       console.error('Error comparing shirts:', error);
-      setResult({ status: 'error', message: 'Failed to compare shirts. Please try again.' });
+      setResult({ status: 'error', message: error.response?.data?.message || 'Failed to compare shirts. Please try again.' });
     } finally {
       setIsLoading(false);
     }
@@ -99,17 +99,23 @@ const ShirtComparison = () => {
       {result && (
         <div className="comparison-result">
           <h3>Comparison Result</h3>
-          {result.recommendations && result.recommendations.map((shirt, index) => (
-            <div key={index} className="result-item">
-              <img src={index === 0 ? preview1 : preview2} alt={`Result ${index + 1}`} className="result-image" />
+          {result.status === 'error' ? (
+            <div className="error-message">{result.message}</div>
+          ) : result.recommendation ? (
+            <div className="result-item">
+              <img src={result.recommendation.id === 'shirt_1' ? preview1 : preview2} 
+                   alt="Recommended Shirt" 
+                   className="result-image" />
               <div className="result-summary">
-                <p><strong>Platform:</strong> {shirt.platform}</p>
-                <p><strong>Price:</strong> {shirt.price}</p>
-                <p><strong>Description:</strong> {shirt.description}</p>
-                <p><strong>Reason:</strong> {shirt.reason}</p>
+                <p><strong>Platform:</strong> {result.recommendation.platform}</p>
+                <p><strong>Price:</strong> {result.recommendation.price}</p>
+                <p><strong>Material:</strong> {result.recommendation.material}</p>
+                <p><strong>Reason:</strong> {result.recommendation.reason}</p>
               </div>
             </div>
-          ))}
+          ) : (
+            <div>No recommendation available</div>
+          )}
         </div>
       )}
     </div>

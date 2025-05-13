@@ -11,6 +11,7 @@ import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
 import About from './components/About/About'
 import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
 import ShirtComparision from './components/ShirtComparison/ShirtComparison'
+import CamVirtualTryOn from './components/CamVirtualTryOn/CamVirtualTryOn';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -63,6 +64,15 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/cam-try-on"
+          element={
+            <PrivateRoute>
+              <CamVirtualTryOn />
+            </PrivateRoute>
+          }
+        />    
 
         <Route
           path="/outfit-suggestion"
