@@ -91,18 +91,25 @@ const VirtualTryOn = () => {
             </div>
 
             <div className="controls">
-                <button 
-                    onClick={handleUpload} 
-                    disabled={!selectedFile || !isConnected}
-                >
-                    Start
-                </button>
-                <button 
-                    onClick={handleStop} 
-                    disabled={!isConnected}
-                >
-                    Stop
-                </button>
+                <input 
+                    type="file" 
+                    onChange={handleFileChange} 
+                    accept="image/*" 
+                />
+                <div className="buttons">
+                    <button 
+                        onClick={handleUpload} 
+                        disabled={!selectedFile || !isConnected}
+                    >
+                        Start
+                    </button>
+                    <button 
+                        onClick={handleStop} 
+                        disabled={!isConnected}
+                    >
+                        Stop
+                    </button>
+                </div>
             </div>
 
             <footer className="footer">
