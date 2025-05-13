@@ -73,25 +73,10 @@ const VirtualTryOn = () => {
 
     return (
         <div className="container">
-            <h1>Virtual Try-On</h1>
-            <p className="status">Status: {status}</p>
-            
-            <div className="controls">
-                <input type="file" onChange={handleFileChange} accept="image/*" />
-                <button 
-                    onClick={handleUpload} 
-                    disabled={!selectedFile || !isConnected}
-                >
-                    Start Virtual Try-On
-                </button>
-                <button 
-                    onClick={handleStop} 
-                    disabled={!isConnected}
-                >
-                    Stop
-                </button>
+            <div className="status-bar">
+                <p className={`status ${isConnected ? 'connected' : 'disconnected'}`}>Status: {status}</p>
             </div>
-            
+
             <div className="video-feed">
                 {imageSrc ? (
                     <img 
@@ -104,6 +89,25 @@ const VirtualTryOn = () => {
                     </div>
                 )}
             </div>
+
+            <div className="controls">
+                <button 
+                    onClick={handleUpload} 
+                    disabled={!selectedFile || !isConnected}
+                >
+                    Start
+                </button>
+                <button 
+                    onClick={handleStop} 
+                    disabled={!isConnected}
+                >
+                    Stop
+                </button>
+            </div>
+
+            <footer className="footer">
+                <p>&copy; 2023 Virtual Try-On. All rights reserved.</p>
+            </footer>
         </div>
     );
 };
