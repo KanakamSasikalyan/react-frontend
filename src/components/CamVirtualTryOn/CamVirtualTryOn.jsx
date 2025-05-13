@@ -77,6 +77,14 @@ const VirtualTryOn = () => {
                 <p className={`status ${isConnected ? 'connected' : 'disconnected'}`}>Status: {status}</p>
             </div>
 
+            <div className="file-upload">
+                <input 
+                    type="file" 
+                    onChange={handleFileChange} 
+                    accept="image/*" 
+                />
+            </div>
+
             <div className="video-feed">
                 {imageSrc ? (
                     <img 
@@ -91,25 +99,18 @@ const VirtualTryOn = () => {
             </div>
 
             <div className="controls">
-                <input 
-                    type="file" 
-                    onChange={handleFileChange} 
-                    accept="image/*" 
-                />
-                <div className="buttons">
-                    <button 
-                        onClick={handleUpload} 
-                        disabled={!selectedFile || !isConnected}
-                    >
-                        Start
-                    </button>
-                    <button 
-                        onClick={handleStop} 
-                        disabled={!isConnected}
-                    >
-                        Stop
-                    </button>
-                </div>
+                <button 
+                    onClick={handleUpload} 
+                    disabled={!selectedFile || !isConnected}
+                >
+                    Start
+                </button>
+                <button 
+                    onClick={handleStop} 
+                    disabled={!isConnected}
+                >
+                    Stop
+                </button>
             </div>
 
             <footer className="footer">
