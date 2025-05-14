@@ -10,6 +10,9 @@ RUN yarn build
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 
+# Install additional dependencies for WebSocket support
+RUN apk add --no-cache bash curl
+
 # Copy build files
 COPY --from=builder /app/build /usr/share/nginx/html
 
