@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
-  "proxy": "http://localhost:8080/",
+  "proxy": "https://fashion-studio-ai.onrender.com",
   "dependencies": {
     "@stomp/stompjs": "^7.1.1",
     "axios": "^0.21.1",
