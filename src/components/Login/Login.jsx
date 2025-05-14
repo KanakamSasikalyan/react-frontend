@@ -1,34 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import API_BASE_URL from '../../config/apiConfig';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('token', data.token); // Save token if provided
-        navigate('/');
-      } else {
-        const errorData = await response.json();
-        alert(`Login failed: ${errorData.message}`);
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      alert('An error occurred. Please try again.');
+    if (username === 'admin' && password === 'password') {
+      localStorage.setItem('isLoggedIn', 'true');
+      navigate('/');
+    } else {
+      alert('Invalid credentials. Please try again or sign up.');
     }
   };
 
