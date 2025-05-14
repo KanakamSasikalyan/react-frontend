@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import './SmartTryOnCamera.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const SmartTryOnCamera = () => {
   const webcamRef = useRef();
@@ -16,6 +17,27 @@ const SmartTryOnCamera = () => {
     width: 400,
     height: 400,
     facingMode: 'user',
+  };
+
+  const handleSaveTryOn = async () => {
+    try {
+      const screenshot = webcamRef.current.getScreenshot();
+      const response = await fetch(`${API_BASE_URL}/api/tryon/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: screenshot }),
+      });
+
+      if (response.ok) {
+        alert('Try-on saved successfully!');
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to save try-on: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error saving try-on:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (

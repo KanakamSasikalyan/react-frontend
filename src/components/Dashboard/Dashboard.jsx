@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const Dashboard = () => {
   return (
@@ -35,5 +36,8 @@ const Dashboard = () => {
     </div>
   );
 };
+
+// Example usage of API_BASE_URL for future API calls
+// fetch(`${API_BASE_URL}/api/endpoint`, { method: 'GET' })
 
 export default Dashboard;

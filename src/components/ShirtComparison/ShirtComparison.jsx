@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './ShirtComparison.css';
 
+const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+
 const ShirtComparison = () => {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -41,7 +43,7 @@ const ShirtComparison = () => {
     if (description2) formData.append('description2', description2);
 
     try {
-      const response = await axios.post('/api/shirts/compare', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/shirts/compare`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setResult(response.data);

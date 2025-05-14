@@ -4,6 +4,10 @@ FROM node:18 AS builder
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile # Ensures exact versions
+
+# Added dependencies for React Router and additional libraries used in the project
+RUN npm install react-router-dom react-webcam react-draggable react-resizable axios
+
 COPY . .
 RUN yarn build
 

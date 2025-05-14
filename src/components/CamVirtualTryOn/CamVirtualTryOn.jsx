@@ -10,6 +10,8 @@ const VirtualTryOn = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const stompClient = useRef(null);
 
+    const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+
     useEffect(() => {
         const socket = new SockJS('http://localhost:8080/virtual-try-on-websocket');
         stompClient.current = Stomp.over(socket);
@@ -49,7 +51,7 @@ const VirtualTryOn = () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
         
-        fetch('http://localhost:8080/api/virtual-try-on/upload-cloth', {
+        fetch(`${API_BASE_URL}/api/virtual-try-on/upload-cloth`, {
             method: 'POST',
             body: formData,
         })
@@ -64,7 +66,7 @@ const VirtualTryOn = () => {
     };
 
     const handleStop = () => {
-        fetch('http://localhost:8080/api/virtual-try-on/stop', {
+        fetch(`${API_BASE_URL}/api/virtual-try-on/stop`, {
             method: 'POST',
         })
         .then(() => setStatus('Stopped'))

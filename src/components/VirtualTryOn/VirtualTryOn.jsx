@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './VirtualTryOn.css';
 
+const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+
 const VirtualTryOn = () => {
   const [userImage, setUserImage] = useState(null);
   const [clothImage, setClothImage] = useState(null);
@@ -26,7 +28,7 @@ const VirtualTryOn = () => {
     formData.append('clothImage', clothImage);
 
     try {
-      const response = await axios.post('/api/virtual-tryon/try-on', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/virtual-tryon/try-on`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

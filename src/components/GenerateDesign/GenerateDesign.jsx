@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './GenerateDesign.css';
 
-const API_BASE_URL = '/api/designs/generate';
+const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
 
 const GenerateDesign = () => {
   const [prompt, setPrompt] = useState('');
@@ -16,7 +16,7 @@ const GenerateDesign = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${API_BASE_URL}?prompt=${encodeURIComponent(prompt)}&style=${style}`
+        `${API_BASE_URL}/api/designs/generate?prompt=${encodeURIComponent(prompt)}&style=${style}`
       );
       const imageUrl = URL.createObjectURL(
         new Blob([response.data], { type: 'image/png' })

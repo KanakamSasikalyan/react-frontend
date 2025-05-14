@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './OutfitSuggestion.css';
 
+const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+
 const OutfitSuggestion = () => {
   const [occasion, setOccasion] = useState('');
   const [gender, setGender] = useState('unisex');
@@ -32,7 +34,7 @@ const OutfitSuggestion = () => {
 
     try {
       const response = await axios.get(
-        `/api/outfit/suggest?occasion=${encodeURIComponent(query)}&gender=${encodeURIComponent(gender)}`
+        `${API_BASE_URL}/api/outfit/suggest?occasion=${encodeURIComponent(query)}&gender=${encodeURIComponent(gender)}`
       );
       setSuggestion(response.data);
     } catch (error) {
