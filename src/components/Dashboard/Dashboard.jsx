@@ -1,26 +1,35 @@
-import React from 'react';
+// Dashboard.jsx
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 import API_BASE_URL from '../../config/apiConfig';
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, []);
+
   return (
     <div className="dashboard-container">
       <nav className="glass-navbar">
         <h1 className="logo">METAVERSE FASHION STUDIO</h1>
-        <div className="nav-links">
-          <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
-          <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
-          <Link to="/try-on" className="nav-link">VTON</Link>
-          {/* <Link to="/try-on-camera" className="nav-link">CAM VTON</Link> */}
-          <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
-          <Link to="/outfit-suggestion" className="nav-link">OUTFIT RECOMMENDER</Link>
-          <Link to="/comparision" className="nav-link">OPTIMAL PICKER</Link>
-          <Link to="/about" className="nav-link">ABOUT</Link>
+        <div className="nav-links-container">
+          <div className="nav-links">
+            <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
+            <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
+            <Link to="/try-on" className="nav-link">VTON</Link>
+            <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
+            <Link to="/outfit-suggestion" className="nav-link">OUTFIT RECOMMENDER</Link>
+            <Link to="/comparision" className="nav-link">OPTIMAL PICKER</Link>
+            <Link to="/about" className="nav-link">ABOUT</Link>
+          </div>
         </div>
       </nav>
 
-      <div className="gradient-bg">
+      <div className="animated-gradient-bg">
         <div className="welcome-screen">
           <h2>Create Your Digital Fashion</h2>
           <p>Design, explore, and try on virtual clothing in the metaverse</p>
@@ -30,16 +39,12 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      
       <footer className="dashboard-footer">
-      &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+        &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>
   );
 };
-
-// Example usage of API_BASE_URL for future API calls
-fetch(`${API_BASE_URL}/api/endpoint`, {
-  method: 'GET',
-});
 
 export default Dashboard;

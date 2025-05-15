@@ -1,140 +1,261 @@
+/* Dashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-accent: #FF6B6B;
+  --primary-accent-hover: #FF5252;
+  --secondary-accent: #4ECDC4;
+  --secondary-accent-hover: #3DBEB6;
+  --text-dark: #2D3436;
+  --text-medium: #636E72;
+  --text-light: #B2BEC3;
+  --white: #FFFFFF;
+  --glass-white: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(224, 224, 224, 0.5);
+}
+
 .dashboard-container {
   min-height: 100vh;
-  font-family: 'Inter', sans-serif; /* Modern font */
-  background-color: #f0f2f5; /* Light background */
+  font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.3s ease; /* Smooth transitions */
+  overflow: hidden;
 }
 
-/* Improved Glassmorphism Navbar */
+/* Enhanced Glassmorphism Navbar */
 .glass-navbar {
-  background: rgba(255, 255, 255, 0.7); /* Slightly less transparent */
-  backdrop-filter: blur(12px); /* Slightly stronger blur */
+  background: var(--glass-white);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 0.8rem 2rem; /* Slightly reduced vertical padding */
+  padding: 0.8rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(224, 224, 224, 0.4); /* Slightly darker border */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06); /* Subtler shadow */
-  border-radius: 0.5rem; /* More subtle rounding */
-  color: #444; /* Slightly lighter text */
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  position: relative;
 }
 
 .logo {
-  color: #34495e; /* Darker logo color */
+  color: var(--text-dark);
   font-family: 'Inter', sans-serif;
-  font-weight: 700; /* Bold font weight */
-  font-size: 1.3rem; /* Slightly smaller logo */
+  font-weight: 700;
+  font-size: 1.3rem;
   margin: 0;
-  transition: color 0.3s ease;
+  white-space: nowrap;
+  margin-right: 2rem;
+}
+
+.nav-links-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 5px;
 }
 
 .nav-links {
   display: flex;
-  gap: 1rem; /* Reduced gap */
+  gap: 0.5rem;
+  white-space: nowrap;
+  padding: 0.2rem 0;
 }
 
 .nav-link {
-  color: #4a5568; /* Slightly lighter link color */
+  color: var(--text-medium);
   text-decoration: none;
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem; /* Smaller font size for nav links */
-  padding: 0.5rem 1rem; /* Reduced padding */
-  border-radius: 0.25rem; /* More subtle rounding */
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.25rem;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-  background-color: rgba(0, 0, 0, 0.03); /* Even subtler hover */
-  color: #34495e; /* Darker on hover */
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-dark);
 }
 
-/* Adjusted Gradient Background */
-.gradient-bg {
-  /* background-image: linear-gradient(-225deg, #7085B6 0%, #87A7D9 50%, #DEF3F8 100%); */
-  background-image: linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%); 
-
-  min-height: calc(100vh - 50px); /* Adjusted to match reduced navbar padding */
-  padding: 2.5rem; /* Slightly increased padding */
+/* Vibrant Animated Gradient Background */
+.animated-gradient-bg {
+  position: relative;
+  min-height: calc(100vh - 60px);
+  padding: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  border-radius: 0.75rem; /* Adjusted rounding */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+  overflow: hidden;
 }
 
+.animated-gradient-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-45deg, 
+    #FF9A8B, 
+    #FF6B6B, 
+    #FF8E53, 
+    #FFCA3A, 
+    #4ECDC4, 
+    #48D1CC, 
+    #12C2E9, 
+    #C471ED, 
+    #F64F59);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Welcome Screen Content */
 .welcome-screen {
   text-align: center;
-  color: white; /* White text on gradient */
+  color: var(--white);
+  max-width: 800px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-screen h2 {
-  font-size: 2rem; /* Slightly smaller heading */
-  margin-bottom: 0.8rem; /* Reduced margin */
-  font-weight: 600;
-  letter-spacing: -0.02em; /* Slightly less tight letter spacing */
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-screen p {
-  font-size: 1rem; /* Slightly smaller paragraph */
-  color: rgba(255, 255, 255, 0.85); /* Slightly darker text */
-  margin-bottom: 1.5rem; /* Reduced margin */
-  line-height: 1.5; /* Adjusted line height */
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 
 .welcome-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Reduced gap */
+  gap: 1.5rem;
 }
 
+/* Vibrant CTA Buttons */
 .cta-button {
-  background-color: #f97316; /* Different accent color */
-  color: white;
-  padding: 0.6rem 1.2rem; /* Reduced padding */
-  border-radius: 0.3rem; /* More subtle rounding */
+  background-color: var(--primary-accent);
+  color: var(--white);
+  padding: 0.9rem 1.8rem;
+  border-radius: 0.6rem;
   text-decoration: none;
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem; /* Smaller button text */
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* Subtler button shadow */
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .cta-button:hover {
-  background-color: #ea580c; /* Darker on hover */
-  transform: translateY(-1px); /* Less lift on hover */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  background-color: var(--primary-accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cta-button.secondary {
-  background-color: #718096; /* Different secondary color */
+  background-color: var(--secondary-accent);
 }
 
 .cta-button.secondary:hover {
-  background-color: #4a5568;
+  background-color: var(--secondary-accent-hover);
 }
 
+/* Fixed Footer */
 .dashboard-footer {
-  background: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
-  backdrop-filter: blur(12px); /* Slightly stronger blur */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   text-align: center;
-  padding: 1rem; /* Reduced padding */
-  /* background-color: rgba(0, 0, 0, 0.6); Slightly lighter footer background */
-  color : #434343;
-  /* color: rgba(255, 255, 255, 0.7); Slightly lighter footer text */
-  font-size: 0.6rem; /* Smaller footer text */
+  padding: 1rem;
+  color: #434343;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
-  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Subtler border */
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.dashboard-footer a {
+  color: var(--primary-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 600;
+}
+
+.dashboard-footer a:hover {
+  color: var(--primary-accent-hover);
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .glass-navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .nav-links {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .welcome-screen {
+    padding: 2rem;
+  }
+  
+  .welcome-screen h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-screen h2 {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-screen p {
+    font-size: 1rem;
+  }
+  
+  .welcome-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .cta-button {
+    width: 100%;
+    padding: 0.8rem;
+  }
 }
