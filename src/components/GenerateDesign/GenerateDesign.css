@@ -1,72 +1,144 @@
 .design-form-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  max-width: 480px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  padding: 32px 28px 24px 28px;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  position: relative;
 }
-
+.design-form-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #2d2d2d;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 .design-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 18px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 6px;
 }
-
 .form-group label {
-  font-weight: 500;
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group select {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
   font-size: 1rem;
+  color: #444;
+  font-weight: 500;
 }
-
+.form-group input, .form-group select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border 0.2s;
+}
+.form-group input:focus, .form-group select:focus {
+  border: 1.5px solid #6c63ff;
+  outline: none;
+}
 .button-container {
   display: flex;
-  gap: 1rem;
-  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
 }
-
 .generate-button {
-  color: #fff;
+  flex: 1;
+  padding: 10px 0;
   border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 0.25rem;
+  border-radius: 6px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  flex: 7;
+  background: #6c63ff;
+  color: #fff;
+  transition: background 0.2s;
 }
-.create-button {
-  background-color: #007bff;
+.generate-button.dashboard-button {
+  background: #e0e7ff;
+  color: #6c63ff;
+  border: 1px solid #b3bcf5;
 }
-
-.dashboard-button {
-  background-color: #6c757d;
-  flex: 3;
+.generate-button:disabled {
+  background: #b3bcf5;
+  color: #fff;
+  cursor: not-allowed;
+}
+.progress-section {
+  margin-top: 24px;
+  text-align: center;
+}
+.progress-label {
+  margin-bottom: 8px;
+  color: #444;
+  font-size: 1rem;
+}
+.progress-bar-outer {
+  width: 100%;
+  height: 18px;
+  background: #e0e7ff;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #6c63ff 60%, #a084ee 100%);
+  border-radius: 9px 0 0 9px;
+  transition: width 0.3s;
+}
+.progress-percent {
+  font-size: 0.95rem;
+  color: #6c63ff;
+  font-weight: 600;
+}
+.error-message {
+  color: #e53e3e;
+  background: #fff0f0;
+  border: 1px solid #fbb6b6;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 18px;
+  text-align: center;
+}
+.preview-section {
+  margin-top: 32px;
+  text-align: center;
+}
+.image-preview-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(108,99,255,0.08);
 }
-
-.generate-button:hover {
-  background-color: #0056b3;
+.image-preview {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(108,99,255,0.10);
 }
-
-.generate-button:disabled {
-  background-color: #adb5bd;
-  cursor: not-allowed;
+.footer {
+  margin-top: 36px;
+  text-align: center;
+  color: #888;
+  font-size: 0.98rem;
+  border-top: 1px solid #ececec;
+  padding-top: 18px;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 600px) {
+  .design-form-container {
+    padding: 16px 4px 12px 4px;
+  }
+  .image-preview-wrapper {
+    padding: 8px;
+  }
 }
