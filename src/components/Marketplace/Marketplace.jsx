@@ -13,13 +13,15 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(`${API_BASE_URL}/api/designs/all`);
-        const designData = await response.json();
+        const response = await fetch(`${API_BASE_URL}/api/designs/image-urls`);
+        const imageUrls = await response.json();
+        // Fetch full design info from backend (prompt, style, gender, imageUrl)
+        const designResp = await fetch(`${API_BASE_URL}/api/designs/all`);
+        const designData = await designResp.json();
         setDesigns(designData);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching designs:', error);
-      } finally {
         setLoading(false);
       }
     };
@@ -27,13 +29,12 @@ const Marketplace = () => {
   }, []);
 
   const filteredDesigns = designs.filter((design) => {
-    const matchesStyle = filter === 'all' || (design.style && design.style.toLowerCase() === filter.toLowerCase());
-    const matchesGender = genderFilter === 'all' || (design.gender && design.gender.toLowerCase() === genderFilter.toLowerCase());
-    const matchesSearch = 
+    const matchesStyle = filter === 'all' || design.style === filter;
+    const matchesGender = genderFilter === 'all' || design.gender === genderFilter;
+    const matchesSearch =
       searchTerm.trim() === '' ||
       (design.prompt && design.prompt.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    return matchesStyle && matchesGender && matchesSearch;
+    return matchesStyle && matchesGender || matchesSearch;
   });
 
   return (
@@ -45,38 +46,26 @@ const Marketplace = () => {
           placeholder="Search designs..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
         />
-        <div className="select-filters">
-          <select 
-            value={filter} 
-            onChange={(e) => setFilter(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Styles</option>
-            <option value="casual">Casual</option>
-            <option value="cyberpunk">Cyberpunk</option>
-            <option value="formal">Formal</option>
-            <option value="sporty">Sporty</option>
-            <option value="party">Party</option>
-            <option value="ethnic">Ethnic</option>
-            <option value="fusion">Fusion</option>
-            <option value="streetwear">Streetwear</option>
-            <option value="business">Business</option>
-            <option value="traditional">Traditional</option>
-            <option value="other">Other</option>
-          </select>
-          <select 
-            value={genderFilter} 
-            onChange={(e) => setGenderFilter(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="unisex">Unisex</option>
-          </select>
-        </div>
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <option value="all">All Styles</option>
+          <option value="casual">Casual</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="formal">Formal</option>
+          <option value="sporty">Sporty</option>
+          <option value="party">Party</option>
+          <option value="ethnic">Ethnic</option>
+          <option value="fusion">Fusion</option>
+          <option value="streetwear">Streetwear</option>
+          <option value="business">Business</option>
+          <option value="traditional">Traditional</option>
+          <option value="other">Other</option>
+        </select>
+        <select value={genderFilter} onChange={(e) => setGenderFilter(e.target.value)}>
+          <option value="all">All Genders</option>
+          <option value="man">Male</option>
+          <option value="woman">Female</option>
+        </select>
       </div>
       {loading ? (
         <div className="loading">Loading designs...</div>
@@ -85,40 +74,22 @@ const Marketplace = () => {
           {filteredDesigns.length > 0 ? (
             filteredDesigns.map((design) => (
               <div key={design.id} className="design-card">
-                <img 
-                  src={design.imageUrl} 
-                  alt={design.prompt || 'Fashion design'} 
-                  onError={(e) => {
-                    e.target.src = '/placeholder-image.jpg'; // Fallback image
-                  }}
-                />
+                <img src={design.imageUrl} alt={design.prompt} />
                 <div className="design-info">
-                  <h3>{design.prompt || 'Untitled Design'}</h3>
-                  <div className="tags">
-                    <span className={`style-tag ${design.style || 'other'}`}>
-                      {design.style || 'other'}
-                    </span>
-                    <span className={`gender-tag ${design.gender || 'unisex'}`}>
-                      {design.gender || 'unisex'}
-                    </span>
+                  {/* Generate a random name for display */}
+                  <h3>{`cloth_${design.gender}_${Math.abs((design.id + (design.prompt ? design.prompt.length : 0)) % 10000).toString().padStart(4, '0')}`}</h3>
+                  <div className="design-meta-row">
+                    <span className={`style-tag ${design.style}`}>{design.style}</span>
+                    <span className={`gender-tag ${design.gender}`}>{design.gender}</span>
+                    <Link to={`/try-on?designId=${design.id}`} className="try-on-button">
+                      Try On
+                    </Link>
                   </div>
-                  <Link to={`/try-on?designId=${design.id}`} className="try-on-button">
-                    Try On
-                  </Link>
                 </div>
               </div>
             ))
           ) : (
-            <div className="no-results">
-              <p>No designs found matching your criteria</p>
-              <button onClick={() => {
-                setFilter('all');
-                setGenderFilter('all');
-                setSearchTerm('');
-              }}>
-                Clear Filters
-              </button>
-            </div>
+            <div className="no-results">No designs found matching your criteria</div>
           )}
         </div>
       )}
