@@ -76,7 +76,7 @@ const Marketplace = () => {
               <div key={design.id} className="design-card">
                 <img src={design.imageUrl} alt={design.prompt} />
                 <div className="design-info">
-                  <h3>{`cloth_${design.gender}_${Math.abs((design.id + (design.prompt ? design.prompt.length : 0)) % 10000).toString().padStart(4, '0')}`}</h3>
+                  <h3>{`Cloth-Design-${design.gender}-${Math.abs((design.id + (design.prompt ? design.prompt.length : 0)) % 10000).toString().padStart(4, '0')}`}</h3>
                   <div className="design-meta-row">
                     <div className="design-meta-tags">
                       <span className={`style-tag ${design.style}`}>{design.style}</span>
