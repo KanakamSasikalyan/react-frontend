@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './OutfitSuggestion.css';
-
-const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+import API_BASE_URL from '../../config/apiConfig';
 
 const OutfitSuggestion = () => {
   const [occasion, setOccasion] = useState('');

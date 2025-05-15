@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './VirtualTryOn.css';
-
-const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+import API_BASE_URL from '../../config/apiConfig';
 
 const VirtualTryOn = () => {
   const [userImage, setUserImage] = useState(null);

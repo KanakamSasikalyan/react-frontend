@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import './CamVirtualTryOn.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const VirtualTryOn = () => {
     const [imageSrc, setImageSrc] = useState('');
@@ -10,10 +11,8 @@ const VirtualTryOn = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const stompClient = useRef(null);
 
-    const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
-
     useEffect(() => {
-        const socket = new SockJS('http://localhost:8080/virtual-try-on-websocket');
+        const socket = new SockJS(`${API_BASE_URL}/virtual-try-on-websocket`);
         stompClient.current = Stomp.over(socket);
         
         stompClient.current.connect({}, () => {

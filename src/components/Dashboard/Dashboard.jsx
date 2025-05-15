@@ -38,6 +38,8 @@ const Dashboard = () => {
 };
 
 // Example usage of API_BASE_URL for future API calls
-// fetch(`${API_BASE_URL}/api/endpoint`, { method: 'GET' })
+fetch(`${API_BASE_URL}/api/endpoint`, {
+  method: 'GET',
+});
 
 export default Dashboard;

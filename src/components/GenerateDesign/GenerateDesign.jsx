@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './GenerateDesign.css';
-
-const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
+import API_BASE_URL from '../../config/apiConfig';
 
 const GenerateDesign = () => {
   const [prompt, setPrompt] = useState('');

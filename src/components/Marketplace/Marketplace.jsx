@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Marketplace.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const Marketplace = () => {
   const [designs, setDesigns] = useState([]);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
-
-  const API_BASE_URL = "https://fashion-studio-ai.onrender.com";
 
   useEffect(() => {
     const imagekitUrlEndpoint = 'https://ik.imagekit.io/sp7ub8zm6/fashion_designs';
