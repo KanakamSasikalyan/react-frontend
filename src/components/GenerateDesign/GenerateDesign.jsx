@@ -23,7 +23,7 @@ const GenerateDesign = () => {
     setCurrentPrompt(prompt);
 
     // Use SSE for progress
-    const url = `${API_BASE_URL}/api/designs/generate/stream?prompt=${encodeURIComponent(prompt)}&style=${style}`;
+    const url = `${API_BASE_URL}/api/designs/generate?prompt=${encodeURIComponent(prompt)}&style=${style}`;
     const eventSource = new window.EventSource(url);
     eventSourceRef.current = eventSource;
 
