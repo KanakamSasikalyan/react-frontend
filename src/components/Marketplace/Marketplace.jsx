@@ -6,78 +6,66 @@ import API_BASE_URL from '../../config/apiConfig';
 const Marketplace = () => {
   const [designs, setDesigns] = useState([]);
   const [filter, setFilter] = useState('all');
-  const [genderFilter, setGenderFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const imagekitUrlEndpoint = 'https://ik.imagekit.io/sp7ub8zm6/fashion_designs';
+
     const fetchDesigns = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(`${API_BASE_URL}/api/designs/all`);
-        const designData = await response.json();
-        setDesigns(designData);
+        const response = await fetch(`${API_BASE_URL}/api/designs/image-urls`);
+        const imageUrls = await response.json();
+        
+        const sampleFilenames = imageUrls.map(url => {
+          return url.substring(url.lastIndexOf('/') + 1);
+        });
+
+        const fetchedDesigns = sampleFilenames.map((filename) => ({
+          id: filename,
+          imageUrl: `${imagekitUrlEndpoint}/${filename}`,
+          prompt: filename.replace('design_', '').replace('.png', '').replace(/_/g, ' '),
+          style: 'unknown',
+        }));
+
+        setDesigns(fetchedDesigns);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching designs:', error);
-      } finally {
         setLoading(false);
       }
     };
+
     fetchDesigns();
   }, []);
 
   const filteredDesigns = designs.filter((design) => {
-    const matchesStyle = filter === 'all' || (design.style && design.style.toLowerCase() === filter.toLowerCase());
-    const matchesGender = genderFilter === 'all' || (design.gender && design.gender.toLowerCase() === genderFilter.toLowerCase());
-    const matchesSearch = 
-      searchTerm.trim() === '' ||
-      (design.prompt && design.prompt.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    return matchesStyle && matchesGender && matchesSearch;
+    const matchesFilter = filter === 'all' || design.style === filter;
+    const matchesSearch = design.prompt.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesFilter && matchesSearch;
   });
 
   return (
     <div className="marketplace-container">
       <h2>Design Marketplace</h2>
+
       <div className="filters">
         <input
           type="text"
           placeholder="Search designs..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
         />
-        <div className="select-filters">
-          <select 
-            value={filter} 
-            onChange={(e) => setFilter(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Styles</option>
-            <option value="casual">Casual</option>
-            <option value="cyberpunk">Cyberpunk</option>
-            <option value="formal">Formal</option>
-            <option value="sporty">Sporty</option>
-            <option value="party">Party</option>
-            <option value="ethnic">Ethnic</option>
-            <option value="fusion">Fusion</option>
-            <option value="streetwear">Streetwear</option>
-            <option value="business">Business</option>
-            <option value="traditional">Traditional</option>
-            <option value="other">Other</option>
-          </select>
-          <select 
-            value={genderFilter} 
-            onChange={(e) => setGenderFilter(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="unisex">Unisex</option>
-          </select>
-        </div>
+
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <option value="all">All Styles</option>
+          <option value="casual">Casual</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="formal">Formal</option>
+          <option value="sporty">Sporty</option>
+        </select>
       </div>
+
       {loading ? (
         <div className="loading">Loading designs...</div>
       ) : (
@@ -87,16 +75,11 @@ const Marketplace = () => {
               <div key={design.id} className="design-card">
                 <img src={design.imageUrl} alt={design.prompt} />
                 <div className="design-info">
-                  <h3>{`Cloth-Design-${design.gender}-${Math.abs((design.id + (design.prompt ? design.prompt.length : 0)) % 10000).toString().padStart(4, '0')}`}</h3>
-                  <div className="design-meta-row">
-                    <div className="design-meta-tags">
-                      <span className={`style-tag ${design.style}`}>{design.style}</span>
-                      <span className={`gender-tag ${design.gender}`}>{design.gender}</span>
-                    </div>
-                    <Link to={`/try-on?designId=${design.id}`} className="try-on-button">
-                      Try On
-                    </Link>
-                  </div>
+                  <h3>{design.prompt}</h3>
+                  <span className={`style-tag ${design.style}`}>{design.style}</span>
+                  <Link to={`/try-on?designId=${design.id}`} className="try-on-button">
+                    Try On
+                  </Link>
                 </div>
               </div>
             ))
@@ -105,9 +88,6 @@ const Marketplace = () => {
           )}
         </div>
       )}
-      <footer className="footer">
-        <div>Fashion Studio AI &copy; {new Date().getFullYear()} | Designed with ❤️</div>
-      </footer>
     </div>
   );
 };
