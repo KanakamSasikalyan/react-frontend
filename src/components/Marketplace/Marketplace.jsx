@@ -76,11 +76,12 @@ const Marketplace = () => {
               <div key={design.id} className="design-card">
                 <img src={design.imageUrl} alt={design.prompt} />
                 <div className="design-info">
-                  {/* Generate a random name for display */}
                   <h3>{`cloth_${design.gender}_${Math.abs((design.id + (design.prompt ? design.prompt.length : 0)) % 10000).toString().padStart(4, '0')}`}</h3>
                   <div className="design-meta-row">
-                    <span className={`style-tag ${design.style}`}>{design.style}</span>
-                    <span className={`gender-tag ${design.gender}`}>{design.gender}</span>
+                    <div className="design-meta-tags">
+                      <span className={`style-tag ${design.style}`}>{design.style}</span>
+                      <span className={`gender-tag ${design.gender}`}>{design.gender}</span>
+                    </div>
                     <Link to={`/try-on?designId=${design.id}`} className="try-on-button">
                       Try On
                     </Link>
@@ -93,6 +94,9 @@ const Marketplace = () => {
           )}
         </div>
       )}
+      <footer className="footer">
+        <div>Fashion Studio AI &copy; {new Date().getFullYear()} | Designed with ❤️</div>
+      </footer>
     </div>
   );
 };
