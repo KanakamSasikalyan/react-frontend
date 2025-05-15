@@ -50,6 +50,12 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Updated hover shadow */
 }
 
+.design-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .design-card img {
   width: 100%;
   height: 150px; /* Reduced height from 200px to 150px */
