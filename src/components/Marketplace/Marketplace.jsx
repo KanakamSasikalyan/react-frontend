@@ -13,15 +13,13 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/designs/image-urls`);
-        const imageUrls = await response.json();
-        // Fetch full design info from backend (prompt, style, gender, imageUrl)
-        const designResp = await fetch(`${API_BASE_URL}/api/designs/all`);
-        const designData = await designResp.json();
+        setLoading(true);
+        const response = await fetch(`${API_BASE_URL}/api/designs/all`);
+        const designData = await response.json();
         setDesigns(designData);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching designs:', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -29,12 +27,13 @@ const Marketplace = () => {
   }, []);
 
   const filteredDesigns = designs.filter((design) => {
-    const matchesStyle = filter === 'all' || design.style === filter;
-    const matchesGender = genderFilter === 'all' || design.gender === genderFilter;
-    const matchesSearch =
+    const matchesStyle = filter === 'all' || (design.style && design.style.toLowerCase() === filter.toLowerCase());
+    const matchesGender = genderFilter === 'all' || (design.gender && design.gender.toLowerCase() === genderFilter.toLowerCase());
+    const matchesSearch = 
       searchTerm.trim() === '' ||
       (design.prompt && design.prompt.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesStyle && matchesGender || matchesSearch;
+    
+    return matchesStyle && matchesGender && matchesSearch;
   });
 
   return (
@@ -46,26 +45,38 @@ const Marketplace = () => {
           placeholder="Search designs..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
         />
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-          <option value="all">All Styles</option>
-          <option value="casual">Casual</option>
-          <option value="cyberpunk">Cyberpunk</option>
-          <option value="formal">Formal</option>
-          <option value="sporty">Sporty</option>
-          <option value="party">Party</option>
-          <option value="ethnic">Ethnic</option>
-          <option value="fusion">Fusion</option>
-          <option value="streetwear">Streetwear</option>
-          <option value="business">Business</option>
-          <option value="traditional">Traditional</option>
-          <option value="other">Other</option>
-        </select>
-        <select value={genderFilter} onChange={(e) => setGenderFilter(e.target.value)}>
-          <option value="all">All Genders</option>
-          <option value="man">Male</option>
-          <option value="woman">Female</option>
-        </select>
+        <div className="select-filters">
+          <select 
+            value={filter} 
+            onChange={(e) => setFilter(e.target.value)}
+            className="filter-select"
+          >
+            <option value="all">All Styles</option>
+            <option value="casual">Casual</option>
+            <option value="cyberpunk">Cyberpunk</option>
+            <option value="formal">Formal</option>
+            <option value="sporty">Sporty</option>
+            <option value="party">Party</option>
+            <option value="ethnic">Ethnic</option>
+            <option value="fusion">Fusion</option>
+            <option value="streetwear">Streetwear</option>
+            <option value="business">Business</option>
+            <option value="traditional">Traditional</option>
+            <option value="other">Other</option>
+          </select>
+          <select 
+            value={genderFilter} 
+            onChange={(e) => setGenderFilter(e.target.value)}
+            className="filter-select"
+          >
+            <option value="all">All Genders</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="unisex">Unisex</option>
+          </select>
+        </div>
       </div>
       {loading ? (
         <div className="loading">Loading designs...</div>
