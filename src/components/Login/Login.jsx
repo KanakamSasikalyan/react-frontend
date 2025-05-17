@@ -43,7 +43,7 @@ const Login = () => {
         <div className="login-links">
           <a href="#" onClick={() => navigate('/signup')}>Sign Up</a>
           <a href="#" onClick={() => navigate('/forgot-password')}>Forgot Password?</a>
-        </div>
+        </div>  
       </form>
     </div>
   );
