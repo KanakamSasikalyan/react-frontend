@@ -3,6 +3,7 @@ import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import './CamVirtualTryOn.css';
 import API_BASE_URL from '../../config/apiConfig';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const VirtualTryOn = () => {
     const [imageSrc, setImageSrc] = useState('');
@@ -10,8 +11,15 @@ const VirtualTryOn = () => {
     const [status, setStatus] = useState('Disconnected');
     const [selectedFile, setSelectedFile] = useState(null);
     const stompClient = useRef(null);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (location.state?.processedClothFile) {
+            setSelectedFile(location.state.processedClothFile);
+            handleUpload(location.state.processedClothFile);
+        }
+
         const socket = new SockJS(`${API_BASE_URL}/virtual-try-on-websocket`);
         stompClient.current = Stomp.over(socket);
         
@@ -38,17 +46,18 @@ const VirtualTryOn = () => {
                 stompClient.current.disconnect();
             }
         };
-    }, []);
+    }, [location.state]);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
 
-    const handleUpload = () => {
-        if (!selectedFile) return;
+    const handleUpload = (file = null) => {
+        const uploadFile = file || selectedFile;
+        if (!uploadFile) return;
         
         const formData = new FormData();
-        formData.append('file', selectedFile);
+        formData.append('file', uploadFile);
         
         fetch(`${API_BASE_URL}/api/virtual-try-on/upload-cloth`, {
             method: 'POST',
@@ -74,7 +83,13 @@ const VirtualTryOn = () => {
 
     return (
         <div className="container">
-            <div className="status-bar">
+            <div className="status-container">
+                {/* <button className="back-button" onClick={() => navigate(-1)}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Back
+                </button> */}
                 <p className={`status ${isConnected ? 'connected' : 'disconnected'}`}>Status: {status}</p>
             </div>
 
@@ -102,7 +117,7 @@ const VirtualTryOn = () => {
 
             <div className="controls">
                 <button 
-                    onClick={handleUpload} 
+                    onClick={() => handleUpload()} 
                     disabled={!selectedFile || !isConnected}
                 >
                     Start
@@ -116,7 +131,7 @@ const VirtualTryOn = () => {
             </div>
 
             <footer className="footer">
-                <p>&copy; 2023 Virtual Try-On. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Metaverse Fashion Studio. All rights reserved.</p>
             </footer>
         </div>
     );

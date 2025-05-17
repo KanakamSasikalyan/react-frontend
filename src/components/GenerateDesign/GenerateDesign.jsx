@@ -54,7 +54,6 @@ const GenerateDesign = () => {
     setError(null);
     setCurrentPrompt(prompt);
 
-    // Use SSE for progress
     const url = `${API_BASE_URL}/api/designs/generate/stream?prompt=${encodeURIComponent(prompt)}&style=${style}&gender=${gender}`;
     const eventSource = new window.EventSource(url);
     eventSourceRef.current = eventSource;
@@ -76,11 +75,23 @@ const GenerateDesign = () => {
         eventSource.close();
       }
     };
+
     eventSource.onerror = () => {
       setError('Connection lost or server error.');
       setIsLoading(false);
       eventSource.close();
     };
+  };
+
+  const handleDownload = () => {
+    if (imageUrl) {
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = `fashion-design-${Date.now()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const goToDashboard = () => {
@@ -89,15 +100,26 @@ const GenerateDesign = () => {
 
   return (
     <div className="design-form-container">
-      <h2>Create Your Design</h2>
+      <h2>Create Your Fashion Design</h2>
       <form onSubmit={handleSubmit} className="design-form">
-        <div className="form-group">
-          <label>Gender</label>
-          <select value={gender} onChange={handleGenderChange} disabled={isLoading}>
-            <option value="man">Male</option>
-            <option value="woman">Female</option>
-          </select>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Gender</label>
+            <select value={gender} onChange={handleGenderChange} disabled={isLoading}>
+              <option value="man">Male</option>
+              <option value="woman">Female</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Select style</label>
+            <select value={style} onChange={(e) => setStyle(e.target.value)} disabled={isLoading}>
+              {styleOptions[gender].map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
+        
         <div className="form-group">
           <label>Describe your design</label>
           <input
@@ -109,14 +131,7 @@ const GenerateDesign = () => {
             disabled={isLoading}
           />
         </div>
-        <div className="form-group">
-          <label>Select style</label>
-          <select value={style} onChange={(e) => setStyle(e.target.value)} disabled={isLoading}>
-            {styleOptions[gender].map((option) => (
-              <option key={option.value} value={option.value}>{option.label}</option>
-            ))}
-          </select>
-        </div>
+        
         <div className="button-container">
           <button
             type="submit"
@@ -134,6 +149,7 @@ const GenerateDesign = () => {
           </button>
         </div>
       </form>
+
       {isLoading && (
         <div className="progress-section">
           <div className="progress-label">Generating: <b>{currentPrompt}</b></div>
@@ -143,17 +159,23 @@ const GenerateDesign = () => {
           <div className="progress-percent">{progress}%</div>
         </div>
       )}
+
       {error && <div className="error-message">{error}</div>}
+
       {imageUrl && (
         <div className="preview-section">
-          <h3>Preview</h3>
+          <h3>Your Generated Design</h3>
           <div className="image-preview-wrapper">
             <img src={imageUrl} alt="Generated Design" className="image-preview" />
+            <button onClick={handleDownload} className="download-button">
+              Download Design
+            </button>
           </div>
         </div>
       )}
+
       <footer className="footer">
-        <div>Fashion Studio AI &copy; {new Date().getFullYear()} | Designed with ❤️</div>
+        <div>Fashion Studio AI &copy; {new Date().getFullYear()}</div>
       </footer>
     </div>
   );

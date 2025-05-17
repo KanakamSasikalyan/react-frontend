@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 import './Marketplace.css';
 import API_BASE_URL from '../../config/apiConfig';
 
@@ -43,23 +43,28 @@ const Marketplace = () => {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
+          },
+          responseType: 'blob'
         }
       );
-
-      if (!response.data.processedImageUrl) {
-        throw new Error('No processed image URL received');
+  
+      if (!response.data) {
+        throw new Error('No processed image received');
       }
-
-      navigate('/try-on', {
+  
+      const processedFile = new File([response.data], 'processed-clothing.png', { 
+        type: 'image/png' 
+      });
+  
+      navigate('/cam-try-on', {
         state: {
-          clothImageUrl: response.data.processedImageUrl,
+          processedClothFile: processedFile,
           designId: designId
         }
       });
     } catch (err) {
       console.error('Background removal failed:', err);
-      setError(err.response?.data?.message || err.message || 'Background removal failed');
+      setError(err.response?.data?.error || err.message || 'Background removal failed');
     } finally {
       setProcessingId(null);
     }
@@ -78,10 +83,18 @@ const Marketplace = () => {
 
   return (
     <div className="marketplace-container">
-      <h2>Design Marketplace</h2>
+      <div className="marketplace-header">
+        <h2>Design Marketplace</h2>
+        <button className="back-to-dashboard" onClick={() => navigate('/')}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Dashboard
+        </button>
+      </div>
       
       {error && (
-        <div className="alert alert-error">
+        <div className="alert-error">
           {error}
           <button onClick={() => setError(null)} className="close-btn">×</button>
         </div>
@@ -96,7 +109,10 @@ const Marketplace = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
-          <i className="search-icon">🔍</i>
+          <svg className="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
 
         <div className="dropdown-filters">
@@ -111,7 +127,7 @@ const Marketplace = () => {
               <option value="casual">Casual</option>
               <option value="formal">Formal</option>
               <option value="sporty">Sporty</option>
-              {/* Add other style options */}
+              <option value="vintage">Vintage</option>
             </select>
           </div>
 
@@ -172,7 +188,7 @@ const Marketplace = () => {
                     className="try-on-btn"
                     disabled={processingId !== null}
                   >
-                    {processingId === design.id ? 'Processing...' : 'Virtual Try-On'}
+                    {processingId === design.id ? 'Processing...' : 'Camera Try-On'}
                   </button>
                 </div>
               </div>
@@ -195,6 +211,10 @@ const Marketplace = () => {
           )}
         </div>
       )}
+
+      <footer className="marketplace-footer">
+        &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+      </footer>
     </div>
   );
 };

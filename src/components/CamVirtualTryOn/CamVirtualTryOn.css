@@ -1,122 +1,219 @@
-/* CamVirtualTryOn.css */
+/* CamVirtualTryOn.css - Enhanced Version */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-accent: #7B61FF;
+  --primary-accent-hover: #6A4EFF;
+  --secondary-accent: #00D4FF;
+  --text-dark: #1A1A2E;
+  --text-medium: #4A4A6A;
+  --text-light: #A1A1B5;
+  --white: #FFFFFF;
+  --glass-white: rgba(255, 255, 255, 0.95);
+  --connected-color: #4CAF50;
+  --disconnected-color: #F44336;
+}
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
+    position: relative;
+    padding-bottom: 120px; /* Added padding to prevent footer overlap */
 }
 
-.status-bar {
+.status-container {
     display: flex;
-    justify-content: flex-end;
-    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--white);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 10px 15px;
+}
+
+.back-button {
+    background-color: transparent;
+    color: var(--primary-accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-accent);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.back-button:hover {
+    background-color: rgba(123, 97, 255, 0.1);
 }
 
 .status {
-    font-size: 1em;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
+    font-weight: 500;
 }
 
 .status.connected::before {
     content: '';
     width: 10px;
     height: 10px;
-    background-color: green;
+    background-color: var(--connected-color);
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 .status.disconnected::before {
     content: '';
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: var(--disconnected-color);
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 8px;
 }
-
-.controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.controls input[type="file"] {
-    margin-right: 10px;
-}
-
-.controls button {
-    padding: 8px 15px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.controls button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Added styles for the upload label to align with the video container */
 
 .file-upload {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .upload-label {
-    margin-right: 10px;
-    font-size: 1em;
-    color: #333;
-    text-align: left;
+    margin-right: 15px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 500;
     flex-shrink: 0;
-    width: 150px; /* Matches the start alignment of the video container */
+    width: 150px;
 }
 
 .video-feed {
     background-color: #000;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     padding: 10px;
-    margin-top: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 500px; /* Increased height */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .video-feed img {
     max-width: 100%;
     max-height: 100%;
     display: block;
+    border-radius: 0.5rem;
 }
 
 .video-feed .placeholder {
-    color: #fff;
+    color: var(--white);
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0; /* Increased margin */
+    gap: 15px;
+}
+
+.controls button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--primary-accent);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.controls button:hover {
+    background-color: var(--primary-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.3);
+}
+
+.controls button:disabled {
+    background-color: #D1C4E9;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.controls button:nth-child(2) {
+    background-color: var(--secondary-accent);
+}
+
+.controls button:nth-child(2):hover {
+    background-color: #00B8E0;
 }
 
 .footer {
     text-align: center;
-    padding: 10px;
-    background-color: #f4f4f4;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #666;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: var(--glass-white);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .file-upload {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .upload-label {
+        margin-bottom: 10px;
+        width: auto;
+    }
+    
+    .video-feed {
+        height: 400px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .controls button {
+        width: 100%;
+    }
 }

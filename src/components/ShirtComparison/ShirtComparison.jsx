@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './ShirtComparison.css';
 import API_BASE_URL from '../../config/apiConfig';
 
@@ -16,6 +17,7 @@ const ShirtComparison = () => {
   const [description2, setDescription2] = useState('');
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const platforms = ['Amazon', 'Myntra', 'Flipkart', 'Snapdeal', 'Nyka', 'Ajio'];
 
@@ -56,7 +58,7 @@ const ShirtComparison = () => {
 
   return (
     <div className="shirt-comparison-container">
-      <h2>Shirt Comparison</h2>
+      <h2>TOP CHOICE</h2>
       <form onSubmit={handleSubmit} className="shirt-comparison-form">
         <div className="side-by-side">
           <div className="form-group">
@@ -94,12 +96,30 @@ const ShirtComparison = () => {
           </div>
         </div>
 
-        <button type="submit" disabled={isLoading}>{isLoading ? 'Comparing...' : 'Compare Shirts'}</button>
+        <div className="button-group-opt">
+          <button 
+            type="submit" 
+            className="compare-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Comparing...' : 'Compare Shirts'}
+          </button>
+          <button 
+            type="button" 
+            className="back-button-opt"
+            onClick={() => navigate(-1)}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back
+          </button>
+        </div>
       </form>
 
       {result && (
         <div className="comparison-result">
-          <h3>Comparison Result</h3>
+          <h3>TOP RECOMMENDATION</h3>
           {result.status === 'error' ? (
             <div className="error-message">{result.message}</div>
           ) : result.recommendation ? (
@@ -119,6 +139,10 @@ const ShirtComparison = () => {
           )}
         </div>
       )}
+
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Metaverse Fashion Studio. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

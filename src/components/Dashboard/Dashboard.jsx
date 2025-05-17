@@ -15,15 +15,15 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <nav className="glass-navbar">
-        <h1 className="logo">METAVERSE FASHION STUDIO</h1>
+        <h1 className="logo">AI FASHION STUDIO</h1>
         <div className="nav-links-container">
           <div className="nav-links">
-            <Link to="/generate" className="nav-link">GENERATE DESIGNS</Link>
+            <Link to="/generate" className="nav-link">DESIGN LAB</Link>
             <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
-            <Link to="/try-on" className="nav-link">VTON</Link>
+            <Link to="/try-on" className="nav-link">DIGITAL FITTING</Link>
             <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
-            <Link to="/outfit-suggestion" className="nav-link">OUTFIT RECOMMENDER</Link>
-            <Link to="/comparision" className="nav-link">OPTIMAL PICKER</Link>
+            <Link to="/outfit-suggestion" className="nav-link">WHAT2WEAR</Link>
+            <Link to="/comparision" className="nav-link">TOP CHOICE</Link>
             <Link to="/about" className="nav-link">ABOUT</Link>
           </div>
         </div>
