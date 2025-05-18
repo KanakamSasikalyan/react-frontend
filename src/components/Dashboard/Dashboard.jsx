@@ -22,6 +22,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user'); // Also clear user info if stored
     navigate('/login');
   };
 
@@ -38,6 +39,7 @@ const Dashboard = () => {
             <Link to="/outfit-suggestion" className="nav-link">WHAT2WEAR</Link>
             <Link to="/comparision" className="nav-link">TOP CHOICE</Link>
             <Link to="/about" className="nav-link">ABOUT</Link>
+            <button className="nav-link logout-btn" onClick={handleLogout}>LOGOUT</button>
           </div>
         </div>
       </nav>
