@@ -28,12 +28,9 @@ const Login = () => {
       const response = await fetch(`${API_BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams({
-          username,
-          password
-        })
+        body: JSON.stringify({ username, password })
       });
 
       if (!response.ok) {

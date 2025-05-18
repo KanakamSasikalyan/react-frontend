@@ -31,6 +31,10 @@ const Signup = () => {
     setPasswordError('');
     setEmailError('');
     setError('');
+    if (!username || !email || !password) {
+      setError('All fields are required.');
+      return;
+    }
     if (!validatePassword(password)) {
       setPasswordError('Password must be at least 8 characters, include a number, an uppercase letter, and a special symbol.');
       return;
@@ -40,10 +44,12 @@ const Signup = () => {
       return;
     }
     try {
+      const payload = { username, email, password };
+      console.log('Signup payload:', payload);
       const response = await fetch(`${API_BASE_URL}/api/users/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify(payload),
       });
       if (response.ok) {
         setError('Signup or account creation successful');
