@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import API_BASE_URL from '../../config/apiConfig';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is already logged in
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
       navigate('/');
@@ -40,44 +41,24 @@ const Login = () => {
         throw new Error(errorData.message || 'Login failed');
       }
 
-      // Assuming your backend returns a token or user data
-      const data = await response.json();
-      
-      // Store authentication state
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('user', JSON.stringify(data.user || { username }));
-      
       navigate('/');
     } catch (error) {
-      console.error('Login error:', error);
       setError(error.message || 'Invalid username or password');
     } finally {
       setIsLoading(false);
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
-      <div className="particles">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div 
-            key={i}
-            className="particle" 
-            style={{
-              width: `${Math.random() * 5 + 2}px`,
-              height: `${Math.random() * 5 + 2}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 20 + 10}s`,
-              animationDelay: `${Math.random() * 5}s`,
-              opacity: Math.random() * 0.5 + 0.3
-            }}
-          />
-        ))}
-      </div>
-      
       <form onSubmit={handleSubmit} className="login-form">
-        <h2>Welcome Back</h2>
+        <div className="brand-title">AI Fashion Studio</div>
+        <h2>Login</h2>
         
         {error && (
           <div className="error-message">
@@ -86,34 +67,31 @@ const Login = () => {
         )}
         
         <div className="form-group">
-          <label>Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            placeholder="Enter your username"
+            placeholder="Username"
             disabled={isLoading}
           />
         </div>
-        <div className="form-group">
-          <label>Password</label>
+        <div className="form-group password-input">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            placeholder="Enter your password"
+            placeholder="Password"
             disabled={isLoading}
           />
+          <span className="password-toggle" onClick={togglePasswordVisibility}>
+            {showPassword ? <FiEyeOff /> : <FiEye />}
+          </span>
         </div>
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
-        <div className="login-links">
-          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signup'); }}>Create Account</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/forgot-password'); }}>Forgot Password?</a>
-        </div>  
       </form>
     </div>
   );
