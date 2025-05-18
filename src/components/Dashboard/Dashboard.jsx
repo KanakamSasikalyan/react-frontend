@@ -1,16 +1,29 @@
 // Dashboard.jsx
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import API_BASE_URL from '../../config/apiConfig';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+      navigate('/login');
+    }
+
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'visible';
     };
-  }, []);
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/login');
+  };
 
   return (
     <div className="dashboard-container">
@@ -41,7 +54,7 @@ const Dashboard = () => {
       </div>
       
       <footer className="dashboard-footer">
-        &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+        &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>
   );

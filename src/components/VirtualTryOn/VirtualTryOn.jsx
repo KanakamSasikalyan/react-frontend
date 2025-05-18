@@ -106,7 +106,7 @@ const VirtualTryOn = () => {
       )}
 
       <footer className="footer">
-        &copy; {new Date().getFullYear()} Metaverse Fashion Studio. All rights reserved.
+        &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI
       </footer>
     </div>
   );

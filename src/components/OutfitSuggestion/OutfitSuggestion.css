@@ -217,3 +217,73 @@
     width: 100%;
   }
 }
+
+/* Add these new styles to your existing CSS file */
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.main-suggestion {
+  background: linear-gradient(135deg, #7B61FF 0%, #00D4FF 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(123, 97, 255, 0.3);
+  animation: fadeIn 0.5s ease;
+}
+
+.alternative-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.alternative-list li {
+  background-color: rgba(123, 97, 255, 0.1);
+  padding: 0.8rem 1rem;
+  border-radius: 0.4rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--primary-accent);
+}
+
+.suggestion-result h4 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.spinner {
+  animation: rotate 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+/* Update the suggestion-result styles */
+.suggestion-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--glass-white);
+  border: 1px solid rgba(123, 97, 255, 0.2);
+  border-radius: 0.8rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}

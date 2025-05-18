@@ -175,7 +175,7 @@ const GenerateDesign = () => {
       )}
 
       <footer className="footer">
-        <div>Fashion Studio AI &copy; {new Date().getFullYear()}</div>
+        <div>Enhancing Fashion Market using Virtual Fashion Studio Powered by AI &copy; {new Date().getFullYear()}</div>
       </footer>
     </div>
   );

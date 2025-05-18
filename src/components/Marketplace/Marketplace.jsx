@@ -213,7 +213,7 @@ const Marketplace = () => {
       )}
 
       <footer className="marketplace-footer">
-        &copy; {new Date().getFullYear()} Metaverse Fashion Studio, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+        &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>
   );

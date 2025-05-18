@@ -141,7 +141,7 @@ const ShirtComparison = () => {
       )}
 
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Metaverse Fashion Studio. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI</p>
       </footer>
     </div>
   );
