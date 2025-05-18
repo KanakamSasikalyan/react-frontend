@@ -19,8 +19,10 @@ const Signup = () => {
       });
 
       if (response.ok) {
-        alert('Signup successful! Please login.');
-        navigate('/login');
+        alert('Signup or account creation successful');
+        setTimeout(() => {
+          navigate('/login');
+        }, 500); // 500ms delay before redirect
       } else {
         const errorData = await response.json();
         alert(`Signup failed: ${errorData.message}`);

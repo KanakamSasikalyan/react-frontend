@@ -92,6 +92,15 @@ const Login = () => {
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
+
+        <div className="auth-links">
+          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signup'); }}>
+            Create an account
+          </a>
+          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/forgot-password'); }}>
+            Forgot password?
+          </a>
+        </div>
       </form>
     </div>
   );
