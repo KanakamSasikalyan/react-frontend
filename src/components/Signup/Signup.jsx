@@ -12,7 +12,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -36,6 +36,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
+        <div className="brand-title">AI Fashion Studio</div>
         <h2>Sign Up</h2>
         <div className="form-group">
           <label>Username</label>
@@ -44,6 +45,8 @@ const Signup = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            placeholder="Enter your username"
+            disabled={false}
           />
         </div>
         <div className="form-group">
@@ -53,6 +56,8 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
+            disabled={false}
           />
         </div>
         <div className="form-group">
@@ -62,9 +67,16 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Enter your password"
+            disabled={false}
           />
         </div>
         <button type="submit">Sign Up</button>
+        <div className="auth-links">
+          <a href="#" onClick={e => { e.preventDefault(); navigate('/login'); }}>
+            Go back to login
+          </a>
+        </div>
       </form>
     </div>
   );
