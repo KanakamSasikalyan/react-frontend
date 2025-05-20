@@ -12,6 +12,7 @@ import About from './components/About/About'
 import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
 import ShirtComparision from './components/ShirtComparison/ShirtComparison'
 import CamVirtualTryOn from './components/CamVirtualTryOn/CamVirtualTryOn';
+import Forgot from './components/Forgot/Forgot';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<Forgot/>} />
         <Route
           path="/"
           element={
@@ -100,7 +102,7 @@ function App() {
               <About />
             </PrivateRoute>
           }
-        />    
+        />  
 
         {/* <Route
           path="/merge-images"
