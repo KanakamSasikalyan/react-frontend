@@ -6,7 +6,7 @@
     "node": "20.x",
     "npm": "9.x"
   },
-  "homepage": "https://react-frontend-jsy8.onrender.com",
+  "homepage": ".",
   "proxy": "https://fashion-studio-ai-zbt4.onrender.com",
   "dependencies": {
     "@stomp/stompjs": "^7.1.1",
