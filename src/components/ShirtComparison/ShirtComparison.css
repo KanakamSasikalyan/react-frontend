@@ -118,11 +118,12 @@
 
 .back-button-opt {
   flex: 5;
-  padding: 0.9rem;
+  margin-top: auto;
+  padding: 0.8rem;
   background-color: transparent;
   color: var(--primary-accent);
   border: 1px solid var(--primary-accent);
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
   font-weight: 600;
