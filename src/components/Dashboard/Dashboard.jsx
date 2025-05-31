@@ -36,7 +36,7 @@ const Dashboard = () => {
             <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
             <Link to="/try-on" className="nav-link">DIGITAL FITTING</Link>
             <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
-            <Link to="/outfit-suggestion" className="nav-link">WHAT2WEAR</Link>
+            <Link to="/outfit-suggestion" className="nav-link">OUTFIT SGSTR</Link>
             <Link to="/comparision" className="nav-link">TOP CHOICE</Link>
             <Link to="/about" className="nav-link">ABOUT</Link>
             <button className="nav-link logout-btn" onClick={handleLogout}>LOGOUT</button>
@@ -56,7 +56,7 @@ const Dashboard = () => {
       </div>
       
       <footer className="dashboard-footer">
-        &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI, <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+        &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI, <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>
   );

@@ -76,7 +76,7 @@ const OutfitSuggestion = () => {
 
   return (
     <div className="outfit-suggestion-container">
-      <h2>WHAT2WEAR</h2>
+      <h2>OUTFIT RECOMMENDER</h2>
       <form onSubmit={handleSubmit} className="outfit-form">
         <div className="form-row">
           <div className="form-group" style={{ flex: 2 }}>
