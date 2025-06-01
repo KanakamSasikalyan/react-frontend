@@ -3,7 +3,7 @@ import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import './CamVirtualTryOn.css';
 import API_BASE_URL from '../../config/apiConfig';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const VirtualTryOn = () => {
     const [imageSrc, setImageSrc] = useState('');
@@ -12,7 +12,6 @@ const VirtualTryOn = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const stompClient = useRef(null);
     const location = useLocation();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (location.state?.processedClothFile) {
@@ -46,7 +45,7 @@ const VirtualTryOn = () => {
                 stompClient.current.disconnect();
             }
         };
-    }, [location.state]);
+    }, [handleUpload, location.state]);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);

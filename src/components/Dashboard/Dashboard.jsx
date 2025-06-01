@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import API_BASE_URL from '../../config/apiConfig';
 
 const Dashboard = () => {
   const navigate = useNavigate();

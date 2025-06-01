@@ -19,27 +19,6 @@ const SmartTryOnCamera = () => {
     facingMode: 'user',
   };
 
-  const handleSaveTryOn = async () => {
-    try {
-      const screenshot = webcamRef.current.getScreenshot();
-      const response = await fetch(`${API_BASE_URL}/api/tryon/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: screenshot }),
-      });
-
-      if (response.ok) {
-        alert('Try-on saved successfully!');
-      } else {
-        const errorData = await response.json();
-        alert(`Failed to save try-on: ${errorData.message}`);
-      }
-    } catch (error) {
-      console.error('Error saving try-on:', error);
-      alert('An error occurred. Please try again.');
-    }
-  };
-
   return (
     <div
       style={{
