@@ -13,6 +13,28 @@ const VirtualTryOn = () => {
     const stompClient = useRef(null);
     const location = useLocation();
 
+    // Wrap handleUpload in useCallback to fix dependency warning
+    const handleUpload = React.useCallback((file = null) => {
+        const uploadFile = file || selectedFile;
+        if (!uploadFile) return;
+        
+        const formData = new FormData();
+        formData.append('file', uploadFile);
+        
+        fetch(`${API_BASE_URL}/api/virtual-try-on/upload-cloth`, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            setStatus('Virtual try-on started');
+        })
+        .catch(error => {
+            console.error('Upload error:', error);
+            setStatus('Upload failed');
+        });
+    }, [selectedFile]);
+
     useEffect(() => {
         if (location.state?.processedClothFile) {
             setSelectedFile(location.state.processedClothFile);
@@ -50,28 +72,6 @@ const VirtualTryOn = () => {
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
-
-    // Wrap handleUpload in useCallback to fix dependency warning
-    const handleUpload = React.useCallback((file = null) => {
-        const uploadFile = file || selectedFile;
-        if (!uploadFile) return;
-        
-        const formData = new FormData();
-        formData.append('file', uploadFile);
-        
-        fetch(`${API_BASE_URL}/api/virtual-try-on/upload-cloth`, {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.text())
-        .then(data => {
-            setStatus('Virtual try-on started');
-        })
-        .catch(error => {
-            console.error('Upload error:', error);
-            setStatus('Upload failed');
-        });
-    }, [selectedFile]);
 
     const handleStop = () => {
         fetch(`${API_BASE_URL}/api/virtual-try-on/stop`, {
