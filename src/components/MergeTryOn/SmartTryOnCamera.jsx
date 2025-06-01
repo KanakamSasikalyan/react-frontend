@@ -4,7 +4,6 @@ import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import './SmartTryOnCamera.css';
-import API_BASE_URL from '../../config/apiConfig';
 
 const SmartTryOnCamera = () => {
   const webcamRef = useRef();

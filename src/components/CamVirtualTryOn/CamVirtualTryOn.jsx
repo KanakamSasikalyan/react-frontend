@@ -51,7 +51,8 @@ const VirtualTryOn = () => {
         setSelectedFile(event.target.files[0]);
     };
 
-    const handleUpload = (file = null) => {
+    // Wrap handleUpload in useCallback to fix dependency warning
+    const handleUpload = React.useCallback((file = null) => {
         const uploadFile = file || selectedFile;
         if (!uploadFile) return;
         
@@ -70,7 +71,7 @@ const VirtualTryOn = () => {
             console.error('Upload error:', error);
             setStatus('Upload failed');
         });
-    };
+    }, [selectedFile]);
 
     const handleStop = () => {
         fetch(`${API_BASE_URL}/api/virtual-try-on/stop`, {
