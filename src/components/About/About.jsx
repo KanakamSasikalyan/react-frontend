@@ -67,7 +67,7 @@ const About = () => {
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
               <button type="submit" className="btn btn-small">Submit</button>
-              <button type="button" className="btn btn-small btn-cancel" onClick={() => setShowFeedback(false)} style={{marginLeft:'0.5rem'}}>Cancel</button>
+              <button type="button" className="btn-cancel" onClick={() => setShowFeedback(false)} style={{marginLeft:'0.5rem'}}>Cancel</button>
             </div>
             {submitMsg && <div style={{marginTop:'0.5rem', color: submitMsg.startsWith('Thank') ? 'green' : 'red'}}>{submitMsg}</div>}
           </form>
