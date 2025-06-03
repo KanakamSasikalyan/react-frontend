@@ -11,31 +11,31 @@
 
 .about-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.7rem; /* Smaller title font */
+  margin-bottom: 1.2rem;
   color: #4a4a4a;
 }
 
 .about-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
 }
 
 .about-content {
   background: #ffffff;
-  padding: 1.5rem;
+  padding: 1.1rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
 .about-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
   color: #2c3e50;
 }
 
 .about-section p, .about-section ul {
-  font-size: 1rem;
-  margin-left: 1.5rem;
+  font-size: 0.92rem;
+  margin-left: 1.1rem;
 }
 
 .about-section ul {
@@ -44,9 +44,98 @@
 
 .about-footer {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   font-size: 0.6rem;
   color: #777;
   border-top: 1px solid #ddd;
-  padding-top: 1rem;
+  padding-top: 0.7rem;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.92rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  width: auto;
+}
+
+.review-form textarea.input {
+  width: 100%;
+  min-height: 48px;
+  resize: vertical;
+}
+
+.btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  margin-right: 0.5rem;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #357ab8;
+}
+
+/* Like animation for reviews */
+.btn span {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn:active span {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+.btn-small {
+  padding: 0.25rem 0.7rem;
+  font-size: 0.85rem;
+  margin-right: 0.3rem;
+  margin-top: 0;
+}
+
+.about-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.feedback-modal {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.2rem 1.5rem;
+  max-width: 420px;
+  margin: 0 auto 1.5rem auto;
+  z-index: 10;
+}
+
+.btn-cancel {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-top: auto;
+  transition: 0.2s;
+}
+
+
+.btn-cancel:hover {
+  background: #357ab8;
+}
+
+/* Like animation for reviews */
+.btn-cancel span {
+  transition: transform 0.3s, opacity 0.3s;
 }

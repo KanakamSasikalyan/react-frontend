@@ -67,7 +67,7 @@ const ShirtComparison = () => {
             {preview1 && <img src={preview1} alt="Preview 1" className="image-preview" />}
             <label>Platform 1</label>
             <select value={platform1} onChange={(e) => setPlatform1(e.target.value)}>
-              <option value="">-- Select Platform --</option>
+              <option value="">Select Platform</option>
               {platforms.map((platform) => (
                 <option key={platform} value={platform}>{platform}</option>
               ))}
@@ -84,7 +84,7 @@ const ShirtComparison = () => {
             {preview2 && <img src={preview2} alt="Preview 2" className="image-preview" />}
             <label>Platform 2</label>
             <select value={platform2} onChange={(e) => setPlatform2(e.target.value)}>
-              <option value="">-- Select Platform --</option>
+              <option value="">Select Platform</option>
               {platforms.map((platform) => (
                 <option key={platform} value={platform}>{platform}</option>
               ))}
