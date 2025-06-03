@@ -35,10 +35,10 @@ const About = () => {
         <div className="about-content">
           <h2>Strategy and Development Methodology</h2>
           <p>
-            Our approach to building the AI Fashion Studio was rooted in agile experimentation. We started with rapid prototyping, validating every model output with expert feedback loops. The strategy was to iteratively refine both the intelligence of the system and its usability for end users. We structured our work in sprints focused on model tuning, data augmentation, UI/UX testing, and system integration.
+            Our approach to building the AI Fashion Studio was rooted in agile experimentation and iterative feature development. We did not simply build everything from scratch or follow a rigid plan—instead, we focused on developing and refining each major feature of the platform step by step. Key features include AI-powered design generation using prompts, a digital marketplace, camera-based virtual try-on, a digital room for outfit visualization, outfit suggestion, and multiplatform comparison of clothes to recommend the best choice.
           </p>
           <p>
-            Rather than building everything from scratch, we identified and integrated open-source fashion models and image generation frameworks, which were then fine-tuned using our proprietary dataset. Throughout the process, our focus remained fixed on two principles—intelligence and accessibility.
+            Each feature was developed, tested in the development environment, and then recursively tested with different scenarios to produce the best and most optimized outputs. This hands-on, iterative process allowed us to quickly identify issues, optimize performance, and ensure that every part of the AI Fashion Studio delivers real value to users.
           </p>
         </div>
       </section>

@@ -11,31 +11,31 @@
 
 .about-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.7rem; /* Smaller title font */
+  margin-bottom: 1.2rem;
   color: #4a4a4a;
 }
 
 .about-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
 }
 
 .about-content {
   background: #ffffff;
-  padding: 1.5rem;
+  padding: 1.1rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
 .about-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
   color: #2c3e50;
 }
 
 .about-section p, .about-section ul {
-  font-size: 1rem;
-  margin-left: 1.5rem;
+  font-size: 0.92rem;
+  margin-left: 1.1rem;
 }
 
 .about-section ul {
@@ -44,9 +44,9 @@
 
 .about-footer {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   font-size: 0.6rem;
   color: #777;
   border-top: 1px solid #ddd;
-  padding-top: 1rem;
+  padding-top: 0.7rem;
 }
