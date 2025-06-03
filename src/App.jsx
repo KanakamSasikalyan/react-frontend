@@ -106,7 +106,7 @@ function App() {
         />  
 
         <Route
-          path="/merge-images"
+          path="/reviews"
           element={
             <PrivateRoute>
               <Reviews />
