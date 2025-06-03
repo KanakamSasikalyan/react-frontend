@@ -37,7 +37,7 @@ const Dashboard = () => {
             <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
             <Link to="/outfit-suggestion" className="nav-link">OUTFIT SGSTR</Link>
             <Link to="/comparision" className="nav-link">TOP CHOICE</Link>
-            <Link to="/about" className="nav-link">ABOUT</Link>
+            <Link to="/about" className="nav-link">BLOG</Link>
             <button className="nav-link logout-btn" onClick={handleLogout}>LOGOUT</button>
           </div>
         </div>

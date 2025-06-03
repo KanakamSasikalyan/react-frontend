@@ -13,6 +13,7 @@ import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
 import ShirtComparision from './components/ShirtComparison/ShirtComparison'
 import CamVirtualTryOn from './components/CamVirtualTryOn/CamVirtualTryOn';
 import Forgot from './components/Forgot/Forgot';
+import Reviews from './components/Reviews/Reviews';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -104,14 +105,14 @@ function App() {
           }
         />  
 
-        {/* <Route
+        <Route
           path="/merge-images"
           element={
             <PrivateRoute>
-              <MergeTryOnPage />
+              <Reviews />
             </PrivateRoute>
           }
-        /> */}
+        />
       </Routes>
     </Router>
   );
