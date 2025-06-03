@@ -9,22 +9,25 @@ const OutfitSuggestion = () => {
   const [gender, setGender] = useState('unisex');
   const [season, setSeason] = useState('all');
   const [customPrompt, setCustomPrompt] = useState('');
-  const [suggestion, setSuggestion] = useState('');
-  const [alternatives, setAlternatives] = useState([]);
+  const [suggestion, setSuggestion] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const occasions = [
-    'Wedding',
-    'Business Meeting',
-    'Beach',
-    'Hiking',
-    'Office',
-    'Shopping',
-    'Interview',
-    'Date Night',
-    'Gym',
-    'Party'
+    'casual',
+    'formal',
+    'business',
+    'sports',
+    'party',
+    'date',
+    'beach',
+    'traditional',
+    'office',
+    'hiking',
+    'interview',
+    'date night',
+    'shopping',
+    'wedding'
   ];
 
   const genders = [
@@ -44,31 +47,38 @@ const OutfitSuggestion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const query = customPrompt || occasion;
-
+    
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/outfit/suggest?occasion=${encodeURIComponent(query)}&gender=${encodeURIComponent(gender)}&season=${encodeURIComponent(season)}`
-      );
-      setSuggestion(response.data);
-      
-      // Parse the response if it contains alternatives
-      if (typeof response.data === 'string' && response.data.includes('Main suggestion:')) {
-        const mainMatch = response.data.match(/Main suggestion: (.*?)(\n|$)/);
-        const altMatch = response.data.match(/Alternative options:\n([\s\S]*)/);
-        
-        if (mainMatch) setSuggestion(mainMatch[1]);
-        if (altMatch) {
-          const altLines = altMatch[1].split('\n').filter(line => line.trim());
-          setAlternatives(altLines.map(line => line.replace(/^- /, '').trim()));
-        }
+      let response;
+      if (customPrompt) {
+        response = await axios.get(
+          `${API_BASE_URL}/api/outfit/suggest?prompt=${encodeURIComponent(customPrompt)}`
+        );
       } else {
-        setAlternatives([]);
+        response = await axios.get(
+          `${API_BASE_URL}/api/outfit/suggest?gender=${encodeURIComponent(gender)}&season=${encodeURIComponent(season)}&occasion=${encodeURIComponent(occasion)}`
+        );
+      }
+
+      if (response.data.status === 'success') {
+        setSuggestion({
+          main: response.data.outfitSuggestion,
+          alternatives: response.data.alternatives || [],
+          gender: response.data.gender,
+          season: response.data.season
+        });
+      } else {
+        setSuggestion({
+          main: response.data.message || 'Failed to get suggestion',
+          alternatives: []
+        });
       }
     } catch (error) {
       console.error('Error fetching outfit suggestion:', error);
-      setSuggestion('Failed to fetch suggestion. Please try again.');
-      setAlternatives([]);
+      setSuggestion({
+        main: 'Failed to fetch suggestion. Please try again.',
+        alternatives: []
+      });
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +98,9 @@ const OutfitSuggestion = () => {
             >
               <option value="">Select Occasion</option>
               {occasions.map((item) => (
-                <option key={item} value={item}>{item}</option>
+                <option key={item} value={item}>
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </option>
               ))}
             </select>
           </div>
@@ -111,7 +123,10 @@ const OutfitSuggestion = () => {
           <input
             type="text"
             value={customPrompt}
-            onChange={(e) => setCustomPrompt(e.target.value)}
+            onChange={(e) => {
+              setCustomPrompt(e.target.value);
+              if (e.target.value) setOccasion('');
+            }}
             placeholder="e.g., Casual dinner with friends"
             disabled={!!occasion}
           />
@@ -167,14 +182,14 @@ const OutfitSuggestion = () => {
         <div className="suggestion-result">
           <h3>Suggested Outfit</h3>
           <div className="main-suggestion">
-            {suggestion}
+            {suggestion.main}
           </div>
           
-          {alternatives.length > 0 && (
+          {suggestion.alternatives.length > 0 && (
             <>
               <h4>Alternative Options</h4>
               <ul className="alternative-list">
-                {alternatives.map((alt, index) => (
+                {suggestion.alternatives.map((alt, index) => (
                   <li key={index}>{alt}</li>
                 ))}
               </ul>
