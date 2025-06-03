@@ -77,7 +77,7 @@ const About = () => {
       <section className="about-section">
         <div className="about-content">
           <p>
-            I’m Kalyan, working as a Software Engineer at a leading multinational corporation, with a deep interest in cutting-edge technologies that can drive practical, industry-level transformations. Over the past few months, I’ve been immersed in one of the most ambitious and innovative projects I’ve ever worked on—developing an AI Fashion Studio. This page is a window into the journey we undertook, the vision that powered our progress, the technical foundation that brought it to life, and how this solution is uniquely positioned to impact the fashion industry.
+            I’m Mahesh Chatarasupalli pursuing Masters in University College Birmingham (UK), with a deep interest in cutting-edge technologies that can drive practical, industry-level transformations. Over the past few months, I’ve been immersed in one of the most ambitious and innovative projects I’ve ever worked on—developing an AI Fashion Studio. This page is a window into the journey we undertook, the vision that powered our progress, the technical foundation that brought it to life, and how this solution is uniquely positioned to impact the fashion industry.
           </p>
         </div>
       </section>
