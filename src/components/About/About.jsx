@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './About.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const About = () => {
   const [name, setName] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [submitMsg, setSubmitMsg] = useState('');
+  const [showFeedback, setShowFeedback] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,7 +20,7 @@ const About = () => {
     }
     try {
       // Assumes POST /api/reviews { name, rating, comment }
-      const res = await fetch('/api/reviews', {
+      const res = await fetch(`${API_BASE_URL}/api/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, rating, comment })
@@ -26,6 +28,7 @@ const About = () => {
       if (res.ok) {
         setSubmitMsg('Thank you for your feedback!');
         setName(''); setRating(0); setComment('');
+        setTimeout(() => setShowFeedback(false), 1200);
       } else {
         setSubmitMsg('Failed to submit review.');
       }
@@ -36,6 +39,40 @@ const About = () => {
 
   return (
     <div className="about-container">
+      <div className="about-actions">
+        <button className="btn btn-small" onClick={() => setShowFeedback(true)}>Share Feedback</button>
+        <button className="btn btn-small" onClick={() => navigate('/reviews')}>Read All Reviews</button>
+      </div>
+      {showFeedback && (
+        <div className="feedback-modal">
+          <form className="review-form" onSubmit={handleSubmit}>
+            <div style={{marginBottom: '0.5rem'}}>
+              <label>Name: </label>
+              <input type="text" value={name} onChange={e => setName(e.target.value)} className="input" style={{marginLeft: '0.5rem'}} />
+            </div>
+            <div style={{marginBottom: '0.5rem'}}>
+              <label>Rating: </label>
+              {[1,2,3,4,5].map(star => (
+                <span
+                  key={star}
+                  onClick={() => setRating(star)}
+                  style={{cursor:'pointer', color: star <= rating ? '#f5b301' : '#ccc', fontSize: '1.2rem'}}
+                  aria-label={star + ' star'}
+                >★</span>
+              ))}
+            </div>
+            <div style={{marginBottom: '0.5rem'}}>
+              <label>Comment: </label>
+              <textarea value={comment} onChange={e => setComment(e.target.value)} className="input" rows={2} style={{marginLeft: '0.5rem', width: '60%'}} />
+            </div>
+            <div style={{display:'flex', alignItems:'center'}}>
+              <button type="submit" className="btn btn-small">Submit</button>
+              <button type="button" className="btn btn-small btn-cancel" onClick={() => setShowFeedback(false)} style={{marginLeft:'0.5rem'}}>Cancel</button>
+            </div>
+            {submitMsg && <div style={{marginTop:'0.5rem', color: submitMsg.startsWith('Thank') ? 'green' : 'red'}}>{submitMsg}</div>}
+          </form>
+        </div>
+      )}
       <h1 className="about-title">Revolutionizing Style with AI: Inside the Making of Our AI Fashion Studio</h1>
       <section className="about-section">
         <div className="about-content">
@@ -136,35 +173,6 @@ const About = () => {
           <p>
             Stay tuned as we continue to expand its capabilities, explore collaborations with fashion brands, and open up the platform to more users. Fashion meets code—and the results are stunning.
           </p>
-        </div>
-      </section>
-      <section className="about-section">
-        <div className="about-content">
-          <h2>Share Your Feedback</h2>
-          <form className="review-form" onSubmit={handleSubmit} style={{marginBottom: '1rem'}}>
-            <div style={{marginBottom: '0.5rem'}}>
-              <label>Name: </label>
-              <input type="text" value={name} onChange={e => setName(e.target.value)} className="input" style={{marginLeft: '0.5rem'}} />
-            </div>
-            <div style={{marginBottom: '0.5rem'}}>
-              <label>Rating: </label>
-              {[1,2,3,4,5].map(star => (
-                <span
-                  key={star}
-                  onClick={() => setRating(star)}
-                  style={{cursor:'pointer', color: star <= rating ? '#f5b301' : '#ccc', fontSize: '1.2rem'}}
-                  aria-label={star + ' star'}
-                >★</span>
-              ))}
-            </div>
-            <div style={{marginBottom: '0.5rem'}}>
-              <label>Comment: </label>
-              <textarea value={comment} onChange={e => setComment(e.target.value)} className="input" rows={2} style={{marginLeft: '0.5rem', width: '60%'}} />
-            </div>
-            <button type="submit" className="btn">Submit</button>
-            {submitMsg && <div style={{marginTop:'0.5rem', color: submitMsg.startsWith('Thank') ? 'green' : 'red'}}>{submitMsg}</div>}
-          </form>
-          <button className="btn" onClick={() => navigate('/reviews')}>Read All Reviews</button>
         </div>
       </section>
       <footer className="about-footer">
