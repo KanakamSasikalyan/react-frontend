@@ -46,7 +46,7 @@ const Dashboard = () => {
       <div className="animated-gradient-bg">
         <div className="welcome-screen">
           <h2>Create Your Digital Fashion</h2>
-          <p>Design, explore, and try on virtual clothing in the metaverse</p>
+          <p>Design, explore, and try on virtual clothing in the AI Studio</p>
           <div className="welcome-buttons">
             <Link to="/generate" className="cta-button">Start Designing</Link>
             <Link to="/marketplace" className="cta-button secondary">Browse Designs</Link>

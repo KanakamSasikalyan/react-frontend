@@ -100,7 +100,7 @@ const About = () => {
       </section>
 
       <footer className="about-footer">
-        &copy; {new Date().getFullYear()} Metaverse Fashion Studio <a href="https://github.com/KanakamSasikalyan" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
+        &copy; {new Date().getFullYear()} Metaverse Fashion Studio <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>
   );

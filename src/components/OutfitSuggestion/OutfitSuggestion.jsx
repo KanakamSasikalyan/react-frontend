@@ -86,7 +86,7 @@ const OutfitSuggestion = () => {
               onChange={(e) => setOccasion(e.target.value)}
               disabled={!!customPrompt}
             >
-              <option value="">-- Select Occasion --</option>
+              <option value="">Select Occasion</option>
               {occasions.map((item) => (
                 <option key={item} value={item}>{item}</option>
               ))}
