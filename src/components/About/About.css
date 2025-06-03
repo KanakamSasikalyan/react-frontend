@@ -50,3 +50,84 @@
   border-top: 1px solid #ddd;
   padding-top: 0.7rem;
 }
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.92rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  width: auto;
+}
+
+.review-form textarea.input {
+  width: 100%;
+  min-height: 48px;
+  resize: vertical;
+}
+
+.btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  margin-right: 0.5rem;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #357ab8;
+}
+
+/* Like animation for reviews */
+.btn span {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn:active span {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+/* Reviews Component Styling */
+.reviews-list {
+  padding: 0;
+}
+
+.reviews-list li {
+  margin-bottom: 1.2rem;
+  list-style: none;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.7rem;
+}
+
+.reviews-list .review-author {
+  font-weight: bold;
+}
+
+.reviews-list .review-stars {
+  color: #f5b301;
+}
+
+.reviews-list .review-comment {
+  margin: 0.3rem 0;
+}
+
+.reviews-list .btn {
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.reviews-list .like-anim {
+  position: absolute;
+  left: 100%;
+  margin-left: 0.3rem;
+  color: #f5b301;
+  font-size: 1.2rem;
+  transition: all 0.5s;
+}
