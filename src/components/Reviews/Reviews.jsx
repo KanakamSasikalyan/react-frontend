@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API_BASE_URL from '../../config/apiConfig';
-import './About.css';
+import './Reviews.css';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
