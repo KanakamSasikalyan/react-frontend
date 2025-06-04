@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import './CamVirtualTryOn.css';
+import API_BASE_URL from '../../config/apiConfig';
 
 const CamVirtualTryOn = () => {
     const videoRef = useRef(null);
@@ -15,11 +16,9 @@ const CamVirtualTryOn = () => {
     const [connectionStatus, setConnectionStatus] = useState('disconnected');
     const intervalIdRef = useRef(null);
 
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
-
     useEffect(() => {
         const client = new Client({
-            webSocketFactory: () => new SockJS(`${backendUrl}/ws`),
+            webSocketFactory: () => new SockJS(`${API_BASE_URL}/virtual-try-on-websocket`),
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
@@ -86,7 +85,7 @@ const CamVirtualTryOn = () => {
             }
             stopWebcam();
         };
-    }, [backendUrl]);
+    }, []);
 
     const startWebcam = async () => {
         setErrorMessage('');
@@ -135,7 +134,7 @@ const CamVirtualTryOn = () => {
             const formData = new FormData();
             formData.append('file', clothFile);
 
-            const uploadResponse = await fetch(`${backendUrl}/api/virtual-try-on/upload-cloth`, {
+            const uploadResponse = await fetch(`${API_BASE_URL}/api/virtual-try-on/upload-cloth`, {
                 method: 'POST',
                 body: formData,
             });
@@ -194,7 +193,7 @@ const CamVirtualTryOn = () => {
         setErrorMessage('');
 
         try {
-            await fetch(`${backendUrl}/api/virtual-try-on/stop`, {
+            await fetch(`${API_BASE_URL}/api/virtual-try-on/stop`, {
                 method: 'POST',
             });
             console.log('Virtual try-on stopped on backend.');
