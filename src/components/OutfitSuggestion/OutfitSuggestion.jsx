@@ -14,21 +14,15 @@ const OutfitSuggestion = () => {
   const navigate = useNavigate();
 
   const occasions = [
-    'casual',
-    'formal',
-    'business',
-    'sports',
-    'party',
-    'date',
-    'beach',
-    'traditional',
-    'office',
-    'hiking',
-    'interview',
-    'date night',
-    'shopping',
-    'wedding'
+    'Wedding',
+    'Business Meeting',
+    'Beach',
+    'Hiking',
+    'Office',
+    'Shopping',
+    'Interview',
   ];
+
 
   const genders = [
     { value: 'male', label: 'Male' },

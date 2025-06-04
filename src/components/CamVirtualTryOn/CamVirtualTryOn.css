@@ -27,7 +27,7 @@ body {
     margin: 0 auto;
     padding: 20px;
     position: relative;
-    padding-bottom: 120px; /* Added padding to prevent footer overlap */
+    padding-bottom: 120px;
 }
 
 .status-container {
@@ -107,18 +107,26 @@ body {
     width: 150px;
 }
 
+.video-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
 .video-feed {
+    flex: 1;
     background-color: #000;
     border-radius: 0.8rem;
     padding: 10px;
-    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px; /* Increased height */
+    height: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
+.video-feed video,
 .video-feed img {
     max-width: 100%;
     max-height: 100%;
@@ -133,10 +141,21 @@ body {
     opacity: 0.7;
 }
 
+.video-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--white);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
 .controls {
     display: flex;
     justify-content: center;
-    margin: 30px 0; /* Increased margin */
+    margin: 30px 0;
     gap: 15px;
 }
 
@@ -193,6 +212,15 @@ body {
     margin: 0;
 }
 
+.error-message {
+    color: var(--disconnected-color);
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: rgba(244, 67, 54, 0.1);
+    border-radius: 4px;
+}
+
 @media (max-width: 768px) {
     .file-upload {
         flex-direction: column;
@@ -204,8 +232,12 @@ body {
         width: auto;
     }
     
+    .video-container {
+        flex-direction: column;
+    }
+    
     .video-feed {
-        height: 400px;
+        height: 300px;
     }
     
     .controls {
