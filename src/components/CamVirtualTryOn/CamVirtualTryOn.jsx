@@ -15,6 +15,8 @@ const CamVirtualTryOn = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [connectionStatus, setConnectionStatus] = useState('disconnected');
     const intervalIdRef = useRef(null);
+    // Add a ref to control the frame sending loop
+    const sendingFrameRef = useRef(false);
 
     useEffect(() => {
         const client = new Client({
@@ -34,6 +36,10 @@ const CamVirtualTryOn = () => {
                     const payload = JSON.parse(message.body);
                     if (payload.frame) {
                         imgRef.current.src = `data:image/jpeg;base64,${payload.frame}`;
+                        // After receiving a result, send the next frame if trying on
+                        if (sendingFrameRef.current && isTryingOn) {
+                            sendNextFrame();
+                        }
                     }
                 });
                 
@@ -117,6 +123,23 @@ const CamVirtualTryOn = () => {
         setErrorMessage('');
     };
 
+    // New: sendNextFrame function
+    const sendNextFrame = () => {
+        if (!videoRef.current || !canvasRef.current || !stompClient || !stompClient.connected || !isTryingOn) return;
+        if (videoRef.current.readyState === 4) {
+            const context = canvasRef.current.getContext('2d');
+            canvasRef.current.width = videoRef.current.videoWidth;
+            canvasRef.current.height = videoRef.current.videoHeight;
+            context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+            const imageData = canvasRef.current.toDataURL('image/jpeg', 0.7);
+            const base64Image = imageData.split(',')[1];
+            stompClient.publish({
+                destination: "/app/process-frame",
+                body: JSON.stringify({ frame: base64Image })
+            });
+        }
+    };
+
     const startTryOn = async () => {
         if (!clothFile) {
             setErrorMessage("Please upload a cloth image first.");
@@ -147,29 +170,9 @@ const CamVirtualTryOn = () => {
             setIsLoading(false);
             setIsTryingOn(true);
             await startWebcam();
-
-            if (intervalIdRef.current) {
-                clearInterval(intervalIdRef.current);
-            }
-            
-            intervalIdRef.current = setInterval(() => {
-                if (videoRef.current && videoRef.current.readyState === 4) {
-                    const context = canvasRef.current.getContext('2d');
-                    canvasRef.current.width = videoRef.current.videoWidth;
-                    canvasRef.current.height = videoRef.current.videoHeight;
-                    context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-                    const imageData = canvasRef.current.toDataURL('image/jpeg', 0.7);
-                    const base64Image = imageData.split(',')[1];
-
-                    if (stompClient && stompClient.connected) {
-                        stompClient.publish({
-                            destination: "/app/process-frame",
-                            body: JSON.stringify({ frame: base64Image })
-                        });
-                    }
-                }
-            }, 100);
-
+            // Start sending frames in real time
+            sendingFrameRef.current = true;
+            sendNextFrame();
         } catch (error) {
             console.error("Error starting try-on:", error);
             setErrorMessage(`Failed to start virtual try-on: ${error.message}`);
@@ -184,6 +187,7 @@ const CamVirtualTryOn = () => {
     };
 
     const stopTryOn = async () => {
+        sendingFrameRef.current = false;
         if (intervalIdRef.current) {
             clearInterval(intervalIdRef.current);
             intervalIdRef.current = null;
