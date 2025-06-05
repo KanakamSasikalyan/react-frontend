@@ -281,43 +281,35 @@ const CamVirtualTryOn = () => {
             try {
                 const cv = opencvRef.current;
                 const context = canvasRef.current.getContext('2d');
-                
                 // Set canvas dimensions to match video
                 canvasRef.current.width = videoRef.current.videoWidth;
                 canvasRef.current.height = videoRef.current.videoHeight;
-                
                 // Draw video frame to canvas
                 context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-                
                 // Get image data from canvas
                 const imageData = context.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
-                
                 // Create OpenCV mat from image data
-                const frameMat = cv.matFromImageData(imageData);
-                
+                let frameMat = cv.matFromImageData(imageData);
                 // Mirror effect (like webcam mirror)
                 cv.flip(frameMat, frameMat, 1);
-                
                 // Detect upper body
                 const upperBodyRect = detectUpperBody(frameMat);
-                
                 if (upperBodyRect) {
                     // Overlay the cloth
                     overlayCloth(frameMat, upperBodyRect, processedCloth, clothMask);
                 }
-                
                 // Display result
+                // Fix: clear the output canvas before drawing
+                const outCtx = outputCanvasRef.current.getContext('2d');
+                outCtx.clearRect(0, 0, outputCanvasRef.current.width, outputCanvasRef.current.height);
                 cv.imshow(outputCanvasRef.current, frameMat);
-                
                 // Clean up
                 frameMat.delete();
             } catch (error) {
                 console.error("Error processing frame:", error);
             }
-            
             animationFrameRef.current = requestAnimationFrame(processFrame);
         };
-        
         animationFrameRef.current = requestAnimationFrame(processFrame);
     };
 
@@ -378,7 +370,6 @@ const CamVirtualTryOn = () => {
                     disabled={isTryingOn || isLoading}
                 />
             </div>
-
             <div className="video-container">
                 <div className="video-feed">
                     {isTryingOn ? (
@@ -388,12 +379,22 @@ const CamVirtualTryOn = () => {
                                 ref={outputCanvasRef} 
                                 width="640" 
                                 height="480"
+                                style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
                             />
                         </>
                     ) : (
-                        <div className="placeholder">
-                            Virtual try-on result will appear here when started
-                        </div>
+                        <>
+                            <span className="video-label">Live Camera Feed</span>
+                            <video 
+                                ref={videoRef} 
+                                width="640" 
+                                height="480" 
+                                autoPlay 
+                                playsInline 
+                                muted 
+                                style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+                            />
+                        </>
                     )}
                 </div>
             </div>
@@ -419,13 +420,6 @@ const CamVirtualTryOn = () => {
                 </div>
             )}
 
-            <video 
-                ref={videoRef} 
-                style={{ display: 'none' }} 
-                autoPlay 
-                playsInline 
-                muted 
-            />
             <canvas 
                 ref={canvasRef} 
                 style={{ display: 'none' }}
