@@ -174,8 +174,16 @@ const CamVirtualTryOn = () => {
                     facingMode: 'user'
                 }
             });
-            videoRef.current.srcObject = stream;
-            videoRef.current.play();
+            // Wait for the video element to be in the DOM
+            if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+                // Ensure video plays after srcObject is set
+                videoRef.current.onloadedmetadata = () => {
+                    videoRef.current.play();
+                };
+            } else {
+                setErrorMessage('Video element not found.');
+            }
             startFrameProcessing();
         } catch (err) {
             console.error("Error accessing webcam:", err);
@@ -337,17 +345,14 @@ const CamVirtualTryOn = () => {
             setErrorMessage("Please upload a cloth image first.");
             return;
         }
-        
         if (!processedCloth || !clothMask) {
             setErrorMessage("Cloth image not processed yet. Please wait or try another image.");
             return;
         }
-        
         if (!isOpenCVReady) {
             setErrorMessage("Computer vision library is still loading. Please wait.");
             return;
         }
-        
         setIsTryingOn(true);
         setErrorMessage('');
         await startWebcam();
@@ -398,7 +403,6 @@ const CamVirtualTryOn = () => {
                     )}
                 </div>
             </div>
-
             <div className="controls">
                 <button 
                     onClick={startTryOn} 
@@ -413,13 +417,11 @@ const CamVirtualTryOn = () => {
                     Stop Try-On
                 </button>
             </div>
-
             {errorMessage && (
                 <div className="error-message">
                     {errorMessage}
                 </div>
             )}
-
             <canvas 
                 ref={canvasRef} 
                 style={{ display: 'none' }}
