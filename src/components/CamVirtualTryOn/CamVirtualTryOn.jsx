@@ -385,56 +385,56 @@ const CamVirtualTryOn = () => {
             <div className="video-container">
                 <div className="video-feed">
                     {isTryingOn ? (
-                        <>
-                            <span className="video-label">Virtual Try-On Result</span>
-                            <canvas 
-                                ref={outputCanvasRef} 
-                                width="640" 
-                                height="480"
-                                style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <span className="video-label">Live Camera Feed</span>
-                            <video 
-                                ref={videoRef} 
-                                width="640" 
-                                height="480" 
-                                autoPlay 
-                                playsInline 
-                                muted 
-                                style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
-                            />
-                        </>
-                    )}
-                </div>
-            </div>
-            <div className="controls">
-                <button 
-                    onClick={startTryOn} 
-                    disabled={isLoading || isTryingOn || !clothFile || !isOpenCVReady}
-                >
-                    {isLoading ? 'Processing...' : 'Start Virtual Try-On'}
-                </button>
-                <button 
-                    onClick={stopTryOn} 
-                    disabled={!isTryingOn}
-                >
-                    Stop Try-On
-                </button>
-            </div>
-            {errorMessage && (
-                <div className="error-message">
-                    {errorMessage}
-                </div>
-            )}
-            <canvas 
-                ref={canvasRef} 
-                style={{ display: 'none' }}
-            ></canvas>
-        </div>
-    );
+                         <>
+                         <span className="video-label">Virtual Try-On Result</span>
+                         <canvas 
+                             ref={outputCanvasRef} 
+                             width="640" 
+                             height="480"
+                             style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+                         />
+                     </>
+                 ) : (
+                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#fff' }}>
+                         <span className="video-label">Live Camera Feed</span>
+                         <video 
+                             ref={videoRef} 
+                             width="640" 
+                             height="480" 
+                             autoPlay 
+                             playsInline 
+                             muted 
+                             style={{ background: '#222', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+                         />
+                     </div>
+                 )}
+             </div>
+         </div>
+         <div className="controls">
+             <button 
+                 onClick={startTryOn} 
+                 disabled={isLoading || isTryingOn || !clothFile || !isOpenCVReady}
+             >
+                 {isLoading ? 'Processing...' : 'Start Virtual Try-On'}
+             </button>
+             <button 
+                 onClick={stopTryOn} 
+                 disabled={!isTryingOn}
+             >
+                 Stop Try-On
+             </button>
+         </div>
+         {errorMessage && (
+             <div className="error-message">
+                 {errorMessage}
+             </div>
+         )}
+         <canvas 
+             ref={canvasRef} 
+             style={{ display: 'none' }}
+         ></canvas>
+     </div>
+ );
 };
 
 export default CamVirtualTryOn;
