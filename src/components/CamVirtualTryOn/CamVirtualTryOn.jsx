@@ -174,16 +174,23 @@ const CamVirtualTryOn = () => {
                     facingMode: 'user'
                 }
             });
-            // Wait for the video element to be in the DOM
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-                // Ensure video plays after srcObject is set
-                videoRef.current.onloadedmetadata = () => {
-                    videoRef.current.play();
-                };
-            } else {
-                setErrorMessage('Video element not found.');
-            }
+            // Wait for the video element to be in the DOM and ready
+            let attempts = 0;
+            const waitForVideo = (resolve, reject) => {
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                    videoRef.current.onloadedmetadata = () => {
+                        videoRef.current.play();
+                        resolve();
+                    };
+                } else if (attempts < 10) {
+                    attempts++;
+                    setTimeout(() => waitForVideo(resolve, reject), 100);
+                } else {
+                    reject('Video element not found after waiting.');
+                }
+            };
+            await new Promise(waitForVideo);
             startFrameProcessing();
         } catch (err) {
             console.error("Error accessing webcam:", err);
