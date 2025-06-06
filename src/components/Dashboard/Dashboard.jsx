@@ -27,29 +27,29 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <nav className="glass-navbar">
-        <h1 className="logo">AI FASHION STUDIO</h1>
-        <div className="nav-links-container">
-          <div className="nav-links">
-            <Link to="/generate" className="nav-link">DESIGN LAB</Link>
-            <Link to="/marketplace" className="nav-link">MARKETPLACE</Link>
-            <Link to="/try-on" className="nav-link">DIGITAL FITTING</Link>
-            <Link to="/cam-try-on" className="nav-link">CAM TRY ON</Link>
-            <Link to="/outfit-suggestion" className="nav-link">OUTFIT SGSTR</Link>
-            <Link to="/comparision" className="nav-link">TOP CHOICE</Link>
-            <Link to="/about" className="nav-link">BLOG</Link>
-            <button className="nav-link logout-btn" onClick={handleLogout}>LOGOUT</button>
+      <nav className="dashboard-glass-navbar">
+        <h1 className="dashboard-logo">AI FASHION STUDIO</h1>
+        <div className="dashboard-nav-links-container">
+          <div className="dashboard-nav-links">
+            <Link to="/generate" className="dashboard-nav-link">DESIGN LAB</Link>
+            <Link to="/marketplace" className="dashboard-nav-link">MARKETPLACE</Link>
+            <Link to="/try-on" className="dashboard-nav-link">DIGITAL FITTING</Link>
+            <Link to="/cam-try-on" className="dashboard-nav-link">CAM TRY ON</Link>
+            <Link to="/outfit-suggestion" className="dashboard-nav-link">OUTFIT SGSTR</Link>
+            <Link to="/comparision" className="dashboard-nav-link">TOP CHOICE</Link>
+            <Link to="/about" className="dashboard-nav-link">BLOG</Link>
+            <button className="dashboard-nav-link dashboard-logout-btn" onClick={handleLogout}>LOGOUT</button>
           </div>
         </div>
       </nav>
 
-      <div className="animated-gradient-bg">
-        <div className="welcome-screen">
+      <div className="dashboard-animated-gradient-bg">
+        <div className="dashboard-welcome-screen">
           <h2>Create Your Digital Fashion</h2>
           <p>Design, explore, and try on virtual clothing in the AI Studio</p>
-          <div className="welcome-buttons">
-            <Link to="/generate" className="cta-button">Start Designing</Link>
-            <Link to="/marketplace" className="cta-button secondary">Browse Designs</Link>
+          <div className="dashboard-welcome-buttons">
+            <Link to="/generate" className="dashboard-cta-button">Start Designing</Link>
+            <Link to="/marketplace" className="dashboard-cta-button dashboard-secondary">Browse Designs</Link>
           </div>
         </div>
       </div>

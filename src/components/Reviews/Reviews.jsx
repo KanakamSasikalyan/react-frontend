@@ -20,25 +20,24 @@ const Reviews = () => {
   };
 
   return (
-    <div className="about-container">
-      <h1 className="about-title">User Reviews</h1>
-      <section className="about-section">
-        <div className="about-content">
+    <div className="about-container-rv">
+      <h1 className="about-title-rv">User Reviews</h1>
+      <section className="about-section-rv">
+        <div className="about-content-rv">
           {reviews.length === 0 ? (
             <div>No reviews yet.</div>
           ) : (
-            <ul style={{padding:0}}>
+            <ul className="reviews-list-rv">
               {reviews.map(r => (
-                <li key={r.id} style={{marginBottom:'1.2rem', listStyle:'none', borderBottom:'1px solid #eee', paddingBottom:'0.7rem'}}>
-                  <div style={{fontWeight:'bold'}}>{r.name} <span style={{color:'#f5b301'}}>{'★'.repeat(r.rating)}{'☆'.repeat(5-r.rating)}</span></div>
-                  <div style={{margin:'0.3rem 0'}}>{r.comment}</div>
+                <li key={r.id}>
+                  <div className="review-author-rv">{r.name} <span className="review-stars-rv">{'★'.repeat(r.rating)}{'☆'.repeat(5-r.rating)}</span></div>
+                  <div className="review-comment-rv">{r.comment}</div>
                   <button
-                    className="btn"
-                    style={{fontSize:'0.9rem', position:'relative'}}
+                    className="btn-rv"
                     onClick={() => handleLike(r.id)}
                   >
                     👍 Like {r.likes || 0}
-                    {likeAnimating[r.id] && <span style={{position:'absolute', left:'100%', marginLeft:'0.3rem', color:'#f5b301', fontSize:'1.2rem', transition:'all 0.5s'}}>+1</span>}
+                    {likeAnimating[r.id] && <span className="like-anim-rv">+1</span>}
                   </button>
                 </li>
               ))}

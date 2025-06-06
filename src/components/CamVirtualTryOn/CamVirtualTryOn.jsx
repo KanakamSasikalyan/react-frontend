@@ -348,10 +348,10 @@ const CamVirtualTryOn = () => {
 
     if (error) {
         return (
-            <div className="container">
-                <div className="error-message">
+            <div className="cam-tryon-container">
+                <div className="cam-tryon-error-message">
                     <p>{error}</p>
-                    <button onClick={() => window.location.reload()} className="reload-button">
+                    <button onClick={() => window.location.reload()} className="cam-tryon-reload-button">
                         Reload Page
                     </button>
                 </div>
@@ -361,21 +361,21 @@ const CamVirtualTryOn = () => {
 
     if (isModelLoading) {
         return (
-            <div className="container">
-                <div className="loading-spinner">
+            <div className="cam-tryon-container">
+                <div className="cam-tryon-loading-spinner">
                     <p>Loading AI model for virtual try-on...</p>
-                    <div className="spinner"></div>
+                    <div className="cam-tryon-spinner"></div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="container">
+        <div className="cam-tryon-container">
             <h1>Virtual Try-On</h1>
             
-            <div className="upload-section">
-                <label htmlFor="cloth-upload" className="upload-label">
+            <div className="cam-tryon-upload-section">
+                <label htmlFor="cloth-upload" className="cam-tryon-upload-label">
                     {isProcessing ? 'Processing...' : 'Upload Clothing Image:'}
                 </label>
                 <input
@@ -387,20 +387,20 @@ const CamVirtualTryOn = () => {
                 />
                 
                 {processedCloth && (
-                    <div className="cloth-preview">
+                    <div className="cam-tryon-cloth-preview">
                         <p>Cloth Preview:</p>
                         <img
                             src={processedCloth.src}
                             alt="Cloth Preview"
-                            className="preview-image"
+                            className="cam-tryon-preview-image"
                         />
                     </div>
                 )}
             </div>
 
-            <div className="video-container">
-                <div className="connection-status">
-                    <span className={`status-bubble ${connectionStatus}`}>
+            <div className="cam-tryon-video-container">
+                <div className="cam-tryon-connection-status">
+                    <span className={`cam-tryon-status-bubble ${connectionStatus}`}>
                         {connectionStatus === 'connected' ? 'Connected' : 'Disconnected'}
                     </span>
                 </div>
@@ -409,31 +409,31 @@ const CamVirtualTryOn = () => {
                     autoPlay
                     playsInline
                     muted
-                    className="hidden-video"
+                    className="cam-tryon-hidden-video"
                 />
                 <canvas
                     ref={canvasRef}
-                    className="try-on-canvas"
+                    className="cam-tryon-canvas"
                 />
                 {!isVideoReady && !error && (
-                    <div className="camera-loading">
+                    <div className="cam-tryon-camera-loading">
                         Waiting for camera feed...
                     </div>
                 )}
             </div>
 
             {!location.state?.processedClothFile && processedCloth && (
-                <div className="try-on-controls">
+                <div className="cam-tryon-controls">
                     <button 
                         onClick={startVirtualTryOn} 
-                        className={`try-on-btn ${isTryOnActive ? 'active' : ''}`}
+                        className={`cam-tryon-btn ${isTryOnActive ? 'active' : ''}`}
                         disabled={isTryOnActive}
                     >
                         Start Virtual Try-On
                     </button>
                     <button 
                         onClick={stopVirtualTryOn} 
-                        className={`stop-btn ${!isTryOnActive ? 'inactive' : ''}`}
+                        className={`cam-tryon-stop-btn ${!isTryOnActive ? 'inactive' : ''}`}
                         disabled={!isTryOnActive}
                     >
                         Stop Virtual Try-On
@@ -441,7 +441,7 @@ const CamVirtualTryOn = () => {
                 </div>
             )}
 
-            <p className="instruction-text">
+            <p className="cam-tryon-instruction-text">
                 Position yourself in front of the camera for the best try-on experience.
                 Stand straight with your shoulders visible for accurate fitting.
             </p>
@@ -793,10 +793,10 @@ const CamVirtualTryOn = () => {
 
     if (error) {
         return (
-            <div className="container">
-                <div className="error-message">
+            <div className="cam-tryon-container">
+                <div className="cam-tryon-error-message">
                     <p>{error}</p>
-                    <button onClick={() => window.location.reload()} className="reload-button">
+                    <button onClick={() => window.location.reload()} className="cam-tryon-reload-button">
                         Reload Page
                     </button>
                 </div>
@@ -806,21 +806,21 @@ const CamVirtualTryOn = () => {
 
     if (isModelLoading) {
         return (
-            <div className="container">
-                <div className="loading-spinner">
+            <div className="cam-tryon-container">
+                <div className="cam-tryon-loading-spinner">
                     <p>Loading AI model for virtual try-on...</p>
-                    <div className="spinner"></div>
+                    <div className="cam-tryon-spinner"></div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="container">
+        <div className="cam-tryon-container">
             <h1>Virtual Try-On</h1>
             
-            <div className="upload-section">
-                <label htmlFor="cloth-upload" className="upload-label">
+            <div className="cam-tryon-upload-section">
+                <label htmlFor="cloth-upload" className="cam-tryon-upload-label">
                     {isProcessing ? 'Processing...' : 'Upload Clothing Image:'}
                 </label>
                 <input
@@ -832,20 +832,20 @@ const CamVirtualTryOn = () => {
                 />
                 
                 {processedCloth && (
-                    <div className="cloth-preview">
+                    <div className="cam-tryon-cloth-preview">
                         <p>Cloth Preview:</p>
                         <img
                             src={processedCloth.src}
                             alt="Cloth Preview"
-                            className="preview-image"
+                            className="cam-tryon-preview-image"
                         />
                     </div>
                 )}
             </div>
 
-            <div className="video-container">
-                <div className="connection-status">
-                    <span className={`status-bubble ${connectionStatus}`}>
+            <div className="cam-tryon-video-container">
+                <div className="cam-tryon-connection-status">
+                    <span className={`cam-tryon-status-bubble ${connectionStatus}`}>
                         {connectionStatus === 'connected' ? 'Connected' : 'Disconnected'}
                     </span>
                 </div>
@@ -854,31 +854,31 @@ const CamVirtualTryOn = () => {
                     autoPlay
                     playsInline
                     muted
-                    className="hidden-video"
+                    className="cam-tryon-hidden-video"
                 />
                 <canvas
                     ref={canvasRef}
-                    className="try-on-canvas"
+                    className="cam-tryon-canvas"
                 />
                 {!isVideoReady && !error && (
-                    <div className="camera-loading">
+                    <div className="cam-tryon-camera-loading">
                         Waiting for camera feed...
                     </div>
                 )}
             </div>
 
             {!location.state?.processedClothFile && processedCloth && (
-                <div className="try-on-controls">
+                <div className="cam-tryon-controls">
                     <button 
                         onClick={startVirtualTryOn} 
-                        className={`try-on-btn ${isTryOnActive ? 'active' : ''}`}
+                        className={`cam-tryon-btn ${isTryOnActive ? 'active' : ''}`}
                         disabled={isTryOnActive}
                     >
                         Start Virtual Try-On
                     </button>
                     <button 
                         onClick={stopVirtualTryOn} 
-                        className={`stop-btn ${!isTryOnActive ? 'inactive' : ''}`}
+                        className={`cam-tryon-stop-btn ${!isTryOnActive ? 'inactive' : ''}`}
                         disabled={!isTryOnActive}
                     >
                         Stop Virtual Try-On
@@ -886,7 +886,7 @@ const CamVirtualTryOn = () => {
                 </div>
             )}
 
-            <p className="instruction-text">
+            <p className="cam-tryon-instruction-text">
                 Position yourself in front of the camera for the best try-on experience.
                 Stand straight with your shoulders visible for accurate fitting.
             </p>
