@@ -96,6 +96,74 @@ input[type="file"] {
     font-size: 1.2rem;
 }
 
+.connection-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.status-bubble {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    background-color: #e74c3c;
+}
+
+.status-bubble.connected {
+    background-color: #2ecc71;
+}
+
+.try-on-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.try-on-btn, .stop-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.try-on-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.try-on-btn:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+.try-on-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.try-on-btn.active {
+    background-color: #2ecc71;
+}
+
+.stop-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.stop-btn:hover:not(:disabled) {
+    background-color: #c0392b;
+}
+
+.stop-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
 .instruction-text {
     color: #7f8c8d;
     font-size: 0.9rem;
@@ -161,5 +229,10 @@ input[type="file"] {
     
     .video-container {
         max-width: 100%;
+    }
+
+    .try-on-controls {
+        flex-direction: column;
+        gap: 10px;
     }
 }
