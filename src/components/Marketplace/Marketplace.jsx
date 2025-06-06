@@ -82,10 +82,10 @@ const Marketplace = () => {
   });
 
   return (
-    <div className="marketplace-container">
-      <div className="marketplace-header">
+    <div className="marketplace-container-mp">
+      <div className="marketplace-header-mp">
         <h2>Design Marketplace</h2>
-        <button className="back-to-dashboard" onClick={() => navigate('/')}>
+        <button className="back-to-dashboard-mp" onClick={() => navigate('/')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
@@ -94,34 +94,34 @@ const Marketplace = () => {
       </div>
       
       {error && (
-        <div className="alert-error">
+        <div className="alert-error-mp">
           {error}
-          <button onClick={() => setError(null)} className="close-btn">×</button>
+          <button onClick={() => setError(null)} className="close-btn-mp">×</button>
         </div>
       )}
 
-      <div className="filters-container">
-        <div className="search-box">
+      <div className="filters-container-mp">
+        <div className="search-box-mp">
           <input
             type="text"
             placeholder="Search designs..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
+            className="search-input-mp"
           />
-          <svg className="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="search-icon-mp" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
 
-        <div className="dropdown-filters">
-          <div className="filter-group">
+        <div className="dropdown-filters-mp">
+          <div className="filter-group-mp">
             <label>Style:</label>
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="filter-select"
+              className="filter-select-mp"
             >
               <option value="all">All Styles</option>
               <option value="casual">Casual</option>
@@ -131,12 +131,12 @@ const Marketplace = () => {
             </select>
           </div>
 
-          <div className="filter-group">
+          <div className="filter-group-mp">
             <label>Gender:</label>
             <select
               value={genderFilter}
               onChange={(e) => setGenderFilter(e.target.value)}
-              className="filter-select"
+              className="filter-select-mp"
             >
               <option value="all">All</option>
               <option value="male">Male</option>
@@ -148,16 +148,16 @@ const Marketplace = () => {
       </div>
 
       {loading ? (
-        <div className="loading-spinner">
-          <div className="spinner"></div>
+        <div className="loading-spinner-mp">
+          <div className="spinner-mp"></div>
           <p>Loading designs...</p>
         </div>
       ) : (
-        <div className="designs-grid">
+        <div className="designs-grid-mp">
           {filteredDesigns.length > 0 ? (
             filteredDesigns.map(design => (
-              <div key={design.id} className="design-card">
-                <div className="image-container">
+              <div key={design.id} className="design-card-mp">
+                <div className="image-container-mp">
                   <img 
                     src={design.imageUrl} 
                     alt={design.prompt || 'Fashion design'}
@@ -166,26 +166,26 @@ const Marketplace = () => {
                     }}
                   />
                   {processingId === design.id && (
-                    <div className="processing-overlay">
-                      <div className="spinner small"></div>
+                    <div className="processing-overlay-mp">
+                      <div className="spinner-mp small"></div>
                       <span>Removing background...</span>
                     </div>
                   )}
                 </div>
 
-                <div className="design-details">
+                <div className="design-details-mp">
                   <h3>{design.prompt || 'Untitled Design'}</h3>
-                  <div className="tags">
-                    <span className={`tag style ${design.style || 'other'}`}>
+                  <div className="tags-mp">
+                    <span className={`tag-mp style ${design.style || 'other'}`}>
                       {design.style || 'other'}
                     </span>
-                    <span className={`tag gender ${design.gender || 'unisex'}`}>
+                    <span className={`tag-mp gender ${design.gender || 'unisex'}`}>
                       {design.gender || 'unisex'}
                     </span>
                   </div>
                   <button
                     onClick={() => handleTryOn(design.id, design.imageUrl)}
-                    className="try-on-btn"
+                    className="try-on-btn-mp"
                     disabled={processingId !== null}
                   >
                     {processingId === design.id ? 'Processing...' : 'Camera Try-On'}
@@ -194,11 +194,11 @@ const Marketplace = () => {
               </div>
             ))
           ) : (
-            <div className="empty-state">
+            <div className="empty-state-mp">
               <img src="/images/no-results.svg" alt="No designs found" />
               <h3>No designs match your search</h3>
               <button 
-                className="clear-filters-btn"
+                className="clear-filters-btn-mp"
                 onClick={() => {
                   setFilter('all');
                   setGenderFilter('all');
@@ -212,7 +212,7 @@ const Marketplace = () => {
         </div>
       )}
 
-      <footer className="marketplace-footer">
+      <footer className="marketplace-footer-mp">
         &copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI, <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub Dev</a>
       </footer>
     </div>

@@ -79,11 +79,11 @@ const OutfitSuggestion = () => {
   };
 
   return (
-    <div className="outfit-suggestion-container">
+    <div className="outfit-suggestion-container-os">
       <h2>OUTFIT RECOMMENDER</h2>
-      <form onSubmit={handleSubmit} className="outfit-form">
-        <div className="form-row">
-          <div className="form-group" style={{ flex: 2 }}>
+      <form onSubmit={handleSubmit} className="outfit-form-os">
+        <div className="form-row-os">
+          <div className="form-group-os" style={{ flex: 2 }}>
             <label>Select an Occasion</label>
             <select
               value={occasion}
@@ -99,7 +99,7 @@ const OutfitSuggestion = () => {
             </select>
           </div>
 
-          <div className="form-group" style={{ flex: 1 }}>
+          <div className="form-group-os" style={{ flex: 1 }}>
             <label>Season</label>
             <select
               value={season}
@@ -112,7 +112,7 @@ const OutfitSuggestion = () => {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className="form-group-os">
           <label>Or Enter a Custom Prompt</label>
           <input
             type="text"
@@ -126,11 +126,11 @@ const OutfitSuggestion = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-os">
           <label>Select Gender</label>
-          <div className="gender-options">
+          <div className="gender-options-os">
             {genders.map((option) => (
-              <label key={option.value} className="gender-option">
+              <label key={option.value} className="gender-option-os">
                 <input
                   type="radio"
                   name="gender"
@@ -144,15 +144,15 @@ const OutfitSuggestion = () => {
           </div>
         </div>
 
-        <div className="button-group-outfit">
+        <div className="button-group-outfit-os">
           <button 
             type="submit" 
-            className="submit-button-outfit"
+            className="submit-button-outfit-os"
             disabled={isLoading || (!occasion && !customPrompt)}
           >
             {isLoading ? (
               <>
-                <svg className="spinner" viewBox="0 0 50 50" width="20" height="20">
+                <svg className="spinner-os" viewBox="0 0 50 50" width="20" height="20">
                   <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5"></circle>
                 </svg>
                 Loading...
@@ -161,7 +161,7 @@ const OutfitSuggestion = () => {
           </button>
           <button 
             type="button" 
-            className="back-button-outfit"
+            className="back-button-outfit-os"
             onClick={() => navigate(-1)}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,16 +173,16 @@ const OutfitSuggestion = () => {
       </form>
 
       {suggestion && (
-        <div className="suggestion-result">
+        <div className="suggestion-result-os">
           <h3>Suggested Outfit</h3>
-          <div className="main-suggestion">
+          <div className="main-suggestion-os">
             {suggestion.main}
           </div>
           
           {suggestion.alternatives.length > 0 && (
             <>
               <h4>Alternative Options</h4>
-              <ul className="alternative-list">
+              <ul className="alternative-list-os">
                 {suggestion.alternatives.map((alt, index) => (
                   <li key={index}>{alt}</li>
                 ))}
@@ -192,7 +192,7 @@ const OutfitSuggestion = () => {
         </div>
       )}
 
-      <footer className="footer">
+      <footer className="footer-os">
         <p>&copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI</p>
       </footer>
     </div>

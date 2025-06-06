@@ -12,7 +12,7 @@
   --glass-white: rgba(255, 255, 255, 0.95);
 }
 
-.shirt-comparison-container {
+.shirt-comparison-container-sc {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
@@ -26,7 +26,7 @@
   padding-bottom: 6rem;
 }
 
-.shirt-comparison-container h2 {
+.shirt-comparison-container-sc h2 {
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -34,34 +34,34 @@
   font-weight: 700;
 }
 
-.shirt-comparison-form {
+.shirt-comparison-form-sc {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.side-by-side {
+.side-by-side-sc {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
 
-.form-group {
+.form-group-sc {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   flex: 1;
 }
 
-.form-group label {
+.form-group-sc label {
   font-weight: 600;
   color: var(--text-medium);
   font-size: 0.95rem;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.form-group-sc input,
+.form-group-sc select,
+.form-group-sc textarea {
   padding: 0.8rem 1rem;
   border: 1px solid #E0E0E0;
   border-radius: 0.5rem;
@@ -70,26 +70,26 @@
   transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group-sc input:focus,
+.form-group-sc select:focus,
+.form-group-sc textarea:focus {
   outline: none;
   border-color: var(--primary-accent);
   box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.2);
 }
 
-.form-group textarea {
+.form-group-sc textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-.button-group-opt {
+.button-group-opt-sc {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.compare-button {
+.compare-button-sc {
   flex: 5;
   padding: 0.9rem;
   background-color: var(--primary-accent);
@@ -103,20 +103,20 @@
   box-shadow: 0 4px 12px rgba(123, 97, 255, 0.2);
 }
 
-.compare-button:hover:not(:disabled) {
+.compare-button-sc:hover:not(:disabled) {
   background-color: var(--primary-accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(123, 97, 255, 0.3);
 }
 
-.compare-button:disabled {
+.compare-button-sc:disabled {
   background-color: #D1C4E9;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-.back-button-opt {
+.back-button-opt-sc {
   flex: 5;
   margin-top: auto;
   padding: 0.8rem;
@@ -134,12 +134,12 @@
   gap: 0.5rem;
 }
 
-.back-button-opt:hover {
+.back-button-opt-sc:hover {
   background-color: rgba(123, 97, 255, 0.1);
   transform: translateY(-2px);
 }
 
-.image-preview {
+.image-preview-sc {
   max-width: 100%;
   max-height: 200px;
   border: 1px solid #E0E0E0;
@@ -147,7 +147,7 @@
   object-fit: cover;
 }
 
-.comparison-result {
+.comparison-result-sc {
   margin-top: 2rem;
   padding: 1.5rem;
   background-color: #F7F7FF;
@@ -155,7 +155,7 @@
   border-radius: 0.6rem;
 }
 
-.comparison-result h3 {
+.comparison-result-sc h3 {
   font-size: 1.3rem;
   color: var(--text-dark);
   margin-bottom: 1rem;
@@ -163,7 +163,7 @@
   text-align: center;
 }
 
-.result-item {
+.result-item-sc {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -174,7 +174,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.result-image {
+.result-image-sc {
   max-width: 150px;
   max-height: 150px;
   border: 1px solid #E0E0E0;
@@ -182,21 +182,21 @@
   object-fit: cover;
 }
 
-.result-summary {
+.result-summary-sc {
   text-align: left;
   flex: 1;
 }
 
-.result-summary p {
+.result-summary-sc p {
   margin: 0.5rem 0;
   color: var(--text-medium);
 }
 
-.result-summary strong {
+.result-summary-sc strong {
   color: var(--text-dark);
 }
 
-.error-message {
+.error-message-sc {
   color: #D32F2F;
   background-color: #FFEBEE;
   padding: 1rem;
@@ -204,7 +204,7 @@
   text-align: center;
 }
 
-.footer {
+.footer-sc {
   text-align: center;
   padding: 1.5rem;
   font-size: 0.9rem;
@@ -219,40 +219,40 @@
   width: 100%;
 }
 
-.footer p {
+.footer-sc p {
   margin: 0;
 }
 
 @media (max-width: 768px) {
-  .shirt-comparison-container {
+  .shirt-comparison-container-sc {
     margin: 1rem;
     padding: 1.5rem;
     min-height: calc(100vh - 5rem);
     padding-bottom: 5rem;
   }
   
-  .side-by-side {
+  .side-by-side-sc {
     flex-direction: column;
     gap: 1.5rem;
   }
   
-  .button-group {
+  .button-group-opt-sc {
     flex-direction: column;
     gap: 0.8rem;
   }
   
-  .compare-button,
-  .back-button {
+  .compare-button-sc,
+  .back-button-opt-sc {
     flex: 1;
     width: 100%;
   }
   
-  .result-item {
+  .result-item-sc {
     flex-direction: column;
     text-align: center;
   }
   
-  .result-summary {
+  .result-summary-sc {
     text-align: center;
   }
 }
