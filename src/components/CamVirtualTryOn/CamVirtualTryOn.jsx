@@ -894,4 +894,4 @@ const CamVirtualTryOn = () => {
     );
 };
 
-export default CamVirtualTryOn;
+export default CamVirtualTryOn;*/
