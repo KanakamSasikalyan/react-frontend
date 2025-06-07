@@ -25,7 +25,7 @@
 }
 
 /* Enhanced Glassmorphism Navbar with subtle animation */
-.glass-navbar {
+.dashboard-glass-navbar {
   background: var(--glass-white);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -40,11 +40,11 @@
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-navbar:hover {
+.dashboard-glass-navbar:hover {
   box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
 }
 
-.logo {
+.dashboard-logo {
   color: var(--text-dark);
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
@@ -59,7 +59,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.nav-links-container {
+.dashboard-nav-links-container {
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -68,25 +68,25 @@
   scrollbar-width: none;
 }
 
-.nav-links-container::-webkit-scrollbar {
+.dashboard-nav-links-container::-webkit-scrollbar {
   display: none;
 }
 
-.nav-links {
+.dashboard-nav-links {
   display: flex;
   gap: 0.75rem;
   white-space: nowrap;
   padding: 0.3rem 0;
 }
 
-.logout-btn{
+.dashboard-logout-btn{
   color: white;
   padding: 0.6rem 0.8rem;
   background-color:  rgba(123, 97, 255, 0.7);
   border-radius: 0.5rem;
 }
 
-.nav-link {
+.dashboard-nav-link {
   color: var(--text-medium);
   text-decoration: none;
   font-family: 'Inter', sans-serif;
@@ -101,7 +101,7 @@
   position: relative;
 }
 
-.nav-link::after {
+.dashboard-nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -113,17 +113,17 @@
   transform: translateX(-50%);
 }
 
-.nav-link:hover {
+.dashboard-nav-link:hover {
   color: var(--primary-accent);
   background-color: rgba(123, 97, 255, 0.08);
 }
 
-.nav-link:hover::after {
+.dashboard-nav-link:hover::after {
   width: 60%;
 }
 
 /* Futuristic Animated Gradient Background */
-.animated-gradient-bg {
+.dashboard-animated-gradient-bg {
   position: relative;
   min-height: calc(100vh - 60px);
   padding: 2.5rem;
@@ -134,7 +134,7 @@
   overflow: hidden;
 }
 
-.animated-gradient-bg::before {
+.dashboard-animated-gradient-bg::before {
   content: '';
   position: absolute;
   top: 0;
@@ -148,19 +148,19 @@
     #7B61FF, 
     #00D4FF);
   background-size: 400% 400%;
-  animation: gradientFlow 16s ease infinite;
+  animation: dashboard-gradientFlow 16s ease infinite;
   z-index: -1;
   opacity: 0.9;
 }
 
-@keyframes gradientFlow {
+@keyframes dashboard-gradientFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 /* Welcome Screen Content with enhanced glass effect */
-.welcome-screen {
+.dashboard-welcome-screen {
   text-align: center;
   color: var(--white);
   max-width: 800px;
@@ -175,13 +175,13 @@
   transform: translateY(0);
 }
 
-.welcome-screen:hover {
+.dashboard-welcome-screen:hover {
   transform: translateY(-5px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
   background: rgba(255, 255, 255, 0.15);
 }
 
-.welcome-screen h2 {
+.dashboard-welcome-screen h2 {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   font-weight: 800;
@@ -190,7 +190,7 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
-.welcome-screen p {
+.dashboard-welcome-screen p {
   font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.92);
   margin-bottom: 3rem;
@@ -198,14 +198,14 @@
   font-weight: 400;
 }
 
-.welcome-buttons {
+.dashboard-welcome-buttons {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
 }
 
 /* Modern CTA Buttons with glow effect */
-.cta-button {
+.dashboard-cta-button {
   background-color: var(--primary-accent);
   color: var(--white);
   padding: 1rem 2.2rem;
@@ -224,7 +224,7 @@
   z-index: 1;
 }
 
-.cta-button::before {
+.dashboard-cta-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -240,55 +240,31 @@
   transition: opacity 0.3s ease;
 }
 
-.cta-button:hover {
+.dashboard-cta-button:hover {
   background-color: var(--primary-accent-hover);
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(123, 97, 255, 0.5);
 }
 
-.cta-button:hover::before {
+.dashboard-cta-button:hover::before {
   opacity: 1;
 }
 
-.cta-button.secondary {
+.dashboard-secondary {
   background-color: var(--secondary-accent);
   box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
 }
 
-.cta-button.secondary:hover {
+.dashboard-secondary:hover {
   background-color: var(--secondary-accent-hover);
   box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
 }
 
-.cta-button.secondary::before {
+.dashboard-secondary::before {
   background: linear-gradient(45deg, 
     var(--secondary-accent), 
     rgba(0, 212, 255, 0.7), 
     var(--secondary-accent));
-}
-
-/* Floating particles effect */
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  animation: float linear infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-100px) translateX(100px); }
-  100% { transform: translateY(0) translateX(0); }
 }
 
 /* Enhanced Footer with subtle gradient */
@@ -348,60 +324,60 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .glass-navbar {
+  .dashboard-glass-navbar {
     flex-direction: column;
     padding: 1.2rem;
   }
   
-  .nav-links {
+  .dashboard-nav-links {
     margin-top: 1.2rem;
     justify-content: center;
   }
   
-  .welcome-screen {
+  .dashboard-welcome-screen {
     padding: 3rem;
   }
   
-  .welcome-screen h2 {
+  .dashboard-welcome-screen h2 {
     font-size: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .welcome-screen h2 {
+  .dashboard-welcome-screen h2 {
     font-size: 2rem;
   }
   
-  .welcome-screen p {
+  .dashboard-welcome-screen p {
     font-size: 1.1rem;
   }
   
-  .welcome-buttons {
+  .dashboard-welcome-buttons {
     flex-direction: column;
     gap: 1rem;
   }
   
-  .cta-button {
+  .dashboard-cta-button {
     width: 100%;
     padding: 1rem;
   }
   
-  .logo {
+  .dashboard-logo {
     margin-right: 0;
     margin-bottom: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .welcome-screen {
+  .dashboard-welcome-screen {
     padding: 2rem;
   }
   
-  .welcome-screen h2 {
+  .dashboard-welcome-screen h2 {
     font-size: 1.8rem;
   }
   
-  .nav-link {
+  .dashboard-nav-link {
     padding: 0.5rem 0.8rem;
     font-size: 0.75rem;
   }

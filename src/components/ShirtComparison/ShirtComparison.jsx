@@ -57,14 +57,14 @@ const ShirtComparison = () => {
   };
 
   return (
-    <div className="shirt-comparison-container">
+    <div className="shirt-comparison-container-sc">
       <h2>TOP CHOICE</h2>
-      <form onSubmit={handleSubmit} className="shirt-comparison-form">
-        <div className="side-by-side">
-          <div className="form-group">
+      <form onSubmit={handleSubmit} className="shirt-comparison-form-sc">
+        <div className="side-by-side-sc">
+          <div className="form-group-sc">
             <label>Upload Image 1</label>
             <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage1, setPreview1)} />
-            {preview1 && <img src={preview1} alt="Preview 1" className="image-preview" />}
+            {preview1 && <img src={preview1} alt="Preview 1" className="image-preview-sc" />}
             <label>Platform 1</label>
             <select value={platform1} onChange={(e) => setPlatform1(e.target.value)}>
               <option value="">Select Platform</option>
@@ -78,10 +78,10 @@ const ShirtComparison = () => {
             <textarea value={description1} onChange={(e) => setDescription1(e.target.value)} />
           </div>
 
-          <div className="form-group">
+          <div className="form-group-sc">
             <label>Upload Image 2</label>
             <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage2, setPreview2)} />
-            {preview2 && <img src={preview2} alt="Preview 2" className="image-preview" />}
+            {preview2 && <img src={preview2} alt="Preview 2" className="image-preview-sc" />}
             <label>Platform 2</label>
             <select value={platform2} onChange={(e) => setPlatform2(e.target.value)}>
               <option value="">Select Platform</option>
@@ -96,17 +96,17 @@ const ShirtComparison = () => {
           </div>
         </div>
 
-        <div className="button-group-opt">
+        <div className="button-group-opt-sc">
           <button 
             type="submit" 
-            className="compare-button"
+            className="compare-button-sc"
             disabled={isLoading}
           >
             {isLoading ? 'Comparing...' : 'Compare Shirts'}
           </button>
           <button 
             type="button" 
-            className="back-button-opt"
+            className="back-button-opt-sc"
             onClick={() => navigate(-1)}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,16 +118,16 @@ const ShirtComparison = () => {
       </form>
 
       {result && (
-        <div className="comparison-result">
+        <div className="comparison-result-sc">
           <h3>TOP RECOMMENDATION</h3>
           {result.status === 'error' ? (
-            <div className="error-message">{result.message}</div>
+            <div className="error-message-sc">{result.message}</div>
           ) : result.recommendation ? (
-            <div className="result-item">
+            <div className="result-item-sc">
               <img src={result.recommendation.id === 'shirt_1' ? preview1 : preview2} 
                    alt="Recommended Shirt" 
-                   className="result-image" />
-              <div className="result-summary">
+                   className="result-image-sc" />
+              <div className="result-summary-sc">
                 <p><strong>Platform:</strong> {result.recommendation.platform}</p>
                 <p><strong>Price:</strong> {result.recommendation.price}</p>
                 <p><strong>Material:</strong> {result.recommendation.material}</p>
@@ -140,7 +140,7 @@ const ShirtComparison = () => {
         </div>
       )}
 
-      <footer className="footer">
+      <footer className="footer-sc">
         <p>&copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI</p>
       </footer>
     </div>
