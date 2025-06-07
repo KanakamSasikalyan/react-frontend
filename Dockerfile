@@ -48,4 +48,3 @@
     
     # Start Nginx server
     CMD ["nginx", "-g", "daemon off;"]
-    
