@@ -224,14 +224,27 @@ const GenerateDesign = () => {
   const [currentPrompt, setCurrentPrompt] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
   const [error, setError] = useState(null);
-  const [showDisclaimer, setShowDisclaimer] = useState(true); // New state for disclaimer visibility
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
   const eventSourceRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set showDisclaimer to true when the component mounts
-    setShowDisclaimer(true);
+    return () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    if (retryCount > 0 && retryCount <= 3) {
+      const timer = setTimeout(() => {
+        handleSubmit({ preventDefault: () => {} });
+      }, 2000 * retryCount);
+      return () => clearTimeout(timer);
+    }
+  }, [retryCount]);
 
   const handleGenderChange = (e) => {
     const selectedGender = e.target.value;
@@ -256,22 +269,33 @@ const GenerateDesign = () => {
         setError(event.data.replace('ERROR:', ''));
         setIsLoading(false);
         eventSource.close();
+        if (retryCount < 3) {
+          setRetryCount(retryCount + 1);
+        }
         return;
       }
       if (event.data.startsWith('PROGRESS:')) {
         const percent = parseInt(event.data.replace('PROGRESS:', ''));
         setProgress(percent);
+        setRetryCount(0);
       } else if (event.data.startsWith('COMPLETE:')) {
         setProgress(100);
         setImageUrl(event.data.replace('COMPLETE:', ''));
         setIsLoading(false);
+        setRetryCount(0);
         eventSource.close();
       }
     };
 
     eventSource.onerror = () => {
-      setError('Connection lost or server error.');
-      setIsLoading(false);
+      if (eventSource.readyState === EventSource.CLOSED) {
+        if (retryCount < 3 && progress < 100) {
+          setRetryCount(retryCount + 1);
+        } else {
+          setError('Connection lost or server error.');
+          setIsLoading(false);
+        }
+      }
       eventSource.close();
     };
   };
@@ -292,7 +316,7 @@ const GenerateDesign = () => {
   };
 
   const handleAcceptDisclaimer = () => {
-    setShowDisclaimer(false); // Hide the disclaimer when "Accept" is clicked
+    setShowDisclaimer(false);
   };
 
   return (
@@ -351,7 +375,7 @@ const GenerateDesign = () => {
             onClick={goToDashboard}
             className="generate-button dashboard-button"
             type="button"
-            disabled={showDisclaimer} // Disable if disclaimer is active
+            disabled={showDisclaimer}
           >
             {'Back'}
           </button>
@@ -365,6 +389,7 @@ const GenerateDesign = () => {
             <div className="progress-bar-inner" style={{ width: `${progress}%` }} />
           </div>
           <div className="progress-percent">{progress}%</div>
+          {retryCount > 0 && <div className="retry-message">Reconnecting... (Attempt {retryCount}/3)</div>}
         </div>
       )}
 
