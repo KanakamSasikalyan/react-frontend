@@ -1,4 +1,4 @@
-//All the necessary imports are added respectively.
+//Added the necessary imports 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
