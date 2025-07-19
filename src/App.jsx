@@ -1,3 +1,4 @@
+//All the necessary imports are added respectively.
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -6,7 +7,6 @@ import Marketplace from './components/Marketplace/Marketplace';
 import VirtualTryOn from './components/VirtualTryOn/VirtualTryOn';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-// import MergeTryOnPage from './components/MergeTryOn/MergeTryOnPage';
 import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
 import About from './components/About/About'
 import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
