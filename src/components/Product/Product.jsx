@@ -64,7 +64,7 @@ function Product() {
               <span className="spinner"></span> Searching...
             </>
           ) : (
-            'Search'
+            'Generate'
           )}
         </button>
       </form>

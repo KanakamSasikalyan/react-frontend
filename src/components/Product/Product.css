@@ -65,7 +65,7 @@
 }
 
 .search-form button {
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
   padding: 12px 32px;
   border: none;
   border-radius: 8px;
