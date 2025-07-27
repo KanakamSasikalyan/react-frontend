@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Product.css';
 import API_BASE_URL from '../../config/apiConfig';
@@ -10,6 +10,7 @@ function Product() {
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState(null);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -36,9 +37,23 @@ function Product() {
     }
   };
 
+  const handleAcceptDisclaimer = () => {
+    setShowDisclaimer(false);
+  };
+
   return (
     <div className="container">
-      <h1>Fashion Image Search</h1>
+      {showDisclaimer && (
+        <div className="disclaimer-overlay">
+          <div className="disclaimer-popup">
+            <h3>Important Information</h3>
+            <p>The images are produced by generative AI algorithms. Faulty responses may occur. To get the best results, refine your prompt with efficient terminology.</p>
+            <button onClick={handleAcceptDisclaimer} className="disclaimer-accept-button">Accept</button>
+          </div>
+        </div>
+      )}
+
+      <h1>Fashion Designs - Generative AI Search</h1>
       
       <form onSubmit={handleSearch} className="search-form">
         <input
@@ -47,18 +62,18 @@ function Product() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Describe the clothing you're looking for..."
           required
-          disabled={generating}
+          disabled={generating || showDisclaimer}
         />
         <select 
           value={gender} 
           onChange={(e) => setGender(e.target.value)}
-          disabled={generating}
+          disabled={generating || showDisclaimer}
         >
           <option value="">Any Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
-        <button type="submit" disabled={generating}>
+        <button type="submit" disabled={generating || showDisclaimer}>
           {generating ? (
             <>
               <span className="spinner"></span> Searching...
@@ -105,11 +120,16 @@ function Product() {
         </div>
       )}
 
-      {!loading && !error && results.length === 0 && query && (
+      {!loading && !error && results.length === 0 && query && !showDisclaimer && (
         <div className="no-results">
           <p>No products found. Try adjusting your search terms.</p>
         </div>
       )}
+
+      <footer className="footer">
+        <div></div>
+        <div>Enhancing Fashion Market using Virtual Fashion Studio Powered by AI &copy; {new Date().getFullYear()}</div>
+      </footer>
     </div>
   );
 }

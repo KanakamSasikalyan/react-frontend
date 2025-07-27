@@ -283,3 +283,118 @@
 .product-card:nth-child(3n) {
   animation-delay: 0.2s;
 }
+
+/* Disclaimer Popup Styles */
+.disclaimer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.disclaimer-popup {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.disclaimer-popup h3 {
+  font-size: 1.6rem;
+  color: #1a1a1a;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.disclaimer-popup p {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.disclaimer-accept-button {
+  padding: 12px 30px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.disclaimer-accept-button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Footer Styles */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+/* Error Message Styles */
+.error-message {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* No Results Styles */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 1.1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-top: 32px;
+}
+
+/* Disable styling when disclaimer is active */
+.search-form input:disabled,
+.search-form select:disabled,
+.search-form button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
