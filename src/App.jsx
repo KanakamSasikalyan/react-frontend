@@ -14,6 +14,7 @@ import ShirtComparision from './components/ShirtComparison/ShirtComparison'
 import CamVirtualTryOn from './components/CamVirtualTryOn/CamVirtualTryOn';
 import Forgot from './components/Forgot/Forgot';
 import Reviews from './components/Reviews/Reviews';
+import Product from './components/Product/Product';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -110,6 +111,14 @@ function App() {
           element={
             <PrivateRoute>
               <Reviews />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/basic-model"
+          element={
+            <PrivateRoute>
+              <Product />
             </PrivateRoute>
           }
         />
