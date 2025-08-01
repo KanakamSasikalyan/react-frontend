@@ -313,6 +313,41 @@
   margin: 0 auto;
 }
 
+.image-drop-zone-vton {
+  box-sizing: border-box;
+  border: 2px dashed var(--primary-accent);
+  background: rgba(123, 97, 255, 0.04);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.image-drop-zone-vton:hover,
+.image-drop-zone-vton:focus-within {
+  border-color: var(--primary-accent-hover);
+  background: rgba(123, 97, 255, 0.08);
+}
+
+.file-name-vton {
+  font-size: 0.85rem;
+  color: var(--primary-accent);
+  margin: 0.5rem 0;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.drop-hint-vton {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .content-wrapper {
     padding: 1.5rem;
@@ -344,6 +379,11 @@
   .preview-box {
     width: 150px;
     height: 150px;
+  }
+  
+  .image-drop-zone-vton {
+    width: 100%;
+    margin: 0;
   }
 }
 
