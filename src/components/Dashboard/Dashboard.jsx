@@ -32,7 +32,7 @@ const Dashboard = () => {
         <div className="dashboard-nav-links-container">
           <div className="dashboard-nav-links">
             <Link to="/generate" className="dashboard-nav-link">DESIGN LAB</Link>
-            <Link to="/basic-model" className="dashboard-nav-link">BASIC MODEL</Link>
+            <Link to="/basic-model" className="dashboard-nav-link">STANDARD MODEL</Link>
             <Link to="/marketplace" className="dashboard-nav-link">MARKETPLACE</Link>
             <Link to="/try-on" className="dashboard-nav-link">DIGITAL FITTING</Link>
             <Link to="/cam-try-on" className="dashboard-nav-link">CAM TRY ON</Link>
