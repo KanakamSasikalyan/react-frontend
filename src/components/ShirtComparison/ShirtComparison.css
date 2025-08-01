@@ -10,6 +10,9 @@
   --text-light: #A1A1B5;
   --white: #FFFFFF;
   --glass-white: rgba(255, 255, 255, 0.95);
+  --error-bg: #FFF0F0;
+  --error-border: #FFD6D6;
+  --error-text: #D32F2F;
 }
 
 .shirt-comparison-container-sc {
@@ -24,13 +27,14 @@
   position: relative;
   min-height: calc(100vh - 8rem);
   padding-bottom: 6rem;
+  color: var(--text-dark);
 }
 
 .shirt-comparison-container-sc h2 {
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--text-dark);
+  color: var(--primary-accent);
   font-weight: 700;
 }
 
@@ -54,6 +58,7 @@
 }
 
 .form-group-sc label {
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   color: var(--text-medium);
   font-size: 0.95rem;
@@ -62,11 +67,13 @@
 .form-group-sc input,
 .form-group-sc select,
 .form-group-sc textarea {
-  padding: 0.8rem 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--glass-white);
   border: 1px solid #E0E0E0;
   border-radius: 0.5rem;
   font-size: 1rem;
-  background-color: var(--glass-white);
+  padding: 0.8rem 1rem;
   transition: all 0.3s ease;
 }
 
@@ -83,6 +90,38 @@
   resize: vertical;
 }
 
+/* Drag & Drop zone styles */
+.image-drop-zone-sc {
+  border: 2px dashed var(--primary-accent);
+  background: rgba(123, 97, 255, 0.04);
+  border-radius: 0.7rem;
+  padding: 1rem;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.image-drop-zone-sc:hover,
+.image-drop-zone-sc:focus-within {
+  border-color: var(--primary-accent-hover);
+  background: rgba(123, 97, 255, 0.08);
+}
+
+.file-name-sc {
+  font-size: 0.85rem;
+  color: var(--primary-accent);
+  margin: 0.5rem 0;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.drop-hint-sc {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
 .button-group-opt-sc {
   display: flex;
   gap: 1rem;
@@ -97,7 +136,7 @@
   border: none;
   border-radius: 0.6rem;
   font-size: 1rem;
-  cursor: pointer;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(123, 97, 255, 0.2);
@@ -125,7 +164,7 @@
   border: 1px solid var(--primary-accent);
   border-radius: 0.5rem;
   font-size: 1rem;
-  cursor: pointer;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   transition: all 0.3s ease;
   display: flex;
@@ -145,6 +184,7 @@
   border: 1px solid #E0E0E0;
   border-radius: 0.5rem;
   object-fit: cover;
+  margin-bottom: 0.5rem;
 }
 
 .comparison-result-sc {
@@ -223,6 +263,7 @@
   margin: 0;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .shirt-comparison-container-sc {
     margin: 1rem;
@@ -230,28 +271,22 @@
     min-height: calc(100vh - 5rem);
     padding-bottom: 5rem;
   }
-  
   .side-by-side-sc {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
   .button-group-opt-sc {
     flex-direction: column;
     gap: 0.8rem;
   }
-  
   .compare-button-sc,
   .back-button-opt-sc {
-    flex: 1;
     width: 100%;
   }
-  
   .result-item-sc {
     flex-direction: column;
     text-align: center;
   }
-  
   .result-summary-sc {
     text-align: center;
   }
