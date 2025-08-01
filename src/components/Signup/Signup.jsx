@@ -12,6 +12,7 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [error, setError] = useState('');
+  const [redirecting, setRedirecting] = useState(false);
   const navigate = useNavigate();
 
   const validatePassword = (pwd) => {
@@ -31,6 +32,7 @@ const Signup = () => {
     setPasswordError('');
     setEmailError('');
     setError('');
+    setRedirecting(false);
     if (!username || !email || !password) {
       setError('All fields are required.');
       return;
@@ -53,9 +55,10 @@ const Signup = () => {
       });
       if (response.ok) {
         setError('Signup or account creation successful');
+        setRedirecting(true);
         setTimeout(() => {
           navigate('/login');
-        }, 1000);
+        }, 1800);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Signup failed');
@@ -72,7 +75,14 @@ const Signup = () => {
         <div className="brand-title">AI Fashion Studio</div>
         <h2>Sign Up</h2>
         {error && (
-          <div className="error-message">{error}</div>
+          <div className={error === 'Signup or account creation successful' ? "success-message" : "error-message"}>
+            {error}
+            {redirecting && (
+              <div style={{ marginTop: '0.5rem', color: '#16a34a', fontSize: '0.95rem' }}>
+                Redirecting to Login page...
+              </div>
+            )}
+          </div>
         )}
         <div className="form-group">
           <label>Username</label>

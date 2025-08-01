@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './ShirtComparison.css';
@@ -17,16 +17,38 @@ const ShirtComparison = () => {
   const [description2, setDescription2] = useState('');
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [fileName1, setFileName1] = useState('');
+  const [fileName2, setFileName2] = useState('');
+  const imageInputRef1 = useRef(null);
+  const imageInputRef2 = useRef(null);
   const navigate = useNavigate();
 
   const platforms = ['Amazon', 'Myntra', 'Flipkart', 'Snapdeal', 'Nyka', 'Ajio'];
 
-  const handleImageChange = (e, setImage, setPreview) => {
-    const file = e.target.files[0];
+  // Handles both file input and drag-drop
+  const handleImageChange = (file, setImage, setPreview, setFileName) => {
     if (file) {
       setImage(file);
       setPreview(URL.createObjectURL(file));
+      setFileName(file.name);
     }
+  };
+
+  // File input change
+  const handleFileInputChange = (e, setImage, setPreview, setFileName) => {
+    const file = e.target.files[0];
+    handleImageChange(file, setImage, setPreview, setFileName);
+  };
+
+  // Drag-drop handlers
+  const handleDrop = (e, setImage, setPreview, setFileName) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleImageChange(e.dataTransfer.files[0], setImage, setPreview, setFileName);
+    }
+  };
+  const handleDragOver = (e) => {
+    e.preventDefault();
   };
 
   const handleSubmit = async (e) => {
@@ -61,10 +83,21 @@ const ShirtComparison = () => {
       <h2>TOP CHOICE</h2>
       <form onSubmit={handleSubmit} className="shirt-comparison-form-sc">
         <div className="side-by-side-sc">
-          <div className="form-group-sc">
+          <div
+            className="form-group-sc image-drop-zone-sc"
+            onDrop={(e) => handleDrop(e, setImage1, setPreview1, setFileName1)}
+            onDragOver={handleDragOver}
+          >
             <label>Upload Image 1</label>
-            <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage1, setPreview1)} />
+            <input
+              type="file"
+              accept="image/*"
+              ref={imageInputRef1}
+              onChange={(e) => handleFileInputChange(e, setImage1, setPreview1, setFileName1)}
+            />
+            {fileName1 && <div className="file-name-sc">{fileName1}</div>}
             {preview1 && <img src={preview1} alt="Preview 1" className="image-preview-sc" />}
+            <div className="drop-hint-sc">Or drag & drop image here</div>
             <label>Platform 1</label>
             <select value={platform1} onChange={(e) => setPlatform1(e.target.value)}>
               <option value="">Select Platform</option>
@@ -78,10 +111,21 @@ const ShirtComparison = () => {
             <textarea value={description1} onChange={(e) => setDescription1(e.target.value)} />
           </div>
 
-          <div className="form-group-sc">
+          <div
+            className="form-group-sc image-drop-zone-sc"
+            onDrop={(e) => handleDrop(e, setImage2, setPreview2, setFileName2)}
+            onDragOver={handleDragOver}
+          >
             <label>Upload Image 2</label>
-            <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, setImage2, setPreview2)} />
+            <input
+              type="file"
+              accept="image/*"
+              ref={imageInputRef2}
+              onChange={(e) => handleFileInputChange(e, setImage2, setPreview2, setFileName2)}
+            />
+            {fileName2 && <div className="file-name-sc">{fileName2}</div>}
             {preview2 && <img src={preview2} alt="Preview 2" className="image-preview-sc" />}
+            <div className="drop-hint-sc">Or drag & drop image here</div>
             <label>Platform 2</label>
             <select value={platform2} onChange={(e) => setPlatform2(e.target.value)}>
               <option value="">Select Platform</option>
