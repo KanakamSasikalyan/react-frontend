@@ -24,7 +24,7 @@ react-frontend
 └── README.md               # Documentation for the project
 ```
 
-## Getting Started
+## Getting Started with repo
 
 1. **Clone the repository:**
    ```
