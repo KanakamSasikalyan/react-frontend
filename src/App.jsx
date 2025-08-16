@@ -1,3 +1,4 @@
+//Added the necessary imports 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -6,12 +7,14 @@ import Marketplace from './components/Marketplace/Marketplace';
 import VirtualTryOn from './components/VirtualTryOn/VirtualTryOn';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-// import MergeTryOnPage from './components/MergeTryOn/MergeTryOnPage';
 import SmartTryOnCamera from './components/MergeTryOn/SmartTryOnCamera';
 import About from './components/About/About'
 import OutfitSuggestion from './components/OutfitSuggestion/OutfitSuggestion'
 import ShirtComparision from './components/ShirtComparison/ShirtComparison'
 import CamVirtualTryOn from './components/CamVirtualTryOn/CamVirtualTryOn';
+import Forgot from './components/Forgot/Forgot';
+import Reviews from './components/Reviews/Reviews';
+import Product from './components/Product/Product';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -24,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<Forgot/>} />
         <Route
           path="/"
           element={
@@ -100,16 +104,24 @@ function App() {
               <About />
             </PrivateRoute>
           }
-        />    
+        />  
 
-        {/* <Route
-          path="/merge-images"
+        <Route
+          path="/reviews"
           element={
             <PrivateRoute>
-              <MergeTryOnPage />
+              <Reviews />
             </PrivateRoute>
           }
-        /> */}
+        />
+        <Route
+          path="/basic-model"
+          element={
+            <PrivateRoute>
+              <Product />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

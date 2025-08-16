@@ -7,8 +7,9 @@ import API_BASE_URL from '../../config/apiConfig';
 const OutfitSuggestion = () => {
   const [occasion, setOccasion] = useState('');
   const [gender, setGender] = useState('unisex');
+  const [season, setSeason] = useState('all');
   const [customPrompt, setCustomPrompt] = useState('');
-  const [suggestion, setSuggestion] = useState('');
+  const [suggestion, setSuggestion] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -22,64 +23,114 @@ const OutfitSuggestion = () => {
     'Interview',
   ];
 
+
   const genders = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
     { value: 'unisex', label: 'Unisex' }
   ];
 
+  const seasons = [
+    { value: 'all', label: 'All Seasons' },
+    { value: 'spring', label: 'Spring' },
+    { value: 'summer', label: 'Summer' },
+    { value: 'fall', label: 'Fall' },
+    { value: 'winter', label: 'Winter' }
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const query = customPrompt || occasion;
-
+    
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/outfit/suggest?occasion=${encodeURIComponent(query)}&gender=${encodeURIComponent(gender)}`
-      );
-      setSuggestion(response.data);
+      let response;
+      if (customPrompt) {
+        response = await axios.get(
+          `${API_BASE_URL}/api/outfit/suggest?prompt=${encodeURIComponent(customPrompt)}`
+        );
+      } else {
+        response = await axios.get(
+          `${API_BASE_URL}/api/outfit/suggest?gender=${encodeURIComponent(gender)}&season=${encodeURIComponent(season)}&occasion=${encodeURIComponent(occasion)}`
+        );
+      }
+
+      if (response.data.status === 'success') {
+        setSuggestion({
+          main: response.data.outfitSuggestion,
+          alternatives: response.data.alternatives || [],
+          gender: response.data.gender,
+          season: response.data.season
+        });
+      } else {
+        setSuggestion({
+          main: response.data.message || 'Failed to get suggestion',
+          alternatives: []
+        });
+      }
     } catch (error) {
       console.error('Error fetching outfit suggestion:', error);
-      setSuggestion('Failed to fetch suggestion. Please try again.');
+      setSuggestion({
+        main: 'Failed to fetch suggestion. Please try again.',
+        alternatives: []
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="outfit-suggestion-container">
-      <h2>WHAT2WEAR</h2>
-      <form onSubmit={handleSubmit} className="outfit-form">
-        <div className="form-group">
-          <label>Select an Occasion</label>
-          <select
-            value={occasion}
-            onChange={(e) => setOccasion(e.target.value)}
-            disabled={!!customPrompt}
-          >
-            <option value="">-- Select Occasion --</option>
-            {occasions.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))}
-          </select>
+    <div className="outfit-suggestion-container-os">
+      <h2>OUTFIT RECOMMENDER</h2>
+      <form onSubmit={handleSubmit} className="outfit-form-os">
+        <div className="form-row-os">
+          <div className="form-group-os" style={{ flex: 2 }}>
+            <label>Select an Occasion</label>
+            <select
+              value={occasion}
+              onChange={(e) => setOccasion(e.target.value)}
+              disabled={!!customPrompt}
+            >
+              <option value="">Select Occasion</option>
+              {occasions.map((item) => (
+                <option key={item} value={item}>
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group-os" style={{ flex: 1 }}>
+            <label>Season</label>
+            <select
+              value={season}
+              onChange={(e) => setSeason(e.target.value)}
+            >
+              {seasons.map((item) => (
+                <option key={item.value} value={item.value}>{item.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="form-group">
+        <div className="form-group-os">
           <label>Or Enter a Custom Prompt</label>
           <input
             type="text"
             value={customPrompt}
-            onChange={(e) => setCustomPrompt(e.target.value)}
+            onChange={(e) => {
+              setCustomPrompt(e.target.value);
+              if (e.target.value) setOccasion('');
+            }}
             placeholder="e.g., Casual dinner with friends"
             disabled={!!occasion}
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group-os">
           <label>Select Gender</label>
-          <div className="gender-options">
+          <div className="gender-options-os">
             {genders.map((option) => (
-              <label key={option.value} className="gender-option">
+              <label key={option.value} className="gender-option-os">
                 <input
                   type="radio"
                   name="gender"
@@ -93,17 +144,24 @@ const OutfitSuggestion = () => {
           </div>
         </div>
 
-        <div className="button-group-outfit">
+        <div className="button-group-outfit-os">
           <button 
             type="submit" 
-            className="submit-button-outfit"
+            className="submit-button-outfit-os"
             disabled={isLoading || (!occasion && !customPrompt)}
           >
-            {isLoading ? 'Loading...' : 'Get Suggestion'}
+            {isLoading ? (
+              <>
+                <svg className="spinner-os" viewBox="0 0 50 50" width="20" height="20">
+                  <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5"></circle>
+                </svg>
+                Loading...
+              </>
+            ) : 'Get Suggestion'}
           </button>
           <button 
             type="button" 
-            className="back-button-outfit"
+            className="back-button-outfit-os"
             onClick={() => navigate(-1)}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,14 +173,27 @@ const OutfitSuggestion = () => {
       </form>
 
       {suggestion && (
-        <div className="suggestion-result">
-          <h3>Suggested Outfit:</h3>
-          <p>{suggestion}</p>
+        <div className="suggestion-result-os">
+          <h3>Suggested Outfit</h3>
+          <div className="main-suggestion-os">
+            {suggestion.main}
+          </div>
+          
+          {suggestion.alternatives.length > 0 && (
+            <>
+              <h4>Alternative Options</h4>
+              <ul className="alternative-list-os">
+                {suggestion.alternatives.map((alt, index) => (
+                  <li key={index}>{alt}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
 
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Metaverse Fashion Studio. All rights reserved.</p>
+      <footer className="footer-os">
+        <p>&copy; {new Date().getFullYear()} Enhancing Fashion Market using Virtual Fashion Studio Powered by AI</p>
       </footer>
     </div>
   );

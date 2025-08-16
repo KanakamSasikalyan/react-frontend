@@ -1,0 +1,89 @@
+/* Reviews Component Styling */
+.reviews-list-rv {
+  padding: 0;
+}
+
+.reviews-list-rv li {
+  margin-bottom: 1.2rem;
+  list-style: none;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.7rem;
+}
+
+.reviews-list-rv .review-author-rv {
+  font-weight: bold;
+}
+
+.reviews-list-rv .review-stars-rv {
+  color: #f5b301;
+}
+
+.reviews-list-rv .review-comment-rv {
+  margin: 0.3rem 0;
+}
+
+.reviews-list-rv .btn-rv {
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.reviews-list-rv .like-anim-rv {
+  position: absolute;
+  left: 100%;
+  margin-left: 0.3rem;
+  color: #f5b301;
+  font-size: 1.2rem;
+  transition: all 0.5s;
+}
+
+.about-container-rv {
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.about-title-rv {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 1.2rem;
+  color: #4a4a4a;
+}
+
+.about-section-rv {
+  margin-bottom: 1.3rem;
+}
+
+.about-content-rv {
+  background: #ffffff;
+  padding: 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-rv {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  margin-right: 0.5rem;
+  transition: background 0.2s;
+}
+
+.btn-rv:hover {
+  background: #357ab8;
+}
+
+.btn-rv span {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn-rv:active span {
+  transform: scale(1.2);
+  opacity: 0.7;
+}

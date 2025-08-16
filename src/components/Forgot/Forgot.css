@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-.signup-container {
+.forgot-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@
   color: #1d4ed8;
 }
 
-.signup-form {
+.forgot-form {
   background: #ffffff;
   padding: 2rem;
   border: 1px solid #ddd;
@@ -67,7 +67,7 @@
   max-width: 400px;
 }
 
-.signup-form h2 {
+.forgot-form h2 {
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
   color: #333;
@@ -85,7 +85,8 @@
   color: #555;
 }
 
-.form-group input {
+.form-group input[type="text"],
+.form-group input[type="password"] {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ccc;
