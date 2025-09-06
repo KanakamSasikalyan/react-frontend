@@ -32,6 +32,11 @@ const ShirtComparison = () => {
     { value: 'EUR', label: 'EUR (€)' },
     { value: 'GBP', label: 'GBP (£)' },
     { value: 'JPY', label: 'JPY (¥)' },
+    { value: 'AUD', label: 'AUD (A$)' },
+    { value: 'CAD', label: 'CAD (C$)' },
+    { value: 'CHF', label: 'CHF (Fr)' },
+    { value: 'CNY', label: 'CNY (¥)' },
+    { value: 'SGD', label: 'SGD (S$)' },
     // Add more currencies as needed
   ];
 
@@ -59,6 +64,13 @@ const ShirtComparison = () => {
   };
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  // When currency1 changes, update currency2 to match
+  const handleCurrency1Change = (e) => {
+    const selected = e.target.value;
+    setCurrency1(selected);
+    setCurrency2(selected);
   };
 
   const handleSubmit = async (e) => {
@@ -128,7 +140,7 @@ const ShirtComparison = () => {
               />
               <select
                 value={currency1}
-                onChange={(e) => setCurrency1(e.target.value)}
+                onChange={handleCurrency1Change}
                 className="currency-dropdown-sc"
                 style={{ width: '38%', marginLeft: '2%' }}
               >
