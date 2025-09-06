@@ -19,11 +19,21 @@ const ShirtComparison = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fileName1, setFileName1] = useState('');
   const [fileName2, setFileName2] = useState('');
+  const [currency1, setCurrency1] = useState('INR');
+  const [currency2, setCurrency2] = useState('INR');
   const imageInputRef1 = useRef(null);
   const imageInputRef2 = useRef(null);
   const navigate = useNavigate();
 
   const platforms = ['Amazon', 'Myntra', 'Flipkart', 'Snapdeal', 'Nyka', 'Ajio'];
+  const currencyOptions = [
+    { value: 'INR', label: 'INR (₹)' },
+    { value: 'USD', label: 'USD ($)' },
+    { value: 'EUR', label: 'EUR (€)' },
+    { value: 'GBP', label: 'GBP (£)' },
+    { value: 'JPY', label: 'JPY (¥)' },
+    // Add more currencies as needed
+  ];
 
   // Handles both file input and drag-drop
   const handleImageChange = (file, setImage, setPreview, setFileName) => {
@@ -59,10 +69,12 @@ const ShirtComparison = () => {
     if (image1) formData.append('image1', image1);
     if (platform1) formData.append('platform1', platform1);
     if (price1) formData.append('price1', price1);
+    if (currency1) formData.append('currency1', currency1);
     if (description1) formData.append('description1', description1);
     if (image2) formData.append('image2', image2);
     if (platform2) formData.append('platform2', platform2);
     if (price2) formData.append('price2', price2);
+    if (currency2) formData.append('currency2', currency2);
     if (description2) formData.append('description2', description2);
 
     try {
@@ -106,7 +118,25 @@ const ShirtComparison = () => {
               ))}
             </select>
             <label>Price 1</label>
-            <input type="number" step="0.01" value={price1} onChange={(e) => setPrice1(e.target.value)} />
+            <div className="price-currency-row-sc">
+              <input
+                type="number"
+                step="0.01"
+                value={price1}
+                onChange={(e) => setPrice1(e.target.value)}
+                style={{ width: '60%' }}
+              />
+              <select
+                value={currency1}
+                onChange={(e) => setCurrency1(e.target.value)}
+                className="currency-dropdown-sc"
+                style={{ width: '38%', marginLeft: '2%' }}
+              >
+                {currencyOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
             <label>Description 1</label>
             <textarea value={description1} onChange={(e) => setDescription1(e.target.value)} />
           </div>
@@ -134,7 +164,25 @@ const ShirtComparison = () => {
               ))}
             </select>
             <label>Price 2</label>
-            <input type="number" step="0.01" value={price2} onChange={(e) => setPrice2(e.target.value)} />
+            <div className="price-currency-row-sc">
+              <input
+                type="number"
+                step="0.01"
+                value={price2}
+                onChange={(e) => setPrice2(e.target.value)}
+                style={{ width: '60%' }}
+              />
+              <select
+                value={currency2}
+                onChange={(e) => setCurrency2(e.target.value)}
+                className="currency-dropdown-sc"
+                style={{ width: '38%', marginLeft: '2%' }}
+              >
+                {currencyOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
             <label>Description 2</label>
             <textarea value={description2} onChange={(e) => setDescription2(e.target.value)} />
           </div>
