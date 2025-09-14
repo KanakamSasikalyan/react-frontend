@@ -1,4 +1,4 @@
-# React Clothing Design Generator
+# React Clothing Design Generator - A Frontend Interface
 
 This project is a React.js frontend application that interacts with a Spring Boot backend to generate clothing designs based on user input. 
 
